@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
-  <link href="http://kozl.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: ccna | My Octopress Blog]]></title>
+  <link href="http://kozl.github.io/blog/categories/ccna/atom.xml" rel="self"/>
   <link href="http://kozl.github.io/"/>
   <updated>2015-05-18T15:22:03+03:00</updated>
   <id>http://kozl.github.io/</id>
@@ -14,13 +14,10 @@
 
   
   <entry>
-    
     <title type="html"><![CDATA[OSPF: краткий конспект]]></title>
     <link href="http://kozl.github.io/blog/2015/05/18/ospf-kratkii-konspiekt/"/>
-    
     <updated>2015-05-18T09:38:15+03:00</updated>
     <id>http://kozl.github.io/blog/2015/05/18/ospf-kratkii-konspiekt</id>
-    
     <content type="html"><![CDATA[<p>OSPF - динамический протокол маршрутизации состояния канала. Предназначен для обмена маршрутной информацией в пределах автономной системы. Исползьзуется поверх протокола IP. Маршрутизаторы обмениваются друг с другом информацией о своих интерфейсах, формируют граф сети, идентичный для каждого маршрутизатора и, используя алгоритм поиска кратчайшего пути, получают маршруты для каждой подсети.</p>
 
 <h2>Терминология OSPF</h2>
@@ -94,7 +91,7 @@
 </ul>
 
 
-<figure class='code'><figcaption><span>[Настройка таймеров OSPF на интерфейсе] </span></figcaption>
+<p><figure class='code'><figcaption><span>[Настройка таймеров OSPF на интерфейсе] </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -104,12 +101,10 @@
 </span><span class='line'>ip ospf hello-interval seconds
 </span><span class='line'>ip ospf dead-interval seconds
 </span><span class='line'>ip ospf authentication-key key
-</span><span class='line'>ip ospf message-digest-key key-id md5 key</span></code></pre></td></tr></table></div></figure>
-
+</span><span class='line'>ip ospf message-digest-key key-id md5 key</span></code></pre></td></tr></table></div></figure></p>
 
 <p>В point-to-point соединениях сразу устанавливаются отношения смежности. В сетях с широковещанием происходят выборы DR и BDR, остальные маршрутизаторы устанавливают с ними отношения смежности, а друг с другом - отношения соседства.</p>
 ]]></content>
-    
   </entry>
   
 </feed>

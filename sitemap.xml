@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://kozl.github.io/blog/2015/05/18/tiestovaia-zapis'/</loc>
+    <loc>http://kozl.github.io/blog/2015/05/18/ospf-kratkii-konspiekt/</loc>
     <lastmod>2015-05-18T09:38:15+03:00</lastmod>
   </url>
   <url>
@@ -9,5 +9,11 @@
   </url>
   <url>
     <loc>http://kozl.github.io/</loc>
+  </url>
+  <url>
+    <loc>http://kozl.github.io/blog/categories/network/</loc>
+  </url>
+  <url>
+    <loc>http://kozl.github.io/blog/categories/ccna/</loc>
   </url>
 </urlset>
