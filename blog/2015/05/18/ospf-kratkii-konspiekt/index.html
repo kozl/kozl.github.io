@@ -21,6 +21,7 @@
   <link rel="canonical" href="http://kozl.github.io/blog/2015/05/18/ospf-kratkii-konspiekt">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
   <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -118,7 +119,7 @@
 </ul>
 
 
-<h3>Типы маршрутизаторов OSPF</h3>
+<h4>Типы маршрутизаторов OSPF</h4>
 
 <ul>
 <li><strong>Backbone router</strong> - один из интерфейсов относится к магистральной зоне</li>
@@ -128,7 +129,7 @@
 </ul>
 
 
-<h3>Типы пакетов OSPF</h3>
+<h4>Типы пакетов OSPF</h4>
 
 <ul>
 <li><strong>Database Description</strong> - описание всех LSA, хранящихся в LSDB маршрутизатора</li>
@@ -147,7 +148,7 @@
 </ol>
 
 
-<h3>Установление отношений смежности</h3>
+<h4>Установление отношений смежности</h4>
 
 <p>Есть отношения соседства и отношения смежности. LSA передаются только между маршрутизаторами установившими отношения смежности. Отношения смежности устанавливаются путём передачи Hello пакетов, которые также выполняют роль keepalive пакетов. Для установления смежности необходимо, чтобы на обоих маршрутизаторах совпадали следующие параметры:</p>
 
@@ -175,6 +176,26 @@
 
 
 <p>В point-to-point соединениях сразу устанавливаются отношения смежности. В сетях с широковещанием происходят выборы DR и BDR, остальные маршрутизаторы устанавливают с ними отношения смежности, а друг с другом - отношения соседства.</p>
+
+<p>Отношения соседства происходят следующим образом:</p>
+
+<ol>
+<li>Маршрутизатор R1 отправляет Hello сообщение на мультикастовый адрес 224.0.0.5.Маршрутизатор R2 принимает его, и если соответствующие параметры совпадают вносит его в список соседей.</li>
+<li>R2 юникастом отправляет также Hello сообщение, в котором в списке соседей уже указан R1, т.е. он его уже считает своим соседом.
+R1 принимает сообщение, находит себя в списке соседей, также вносит R2 в список соседей, между ними устанавливаются отношения смежности. R1 и R2 переходят в состояние <strong>TWO WAY</strong></li>
+<li>Далее происходит обмен информацией о состоянии каналов.</li>
+</ol>
+
+
+<h4>Обмен информацией о состоянии каналов</h4>
+
+<ol>
+<li>Маршрутизаторы обмениваются DBD сообщениями с описанием LSDB. Первым DBD отправляет маршрутизатор с большим Router ID.</li>
+<li>Подтвердив получение DBD сообщениями LSAck, R1 и R2 посылают друг другу LSR с указанием тех LSA, которые им незвестны, переходя в состояние <strong>LOADING</strong></li>
+<li>Получив LSR, маршрутизатор отправляет LSU, которые содержат в себе LSA с детальной информацией о подсетях.</li>
+<li>После того как сформирована LSDB, маршрутизаторы переходят в состояние <strong>FULL STATE</strong></li>
+</ol>
+
 </div>
 
 
@@ -221,6 +242,8 @@
     <p class="meta">
       
       
+        <a class="basic-alignment right" href="/blog/2015/05/18/zarieziervirovannyie-ip-adriesa-rfc-6890/" title="Next Post: Зарезервированные IP адреса: RFC 6890">Зарезервированные IP адреса: RFC 6890 &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -232,6 +255,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/05/18/zarieziervirovannyie-ip-adriesa-rfc-6890/">Зарезервированные IP адреса: RFC 6890</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2015/05/18/ospf-kratkii-konspiekt/">OSPF: краткий конспект</a>
