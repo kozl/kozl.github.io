@@ -163,8 +163,8 @@
 </pre></td><td class="code"><pre><code class=""><span class="line">interface type number
 </span><span class="line">ip ospf hello-interval seconds
 </span><span class="line">ip ospf dead-interval seconds
-</span><span class="line">ip ospf authentication-key key
-</span><span class="line">ip ospf message-digest-key key-id md5 key</span></code></pre></td></tr></table></div></figure></notextile></div>
+</span><span class="line">ip ospf authentication-key key # plaintext
+</span><span class="line">ip ospf message-digest-key key-id md5 key # md5</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>В point-to-point соединениях сразу устанавливаются отношения смежности. В сетях с широковещанием происходят выборы DR и BDR, остальные маршрутизаторы устанавливают с ними отношения смежности, а друг с другом - отношения соседства.</p>
 
@@ -183,7 +183,6 @@ R1 принимает сообщение, находит себя в списк�
   <li>Маршрутизаторы обмениваются DBD сообщениями с описанием LSDB. Первым DBD отправляет маршрутизатор с большим Router ID.</li>
   <li>Подтвердив получение DBD сообщениями LSAck, R1 и R2 посылают друг другу LSR с указанием тех LSA, которые им незвестны, переходя в состояние <strong>LOADING</strong></li>
   <li>Получив LSR, маршрутизатор отправляет LSU, которые содержат в себе LSA с детальной информацией о подсетях.</li>
-  <li>После того как сформирована LSDB, маршрутизаторы переходят в состояние <strong>FULL STATE</strong></li>
 </ol>
 </div>
 
@@ -244,6 +243,10 @@ R1 принимает сообщение, находит себя в списк�
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/05/19/eigrp-kratkii-konspiekt/">EIGRP: краткий конспект</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2015/05/18/bazovaia-nastroika-marshrutizatora/">Базовая настройка маршрутизатора</a>
