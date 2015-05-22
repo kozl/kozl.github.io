@@ -59,8 +59,8 @@ OSPF - динамический протокол маршрутизации со
 interface type number
 ip ospf hello-interval seconds
 ip ospf dead-interval seconds
-ip ospf authentication-key key
-ip ospf message-digest-key key-id md5 key
+ip ospf authentication-key key # plaintext
+ip ospf message-digest-key key-id md5 key # md5
 {% endcodeblock %}
 
 В point-to-point соединениях сразу устанавливаются отношения смежности. В сетях с широковещанием происходят выборы DR и BDR, остальные маршрутизаторы устанавливают с ними отношения смежности, а друг с другом - отношения соседства.
@@ -77,4 +77,3 @@ ip ospf message-digest-key key-id md5 key
 4. Маршрутизаторы обмениваются DBD сообщениями с описанием LSDB. Первым DBD отправляет маршрутизатор с большим Router ID.
 5. Подтвердив получение DBD сообщениями LSAck, R1 и R2 посылают друг другу LSR с указанием тех LSA, которые им незвестны, переходя в состояние **LOADING**
 6. Получив LSR, маршрутизатор отправляет LSU, которые содержат в себе LSA с детальной информацией о подсетях.
-7. После того как сформирована LSDB, маршрутизаторы переходят в состояние **FULL STATE**

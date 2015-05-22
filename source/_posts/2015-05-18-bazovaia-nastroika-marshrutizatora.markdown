@@ -10,3 +10,16 @@ categories: network, ccna
 ```
 Router#erase startup-config
 ```
+
+Отключение DNS запросов при ошибках в консоли
+```
+no ip domain lookup
+```
+
+Выключить таймаут неактивной сессии в консоли, включить синхронный вывод на консоль:
+```
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+```
