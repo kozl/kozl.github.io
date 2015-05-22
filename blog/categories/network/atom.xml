@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: network, | Мои записи]]></title>
+  <title><![CDATA[Category: network | Networks, security and system administration]]></title>
   <link href="http://kozl.github.io/blog/categories/network/atom.xml" rel="self"/>
   <link href="http://kozl.github.io/"/>
-  <updated>2015-05-22T11:48:34+03:00</updated>
+  <updated>2015-05-22T16:23:12+03:00</updated>
   <id>http://kozl.github.io/</id>
   <author>
     <name><![CDATA[Kozlov Alexander]]></name>
@@ -14,313 +14,41 @@
 
   
   <entry>
-    <title type="html"><![CDATA[EIGRP: краткий конспект]]></title>
-    <link href="http://kozl.github.io/blog/2015/05/19/eigrp-kratkii-konspiekt/"/>
-    <updated>2015-05-19T12:38:41+03:00</updated>
-    <id>http://kozl.github.io/blog/2015/05/19/eigrp-kratkii-konspiekt</id>
-    <content type="html"><![CDATA[<ul>
-  <li>Advanced distance-vector routing protocol</li>
-  <li>Обнаруживает соседей путём отправки Hello пакетов мультикастом, хранит информацию о них</li>
-  <li>Надежная доставка через уведомления о получении сообщения, отправляет сначала мультикастом, если не получил ответ - юникастом</li>
-  <li>Рассылает не полную таблицу маршрутов как RIP, а только обновления</li>
-  <li>Метрики, основанные на полосе пропускания, задержке, надежности, нагрузке. MTU учитывается, но не участвует в расчёте метрики.</li>
-  <li>Расчёт метрики: bandwith маршрута = минимальной bandwith на маршруте, из-за этого расчитывает маршруты точнее, чем OSPF</li>
-  <li>Маршрутизаторы хранят все маршруты до искомой сети, выбирается основной (Successor Route), который добавляется в таблицу маршрутизации и резервный (Feasible Route), который будет задействован в случае выхода из строя основного</li>
-  <li>Суммирование возможно на любом маршрутизаторе</li>
-</ul>
+    <title type="html"><![CDATA[Двухточечные протоколы]]></title>
+    <link href="http://kozl.github.io/blog/2015/05/22/dvukhtochiechnyie-protokoly/"/>
+    <updated>2015-05-22T16:00:42+03:00</updated>
+    <id>http://kozl.github.io/blog/2015/05/22/dvukhtochiechnyie-protokoly</id>
+    <content type="html"><![CDATA[<h2 id="point-to-point-protocol-ppp">Point-to-Point Protocol (PPP)</h2>
 
-<h2 id="eigrp">Терминология EIGRP</h2>
+<p>Двухточечный протокол канального уровня. Обеспечивает:</p>
 
 <ul>
-  <li><strong>DUAL</strong> - Diffusing Update ALgorithm, алгоритм, который используется для вычисления новых маршрутов.
-    <ul>
-      <li><strong>AD</strong> - Advertised Distance, стоимость расстояния между соседом и целевой подсетью</li>
-      <li><strong>FD</strong> - Feasible Distance, AD + стоимость расстояния между локальным маршрутизатором и соседом</li>
-      <li><strong>Successor</strong> - маршрут до целевой подсети с наименьшей стоимостью</li>
-      <li><strong>Feasible</strong> - резервный маршрут, такой, у которого FD меньше чем AD successor’a</li>
-    </ul>
-  </li>
+  <li>аутентификацию (PAP и CHAP)</li>
+  <li>автоматическую настройку интерфейсов на каждом конце по протоколу LCP</li>
+  <li>обнаружение закольцованных связей (на физическом уровне)</li>
+  <li>возможность работы нескольких протоколов 3 уровня на одном канале связи</li>
+  <li>обнаружение ошибок</li>
+  <li>многоканальную передачу, для передачи трафика через несколько физических каналов имея одно логическое соединение</li>
 </ul>
 
-<h4 id="section">Типы пакетов</h4>
+<p><strong>LCP</strong> - Link Control Protocol, для установление соединения и согласования параметров соединения
+<strong>NCP</strong> - Network Control Protocol, инициирует соединение и настройку различных протоколов сетевого уровня. Для IP - IPCP</p>
 
-<ul>
-  <li><strong>Hello</strong> - для обнаружения соседей, единственный пакет, который не подтверждается</li>
-  <li><strong>Update</strong> - для обмена маршрутной информацией, основная работа</li>
-  <li><strong>Query</strong> - запрос маршрутной информацией к соседям</li>
-  <li><strong>Reply</strong> - ответ на запрос</li>
-  <li><strong>Ack</strong> - подтверждение</li>
-</ul>
+<h4 id="section">Аутентификация</h4>
 
-<h2 id="section-1">Стадии установления соседства</h2>
+<p><strong>PAP</strong> - пароль передаётся в открытом тексте
+<strong>CHAP</strong> - challenge-response аутентификация, основанная на MD5</p>
 
-<ol>
-  <li><strong>R1</strong> и <strong>R2</strong> отправляют Hello мультикастом</li>
-  <li>Получив Hello маршрутизатор вносит отправителя в список своих соседей</li>
-  <li>После установления соседства, роутер с большим IP первым отправляет Update, следом за ним второй, все они подтверждаются.</li>
-</ol>
-
-<h4 id="section-2">Формула расчёта метрики</h4>
-
-<script type="math/tex; mode=display">\begin{equation}
-\mbox{} (Metric = K_1*BW+(\frac{K_2*BW}{256 - Load})+K_3*Delay)*(\frac{K_5}{Reliability+K_4}) \\
-\mbox{} BW = (10000000/bandwith(i))*256 \\
-\mbox{} Delay = (delay(i))*256 \\
-\end{equation}</script>
-
-<p><em>bandwith(i)</em> - минимальное значение bandwith на всём маршруте, в килобитах
-<em>delay(i)</em> - суммарная задержка на маршруте, измеряется в десятках  микросекунд
-<em>Load</em> - худшая загрузка на маршруте, измеряется от 1 до 255
-<em>Reliability</em> - худшее значение надежности на всём маршруте</p>
-
-<p>По умолчанию: 
-<script type="math/tex">\begin{align}
-\mbox{} K_1=K_3=1, K_2=K_4=K5=0
-\end{align}</script>
-При таких параметрах формула превращается в такую:</p>
-
-<script type="math/tex; mode=display">\begin{align}
-\mbox{} Metric = BW + Delay
-\end{align}</script>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Базовая настройка маршрутизатора]]></title>
-    <link href="http://kozl.github.io/blog/2015/05/18/bazovaia-nastroika-marshrutizatora/"/>
-    <updated>2015-05-18T17:11:57+03:00</updated>
-    <id>http://kozl.github.io/blog/2015/05/18/bazovaia-nastroika-marshrutizatora</id>
-    <content type="html"><![CDATA[<p>Удаление предыдущей конфигурации</p>
-
-<p><code>
-Router#erase startup-config
-</code></p>
-
-<p>Отключение DNS запросов при ошибках в консоли
+<p>Конфигурация на маршрутизаторах Cisco:
 <code>
-no ip domain lookup
+hostname R1
+username R2 password mypass
+!
+interface serial 0/1
+ encapsulation ppp
+ ppp authentication chap
 </code></p>
 
-<p>Выключить таймаут неактивной сессии в консоли, включить синхронный вывод на консоль:
-<code>
-line con 0
- exec-timeout 0 0
- privilege level 15
- logging synchronous
-</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Зарезервированные IP адреса: RFC 6890]]></title>
-    <link href="http://kozl.github.io/blog/2015/05/18/zarieziervirovannyie-ip-adriesa-rfc-6890/"/>
-    <updated>2015-05-18T15:57:17+03:00</updated>
-    <id>http://kozl.github.io/blog/2015/05/18/zarieziervirovannyie-ip-adriesa-rfc-6890</id>
-    <content type="html"><![CDATA[<table class="table">
-  <thead>
-    <tr>
-      <th style="text-align: center">Подсеть</th>
-      <th>Назначение</th>
-      <th>Маршрутизация</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">0.0.0.0/8</td>
-      <td>Адреса источников “своей” сети</td>
-      <td>запрещена</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">0.0.0.0/32</td>
-      <td>Любая сеть отправителя или получателя</td>
-      <td>запрещена</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">10.0.0.0/8</td>
-      <td>Для использования в частных сетях</td>
-      <td>только в частных сетях</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">100.64.0.0/10</td>
-      <td>Shared Address Space. RFC 6598. Для использования в сетях сервис-провайдера.</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td style="text-align: center">127.0.0.0/8</td>
-      <td>Loopback IP</td>
-      <td>запрещена</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">169.254.0.0/16</td>
-      <td>Автоматическое назначение IP адреса</td>
-      <td>только в частных сетях</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">172.16.0.0/12</td>
-      <td>Для использования в частных сетях</td>
-      <td>только в частных сетях</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">192.0.2.0/24</td>
-      <td>Для примеров в документации.</td>
-      <td>запрещена</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">192.88.99.0/24</td>
-      <td>Используются для рассылки ближайшему узлу. RFC 3068</td>
-      <td>глобально запрещена</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">192.88.99.1/32</td>
-      <td>Применяется в качестве ретранслятора при инкапсуляции IPv6 в IPv4</td>
-      <td>глобально запрещена</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">192.168.0.0/16</td>
-      <td>Для использования в частных сетях.</td>
-      <td>только в частных сетях</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">198.51.100.0/24</td>
-      <td>Для примеров в документации.</td>
-      <td>запрещена</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">198.18.0.0/15</td>
-      <td>Для стендов тестирования производительности.</td>
-      <td>только для тестов</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">203.0.113.0/24</td>
-      <td>Для примеров в документации.</td>
-      <td>запрещена</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">224.0.0.0/4</td>
-      <td>Multicast IP</td>
-      <td>Глобально разрешена только для подсетей 233.0.0.0/8 и 234.0.0.0/8.</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">239.0.0.0/8</td>
-      <td>Для частных мультикаст-доменов/организаций</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td style="text-align: center">240.0.0.0/4</td>
-      <td>Зарезервировано для использования в будущем.</td>
-      <td>запрещена</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">255.255.255.255/32</td>
-      <td>Широковещательный адрес</td>
-      <td>запрещена</td>
-    </tr>
-  </tbody>
-</table>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[OSPF: краткий конспект]]></title>
-    <link href="http://kozl.github.io/blog/2015/05/18/ospf-kratkii-konspiekt/"/>
-    <updated>2015-05-18T09:38:15+03:00</updated>
-    <id>http://kozl.github.io/blog/2015/05/18/ospf-kratkii-konspiekt</id>
-    <content type="html"><![CDATA[<p>OSPF - динамический протокол маршрутизации состояния канала. Предназначен для обмена маршрутной информацией в пределах автономной системы. Исползьзуется поверх протокола IP. Маршрутизаторы обмениваются друг с другом информацией о своих интерфейсах, формируют граф сети, идентичный для каждого маршрутизатора и, используя алгоритм поиска кратчайшего пути, получают маршруты для каждой подсети.</p>
-
-<h2 id="ospf">Терминология OSPF</h2>
-
-<ul>
-  <li><strong>Router id</strong> - уникальный в пределах домена OSPF идентификатор маршрутизатора</li>
-  <li><strong>Area</strong> - совокупность маршрутизаторов, имеющих единую базу состояния каналов (LSDB). Существуют различные типы зон, вот некоторые из них:
-    <ul>
-      <li><strong>Backbone area</strong> - зона с идентификатором 0.0.0.0, не может быть тупиковой.</li>
-      <li><strong>Stub area</strong> - зона, в которой запрещено распространение External LSA, вместо этого распространяется Summary LSA с маршрутом по умолчанию.</li>
-      <li><strong>Totally stub area</strong> - Stub зона, в которой кроме того запрещено распространение Summary LSA, вместо этого распространяется единственный Summary LSA с маршрутом по умолчанию.</li>
-      <li><strong>NSSArea</strong> - Stub зона, в которой разрешено распространение Type 7 External LSA, которые предназначены для анонса внешних по отношению к автономной системе маршрутов.</li>
-    </ul>
-  </li>
-  <li><strong>LSDB</strong> - база данных, содержащая информацию о состоянии всех каналов, формируется путём обмена сообщениями LSA.</li>
-  <li><strong>LSA</strong> - сообщение, описывающее состояние канала или сети. Существуют LSA разных типов, вот некоторые из них:
-    <ul>
-      <li><strong>Router LSA (Type 1)</strong> - объявление о состоянии каналов маршрутизатора, распространяется внутри зоны, отправляется всеми роутерами.</li>
-      <li><strong>Network LSA (Type 2)</strong> - объявление о состоянии каналов сети, распространяется внутри зоны, отправляется DR.</li>
-      <li><strong>Network Summary LSA (Type 3)</strong> - суммарное объявление о состоянии каналов в сети, не содержит информации о топологии сети, содержит маршруты и метрики к сетям вне зоны, распространяется ABR.</li>
-      <li><strong>ASBR Summary LSA (Type 4)</strong> - суммарное объявление о состоянии каналов пограничного маршрутизатора автономной системы, распространяется ABR, то же что LSA 3, только распространяется информация о состоянии каналов ASBR.</li>
-      <li><strong>AS External LSA (Type 5)</strong> - объявление о состоянии внешних каналов автономной системы, рапространяется в пределах всей автономной системы, отправялется ASBR.</li>
-      <li><strong>AS External LSA for NSSA (Type 7)</strong> - объявление о состоянии внешних каналов автономной системы в NSSA зоне, аналогично LSA Type 5, рапространяется только в пределах NSSA зоны, отправялется ASBR.</li>
-    </ul>
-  </li>
-</ul>
-
-<h4 id="ospf-1">Типы маршрутизаторов OSPF</h4>
-
-<ul>
-  <li><strong>Backbone router</strong> - один из интерфейсов относится к магистральной зоне</li>
-  <li><strong>Internal router</strong> - все интерфейсы маршрутизатора находятся в одной зоне</li>
-  <li><strong>Area Border Router</strong> - соединяет одно или больше зон с магистральной зоной, для каждой зоны имеет отдельную базу состояний каналов</li>
-  <li><strong>AS Boundary Router</strong> - пограничный маршрутизатор автономной системы, один из интерфейсов связан с другой автономной системой или доменом маршрутизации другого протокола</li>
-</ul>
-
-<h4 id="ospf-2">Типы пакетов OSPF</h4>
-
-<ul>
-  <li><strong>Database Description</strong> - описание всех LSA, хранящихся в LSDB маршрутизатора</li>
-  <li><strong>Link State Request</strong> - запрос с описанием тех LSA, которых не хватает в LSDB</li>
-  <li><strong>Link State Update</strong> - сообщение, в котором передаются полные LSA</li>
-  <li><strong>Link State Acknowledgment</strong> - подтверждение о получении конкретных LSA с их описанием</li>
-</ul>
-
-<h2 id="section">Стадии обмена маршрутной информацией</h2>
-
-<ol>
-  <li>Установление отношений смежности</li>
-  <li>Обмен информацией о состоянии каналов</li>
-  <li>Вычисление кратчайших путей по алгоритму SPF до всех подсетей</li>
-</ol>
-
-<h4 id="section-1">Установление отношений смежности</h4>
-<p>Есть отношения соседства и отношения смежности. LSA передаются только между маршрутизаторами установившими отношения смежности. Отношения смежности устанавливаются путём передачи Hello пакетов, которые также выполняют роль keepalive пакетов. Для установления смежности необходимо, чтобы на обоих маршрутизаторах совпадали следующие параметры:</p>
-
-<ul>
-  <li>Hello interval</li>
-  <li>Router Dead Interval = 4 * Hello interval</li>
-  <li>Area ID</li>
-  <li>Authentication</li>
-  <li>Stub area flag</li>
-  <li>сеть и маска сети на интерфейсах</li>
-</ul>
-
-<p><figure class='code'><figcaption><span>[Настройка таймеров OSPF на интерфейсе] </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>interface type number
-</span><span class='line'>ip ospf hello-interval seconds
-</span><span class='line'>ip ospf dead-interval seconds
-</span><span class='line'>ip ospf authentication-key key # plaintext
-</span><span class='line'>ip ospf message-digest-key key-id md5 key # md5</span></code></pre></td></tr></table></div></figure></p>
-
-<p>В point-to-point соединениях сразу устанавливаются отношения смежности. В сетях с широковещанием происходят выборы DR и BDR, остальные маршрутизаторы устанавливают с ними отношения смежности, а друг с другом - отношения соседства.</p>
-
-<p>Отношения соседства происходят следующим образом:</p>
-
-<ol>
-  <li>Маршрутизатор R1 отправляет Hello сообщение на мультикастовый адрес 224.0.0.5.Маршрутизатор R2 принимает его, и если соответствующие параметры совпадают вносит его в список соседей.</li>
-  <li>R2 юникастом отправляет также Hello сообщение, в котором в списке соседей уже указан R1, т.е. он его уже считает своим соседом.
-R1 принимает сообщение, находит себя в списке соседей, также вносит R2 в список соседей, между ними устанавливаются отношения смежности. R1 и R2 переходят в состояние <strong>TWO WAY</strong></li>
-  <li>Далее происходит обмен информацией о состоянии каналов.</li>
-</ol>
-
-<h4 id="section-2">Обмен информацией о состоянии каналов</h4>
-
-<ol>
-  <li>Маршрутизаторы обмениваются DBD сообщениями с описанием LSDB. Первым DBD отправляет маршрутизатор с большим Router ID.</li>
-  <li>Подтвердив получение DBD сообщениями LSAck, R1 и R2 посылают друг другу LSR с указанием тех LSA, которые им незвестны, переходя в состояние <strong>LOADING</strong></li>
-  <li>Получив LSR, маршрутизатор отправляет LSU, которые содержат в себе LSA с детальной информацией о подсетях.</li>
-</ol>
 ]]></content>
   </entry>
   

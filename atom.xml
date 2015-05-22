@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Мои записи]]></title>
+  <title><![CDATA[Networks, security and system administration]]></title>
   <link href="http://kozl.github.io/atom.xml" rel="self"/>
   <link href="http://kozl.github.io/"/>
-  <updated>2015-05-22T11:48:34+03:00</updated>
+  <updated>2015-05-22T16:23:12+03:00</updated>
   <id>http://kozl.github.io/</id>
   <author>
     <name><![CDATA[Kozlov Alexander]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    
+    <title type="html"><![CDATA[Двухточечные протоколы]]></title>
+    <link href="http://kozl.github.io/blog/2015/05/22/dvukhtochiechnyie-protokoly/"/>
+    
+    <updated>2015-05-22T16:00:42+03:00</updated>
+    <id>http://kozl.github.io/blog/2015/05/22/dvukhtochiechnyie-protokoly</id>
+    
+    <content type="html"><![CDATA[<h2 id="point-to-point-protocol-ppp">Point-to-Point Protocol (PPP)</h2>
+
+<p>Двухточечный протокол канального уровня. Обеспечивает:</p>
+
+<ul>
+  <li>аутентификацию (PAP и CHAP)</li>
+  <li>автоматическую настройку интерфейсов на каждом конце по протоколу LCP</li>
+  <li>обнаружение закольцованных связей (на физическом уровне)</li>
+  <li>возможность работы нескольких протоколов 3 уровня на одном канале связи</li>
+  <li>обнаружение ошибок</li>
+  <li>многоканальную передачу, для передачи трафика через несколько физических каналов имея одно логическое соединение</li>
+</ul>
+
+<p><strong>LCP</strong> - Link Control Protocol, для установление соединения и согласования параметров соединения
+<strong>NCP</strong> - Network Control Protocol, инициирует соединение и настройку различных протоколов сетевого уровня. Для IP - IPCP</p>
+
+<h4 id="section">Аутентификация</h4>
+
+<p><strong>PAP</strong> - пароль передаётся в открытом тексте
+<strong>CHAP</strong> - challenge-response аутентификация, основанная на MD5</p>
+
+<p>Конфигурация на маршрутизаторах Cisco:</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">hostname R1
+</span><span class="line">username R2 password mypass
+</span><span class="line">!
+</span><span class="line">interface serial 0/1
+</span><span class="line"> encapsulation ppp
+</span><span class="line"> ppp authentication chap</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+]]></content>
+    
+  </entry>
   
   <entry>
     

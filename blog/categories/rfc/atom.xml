@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: rfc | Мои записи]]></title>
+  <title><![CDATA[Category: rfc | Networks, security and system administration]]></title>
   <link href="http://kozl.github.io/blog/categories/rfc/atom.xml" rel="self"/>
   <link href="http://kozl.github.io/"/>
-  <updated>2015-05-22T11:48:34+03:00</updated>
+  <updated>2015-05-22T16:23:12+03:00</updated>
   <id>http://kozl.github.io/</id>
   <author>
     <name><![CDATA[Kozlov Alexander]]></name>
