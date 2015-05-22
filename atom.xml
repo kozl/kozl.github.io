@@ -4,7 +4,7 @@
   <title><![CDATA[Мои записи]]></title>
   <link href="http://kozl.github.io/atom.xml" rel="self"/>
   <link href="http://kozl.github.io/"/>
-  <updated>2015-05-22T10:45:39+03:00</updated>
+  <updated>2015-05-22T11:48:34+03:00</updated>
   <id>http://kozl.github.io/</id>
   <author>
     <name><![CDATA[Kozlov Alexander]]></name>
@@ -62,6 +62,30 @@
   <li>Получив Hello маршрутизатор вносит отправителя в список своих соседей</li>
   <li>После установления соседства, роутер с большим IP первым отправляет Update, следом за ним второй, все они подтверждаются.</li>
 </ol>
+
+<h4 id="section-2">Формула расчёта метрики</h4>
+
+<script type="math/tex; mode=display">\begin{equation}
+\mbox{} (Metric = K_1*BW+(\frac{K_2*BW}{256 - Load})+K_3*Delay)*(\frac{K_5}{Reliability+K_4}) \\
+\mbox{} BW = (10000000/bandwith(i))*256 \\
+\mbox{} Delay = (delay(i))*256 \\
+\end{equation}</script>
+
+<p><em>bandwith(i)</em> - минимальное значение bandwith на всём маршруте, в килобитах
+<em>delay(i)</em> - суммарная задержка на маршруте, измеряется в десятках  микросекунд
+<em>Load</em> - худшая загрузка на маршруте, измеряется от 1 до 255
+<em>Reliability</em> - худшее значение надежности на всём маршруте</p>
+
+<p>По умолчанию: 
+<script type="math/tex">\begin{align}
+\mbox{} K_1=K_3=1, K_2=K_4=K5=0
+\end{align}</script>
+При таких параметрах формула превращается в такую:</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\mbox{} Metric = BW + Delay
+\end{align}</script>
+
 ]]></content>
     
   </entry>
@@ -78,6 +102,20 @@
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">Router#erase startup-config</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Отключение DNS запросов при ошибках в консоли</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">no ip domain lookup</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Выключить таймаут неактивной сессии в консоли, включить синхронный вывод на консоль:</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">line con 0
+</span><span class="line"> exec-timeout 0 0
+</span><span class="line"> privilege level 15
+</span><span class="line"> logging synchronous</span></code></pre></td></tr></table></div></figure></notextile></div>
 ]]></content>
     
   </entry>

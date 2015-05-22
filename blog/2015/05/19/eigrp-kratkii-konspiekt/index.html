@@ -32,6 +32,39 @@
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
   
 
 </head>
@@ -130,6 +163,30 @@
   <li>Получив Hello маршрутизатор вносит отправителя в список своих соседей</li>
   <li>После установления соседства, роутер с большим IP первым отправляет Update, следом за ним второй, все они подтверждаются.</li>
 </ol>
+
+<h4 id="section-2">Формула расчёта метрики</h4>
+
+<script type="math/tex; mode=display">\begin{equation}
+\mbox{} (Metric = K_1*BW+(\frac{K_2*BW}{256 - Load})+K_3*Delay)*(\frac{K_5}{Reliability+K_4}) \\
+\mbox{} BW = (10000000/bandwith(i))*256 \\
+\mbox{} Delay = (delay(i))*256 \\
+\end{equation}</script>
+
+<p><em>bandwith(i)</em> - минимальное значение bandwith на всём маршруте, в килобитах
+<em>delay(i)</em> - суммарная задержка на маршруте, измеряется в десятках  микросекунд
+<em>Load</em> - худшая загрузка на маршруте, измеряется от 1 до 255
+<em>Reliability</em> - худшее значение надежности на всём маршруте</p>
+
+<p>По умолчанию: 
+<script type="math/tex">\begin{align}
+\mbox{} K_1=K_3=1, K_2=K_4=K5=0
+\end{align}</script>
+При таких параметрах формула превращается в такую:</p>
+
+<script type="math/tex; mode=display">\begin{align}
+\mbox{} Metric = BW + Delay
+\end{align}</script>
+
 </div>
 
 
