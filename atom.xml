@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[Мои записи]]></title>
   <link href="http://kozl.github.io/atom.xml" rel="self"/>
   <link href="http://kozl.github.io/"/>
-  <updated>2015-05-21T12:50:11+03:00</updated>
+  <updated>2015-05-22T10:43:19+03:00</updated>
   <id>http://kozl.github.io/</id>
   <author>
     <name><![CDATA[Kozlov Alexander]]></name>
