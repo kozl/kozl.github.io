@@ -23,3 +23,8 @@ line con 0
  privilege level 15
  logging synchronous
 ```
+
+Хранить startup конфиг в сжатом виде
+```
+service compress-config 
+```
