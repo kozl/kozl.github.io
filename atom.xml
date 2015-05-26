@@ -4,7 +4,7 @@
   <title><![CDATA[Networks, security and system administration]]></title>
   <link href="http://kozl.github.io/atom.xml" rel="self"/>
   <link href="http://kozl.github.io/"/>
-  <updated>2015-05-25T12:06:54+03:00</updated>
+  <updated>2015-05-26T14:20:21+03:00</updated>
   <id>http://kozl.github.io/</id>
   <author>
     <name><![CDATA[Kozlov Alexander]]></name>
@@ -133,6 +133,9 @@
 \mbox{} Metric = BW + Delay
 \end{align}</script>
 
+<h2 id="section-3">Балансировка нагрузки</h2>
+
+<p>Возможна балансировка по маршрутам с различной метрикой, настраивается параметром variance. Маршруты до подсети считаются эквивалентыми, если FD лучшего маршрута * variance &lt; FD другого маршрута. Маршруты, у которых AD &gt; чем FD лучшего маршрута не участвуют в определении эквивалентных маршрутов - такой механизм нужен для защиты от петель.</p>
 ]]></content>
     
   </entry>
@@ -154,7 +157,7 @@
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">no ip domain lookup</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>Выключить таймаут неактивной сессии в консоли, включить синхронный вывод на консоль:</p>
+<p>Выключить таймаут неактивной сессии в консоли, привилегированный режим в консоли, включить синхронный вывод на консоль:</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -167,6 +170,43 @@
 <p>Хранить startup конфиг в сжатом виде</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">service compress-config </span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>### Безопасность</p>
+
+<p>Хранение паролей в зашифрованном виде</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">service password-encryption</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Блокировать после нескольких неудачных попыток залогиниться</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">login block-for &lt;timeout&gt; attemts &lt;num&gt; within &lt;timeot&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Логирование доступа</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">login on-success log
+</span><span class="line">login on-failure log every 2</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Настройка ключей SSH</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">hostname &lt;hostname&gt;
+</span><span class="line">ip domain name &lt;domain name&gt;
+</span><span class="line">crypto key generate rsa general-keys modulus 1024
+</span><span class="line">ip ssh time-out 90
+</span><span class="line">ip ssh maxstartups 2 
+</span><span class="line">ip ssh authentication-retries 2 </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Настроить SSH на нестандартный порт</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">ip ssh port &lt;port&gt; rotary &lt;group&gt;
+</span><span class="line">line vty 0 4
+</span><span class="line"> rotary &lt;group&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
 ]]></content>
     
   </entry>
