@@ -4,7 +4,7 @@
   <title><![CDATA[Networks, security and system administration]]></title>
   <link href="http://kozl.github.io/atom.xml" rel="self"/>
   <link href="http://kozl.github.io/"/>
-  <updated>2015-05-31T17:33:41+03:00</updated>
+  <updated>2015-05-31T17:35:10+03:00</updated>
   <id>http://kozl.github.io/</id>
   <author>
     <name><![CDATA[Kozlov Alexander]]></name>
@@ -170,7 +170,6 @@
 <p>Хранить startup конфиг в сжатом виде</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">service compress-config </span></code></pre></td></tr></table></div></figure></notextile></div>
-<p>### Безопасность</p>
 
 <p>Хранение паролей в зашифрованном виде</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
