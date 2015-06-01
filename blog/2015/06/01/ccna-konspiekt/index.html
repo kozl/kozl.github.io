@@ -251,7 +251,59 @@
 
 <h3 id="lan-switching-technologies">2.0 LAN Switching Technologies</h3>
 
-<p>####</p>
+<h4 id="configure-and-verify-initial-switch-configuration-including-remote-access-management">2.3 Configure and verify initial switch configuration including remote access management</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">hostname &lt;HOSTNAME&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface Vlan &lt;NUM&gt;
+</span><span class="line"> no sh
+</span><span class="line"> ip address &lt;IP&gt; &lt;MASK&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">ip default-gateway &lt;GW&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">username &lt;USER&gt; password &lt;PASSWORD&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">line vty 0 15
+</span><span class="line"> login local
+</span><span class="line"> transport input &lt;PROTOCOL&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">enable secret &lt;PASSWORD&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">service password-encryption</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="configure-and-verify-vlans">2.6 Configure and verify VLANs</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">vlan &lt;NUM&gt;
+</span><span class="line"> name &lt;NAME&gt;
+</span><span class="line">
+</span><span class="line">interface &lt;INT&gt;
+</span><span class="line"> switchport access vlan &lt;VLAN&gt;
+</span><span class="line">
+</span><span class="line">interface &lt;INT&gt;
+</span><span class="line"> switchport trunk encapsulation dot1q
+</span><span class="line"> switchport trunk allowed vlan &lt;VLANS&gt;
+</span><span class="line"> switchport mode trunk</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 </div>
 
