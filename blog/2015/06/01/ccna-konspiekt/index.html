@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: rfc - Networks, security and system administration</title>
+  <title>CCNA: конспект - Networks, security and system administration</title>
   <meta name="author" content="Kozlov Alexander">
 
   
-  <meta name="description" content="Category: rfc">
+  <meta name="description" content="CCNA Version 2 (200-120) 1.0 Operation of IP Data Networks 1.4 Describe the purpose and basic operation of the protocols in the OSI and TCP/IP models &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://kozl.github.io/blog/categories/rfc">
+  <link rel="canonical" href="http://kozl.github.io/blog/2015/06/01/ccna-konspiekt">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -93,30 +93,216 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Rfc</h1>
+  
+    
+      <h1 class="entry-title">CCNA: конспект</h1>
+    
+  
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-01T11:37:56+03:00" pubdate data-updated="true"></time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><h2 id="ccna-version-2-200-120">CCNA Version 2 (200-120)</h2>
 
-  
-  <h2>2015</h2>
+<h3 id="operation-of-ip-data-networks">1.0 Operation of IP Data Networks</h3>
 
-<article>
-  
-<h1><a href="/blog/2015/05/18/zarieziervirovannyie-ip-adriesa-rfc-6890/">Зарезервированные IP адреса: RFC 6890</a></h1>
-<time datetime="2015-05-18T15:57:17+03:00" pubdate><span class='month'>May</span> <span class='day'>18</span> <span class='year'>2015</span></time>
+<h4 id="describe-the-purpose-and-basic-operation-of-the-protocols-in-the-osi-and-tcpip-models">1.4 Describe the purpose and basic operation of the protocols in the OSI and TCP/IP models</h4>
 
-</article>
+<p><strong>OSI</strong></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Layer</th>
+      <th>Name</th>
+      <th>Protocols</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>7</td>
+      <td>Application</td>
+      <td>DNS, NTP, FTP, HTTP, DHCP, SMTP, Telnet, NFS</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Presentation</td>
+      <td>MIME, SSL/TLS</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Session</td>
+      <td>NETBIOS, RPC, SOCKS</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Transport</td>
+      <td>TCP, UDP, SCTP</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Network</td>
+      <td>IP, ICMP, IGMP, IPsec, OSPF, RIP, EIGRP, IS-IS</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Data link</td>
+      <td>L2TP, PPP, Ethernet, CDP, HDLC, ARP, Frame Relay</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Physical</td>
+      <td>DSL, USB</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>.</p>
+
+<p><strong>DoD</strong></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Protocols</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Application</td>
+      <td>DNS, NTP, FTP, HTTP, DHCP, SMTP, Telnet, NFS</td>
+    </tr>
+    <tr>
+      <td>Transport layer</td>
+      <td>TCP, UDP, SCTP</td>
+    </tr>
+    <tr>
+      <td>Internet layer</td>
+      <td>IP, ICMP, IGMP, IPsec, OSPF, RIP, EIGRP, IS-IS</td>
+    </tr>
+    <tr>
+      <td>Link layer</td>
+      <td>L2TP, PPP, Ethernet, CDP, HDLC, ARP, Frame Relay</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>.</p>
+
+<h4 id="identify-the-appropriate-media-cables-ports-and-connectors-to-connect-cisco-network-devices-to-other-network-devices-and-hosts-in-a-lan">1.6 Identify the appropriate media, cables, ports and connectors to connect Cisco network devices to other network devices and hosts in a LAN</h4>
+
+<p>Схемы распайки: TIA <strong>T568A</strong>, и EIA <strong>T568B</strong></p>
+
+<p><img src="http://www.bitsbyjohn.com/wp-content/uploads/2013/06/UTP-Pairing.png" /></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>TX: 1,2 RX: 3,6</th>
+      <th>RX: 1,2 TX: 3,6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Сетевые адаптеры ПК</td>
+      <td>Коммутаторы</td>
+    </tr>
+    <tr>
+      <td>Маршрутизаторы</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Точки доступа</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Сетевые принтеры</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Однотипные устройства подключаются перекрещенным кабелем (crossover)</p>
+
+<p>Cisco Console Rollover cable</p>
+
+<p><img src="http://wiki.artisansasylum.com/images/b/b6/Wiring-rollover.png" /></p>
+
+<h3 id="lan-switching-technologies">2.0 LAN Switching Technologies</h3>
+
+<p>####</p>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Kozlov Alexander</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-01T11:37:56+03:00" pubdate data-updated="true"></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ccna/'>ccna</a>, <a class='category' href='/blog/categories/network/'>network,</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kozl.github.io/blog/2015/06/01/ccna-konspiekt/" data-via="" data-counturl="http://kozl.github.io/blog/2015/06/01/ccna-konspiekt/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/05/22/dvukhtochiechnyie-protokoly/" title="Previous Post: Двухточечные протоколы">&laquo; Двухточечные протоколы</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>
