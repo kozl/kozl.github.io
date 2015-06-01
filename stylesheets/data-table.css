@@ -1,10 +1,10 @@
-table {
+table.table {
   border-style:solid;
   border-width:2px;
   border-color:#e7e3e7;
 }
 
-table th, table td {
+table.table th, table.table td {
   border-style:dashed;
   border-width:2px;
   border-color:#e7e3e7;
@@ -12,20 +12,20 @@ table th, table td {
   padding-right: 3px;
 }
 
-table th {
+table.table th {
   border-style:solid;
   font-weight:bold;
   background: url("/images/noise.png?1330434582") repeat scroll left top #F7F3F7;
 }
 
-table th[align="left"], table td[align="left"] {
+table.table th[align="left"], table.table td[align="left"] {
   text-align:left;
 }
 
-table th[align="right"], table td[align="right"] {
+table.table th[align="right"], table.table td[align="right"] {
   text-align:right;
 }
 
-table th[align="center"], table td[align="center"] {
+table.table th[align="center"], table.table td[align="center"] {
   text-align:center;
 }
