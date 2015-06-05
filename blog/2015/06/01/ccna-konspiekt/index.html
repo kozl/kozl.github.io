@@ -294,6 +294,7 @@
 <span class="line-number">8</span>
 <span class="line-number">9</span>
 <span class="line-number">10</span>
+<span class="line-number">11</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">vlan &lt;NUM&gt;
 </span><span class="line"> name &lt;NAME&gt;
 </span><span class="line">
@@ -303,8 +304,100 @@
 </span><span class="line">interface &lt;INT&gt;
 </span><span class="line"> switchport trunk encapsulation dot1q
 </span><span class="line"> switchport trunk allowed vlan &lt;VLANS&gt;
+</span><span class="line"> switchport trunk native vlan &lt;VLAN&gt;
 </span><span class="line"> switchport mode trunk</span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<h4 id="configure-and-verify-trunking-on-cisco-switches">2.7 Configure and verify trunking on Cisco switches</h4>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>switchport modes</th>
+      <th>trunk active</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>access</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>trunk</td>
+      <td>trunk, dynamic auto, dynamic desirable</td>
+    </tr>
+    <tr>
+      <td>dynamic auto</td>
+      <td>trunk, dynamic desirable</td>
+    </tr>
+    <tr>
+      <td>dynamic desirable</td>
+      <td>trunk, dynamic auto, dynamic desirable</td>
+    </tr>
+    <tr>
+      <td>nonegotiate</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="identify-enhanced-switching-technologies">2.8 Identify enhanced switching technologies</h4>
+
+<p><strong>STP</strong> - 802.1d</p>
+
+<ol>
+  <li>Выбирается корневой мост. Корневым становится коммутатор с меньшим Bridge ID = Priority + MAC. Приоритет может быть изменен администратором с целью влияния на процесс выбора</li>
+  <li>Определение корневых и выделенных портов (root и designated ports). Корневой выбирается по наилучшему пути до корневого моста. Наименьший по Root Path Cost.</li>
+  <li>Перевод остальных портов в состояние Blocking</li>
+</ol>
+
+<p>Роли портов</p>
+
+<ol>
+  <li>Root port</li>
+  <li>Designated port</li>
+  <li>Non-designated port</li>
+  <li>Disabled port</li>
+</ol>
+
+<p>Состояния портов</p>
+
+<ol>
+  <li>Blocking</li>
+  <li>Listening</li>
+  <li>Learning</li>
+  <li>Forwarding</li>
+</ol>
+
+<p><strong>RSTP</strong> - 802.1w, ускоренная сходимость за счёт наличия альтернативных путей до корневого моста и меньшего количества состояний порта</p>
+
+<p>Роли портов:</p>
+
+<ol>
+  <li>Root port</li>
+  <li>Designated port</li>
+  <li>Alternative port</li>
+  <li>Backup port</li>
+</ol>
+
+<p>Состояния портов:</p>
+
+<ol>
+  <li>Discarding</li>
+  <li>Learning</li>
+  <li>Forwarding</li>
+</ol>
+
+<p><strong>PVST</strong>, <strong>PVST+</strong> - проприетарные протоколы Cisco, для каждого VLAN строят отдельное дерево, могут использовать транки на ISL. Основаны на STP.</p>
+
+<dl>
+  <dt><strong>Rapid PVST</strong>, <strong>Rapid PVST+</strong> - основаны на RSTP</dt>
+  <dt><strong>Portfast</strong></dt>
+  <dd>настраивается на access портах, сразу переводит порт в состояние Forwarding
+<strong>BPDU Guard</strong></dd>
+  <dd>выключает порт при получении BPDU</dd>
+</dl>
+
+<p><strong>MSTP</strong> - 802.1s</p>
 </div>
 
 
@@ -353,6 +446,8 @@
         <a class="basic-alignment left" href="/blog/2015/05/22/dvukhtochiechnyie-protokoly/" title="Previous Post: Двухточечные протоколы">&laquo; Двухточечные протоколы</a>
       
       
+        <a class="basic-alignment right" href="/blog/2015/06/05/vpn/" title="Next Post: VPN">VPN &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -364,6 +459,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/06/05/vpn/">VPN</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2015/06/01/ccna-konspiekt/">CCNA: конспект</a>
@@ -379,10 +478,6 @@
     
       <li class="post">
         <a href="/blog/2015/05/18/bazovaia-nastroika-marshrutizatora/">Базовая настройка маршрутизатора</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/18/zarieziervirovannyie-ip-adriesa-rfc-6890/">Зарезервированные IP адреса: RFC 6890</a>
       </li>
     
   </ul>
