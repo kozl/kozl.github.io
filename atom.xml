@@ -4,7 +4,7 @@
   <title><![CDATA[Networks, security and system administration]]></title>
   <link href="http://kozl.github.io/atom.xml" rel="self"/>
   <link href="http://kozl.github.io/"/>
-  <updated>2015-05-31T17:35:10+03:00</updated>
+  <updated>2015-06-01T18:22:16+03:00</updated>
   <id>http://kozl.github.io/</id>
   <author>
     <name><![CDATA[Kozlov Alexander]]></name>
@@ -12,6 +12,201 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    
+    <title type="html"><![CDATA[CCNA: конспект]]></title>
+    <link href="http://kozl.github.io/blog/2015/06/01/ccna-konspiekt/"/>
+    
+    <updated>2015-06-01T11:37:56+03:00</updated>
+    <id>http://kozl.github.io/blog/2015/06/01/ccna-konspiekt</id>
+    
+    <content type="html"><![CDATA[<h2 id="ccna-version-2-200-120">CCNA Version 2 (200-120)</h2>
+
+<h3 id="operation-of-ip-data-networks">1.0 Operation of IP Data Networks</h3>
+
+<h4 id="describe-the-purpose-and-basic-operation-of-the-protocols-in-the-osi-and-tcpip-models">1.4 Describe the purpose and basic operation of the protocols in the OSI and TCP/IP models</h4>
+
+<p><strong>OSI</strong></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Layer</th>
+      <th>Name</th>
+      <th>Protocols</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>7</td>
+      <td>Application</td>
+      <td>DNS, NTP, FTP, HTTP, DHCP, SMTP, Telnet, NFS</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Presentation</td>
+      <td>MIME, SSL/TLS</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Session</td>
+      <td>NETBIOS, RPC, SOCKS</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Transport</td>
+      <td>TCP, UDP, SCTP</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Network</td>
+      <td>IP, ICMP, IGMP, IPsec, OSPF, RIP, EIGRP, IS-IS</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Data link</td>
+      <td>L2TP, PPP, Ethernet, CDP, HDLC, ARP, Frame Relay</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Physical</td>
+      <td>DSL, USB</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>.</p>
+
+<p><strong>DoD</strong></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Protocols</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Application</td>
+      <td>DNS, NTP, FTP, HTTP, DHCP, SMTP, Telnet, NFS</td>
+    </tr>
+    <tr>
+      <td>Transport layer</td>
+      <td>TCP, UDP, SCTP</td>
+    </tr>
+    <tr>
+      <td>Internet layer</td>
+      <td>IP, ICMP, IGMP, IPsec, OSPF, RIP, EIGRP, IS-IS</td>
+    </tr>
+    <tr>
+      <td>Link layer</td>
+      <td>L2TP, PPP, Ethernet, CDP, HDLC, ARP, Frame Relay</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>.</p>
+
+<h4 id="identify-the-appropriate-media-cables-ports-and-connectors-to-connect-cisco-network-devices-to-other-network-devices-and-hosts-in-a-lan">1.6 Identify the appropriate media, cables, ports and connectors to connect Cisco network devices to other network devices and hosts in a LAN</h4>
+
+<p>Схемы распайки: TIA <strong>T568A</strong>, и EIA <strong>T568B</strong></p>
+
+<p><img src="http://www.bitsbyjohn.com/wp-content/uploads/2013/06/UTP-Pairing.png" /></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>TX: 1,2 RX: 3,6</th>
+      <th>RX: 1,2 TX: 3,6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Сетевые адаптеры ПК</td>
+      <td>Коммутаторы</td>
+    </tr>
+    <tr>
+      <td>Маршрутизаторы</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Точки доступа</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Сетевые принтеры</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Однотипные устройства подключаются перекрещенным кабелем (crossover)</p>
+
+<p>Cisco Console Rollover cable</p>
+
+<p><img src="http://wiki.artisansasylum.com/images/b/b6/Wiring-rollover.png" /></p>
+
+<h3 id="lan-switching-technologies">2.0 LAN Switching Technologies</h3>
+
+<h4 id="configure-and-verify-initial-switch-configuration-including-remote-access-management">2.3 Configure and verify initial switch configuration including remote access management</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">hostname &lt;HOSTNAME&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface Vlan &lt;NUM&gt;
+</span><span class="line"> no sh
+</span><span class="line"> ip address &lt;IP&gt; &lt;MASK&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">ip default-gateway &lt;GW&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">username &lt;USER&gt; password &lt;PASSWORD&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">line vty 0 15
+</span><span class="line"> login local
+</span><span class="line"> transport input &lt;PROTOCOL&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">enable secret &lt;PASSWORD&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">service password-encryption</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="configure-and-verify-vlans">2.6 Configure and verify VLANs</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">vlan &lt;NUM&gt;
+</span><span class="line"> name &lt;NAME&gt;
+</span><span class="line">
+</span><span class="line">interface &lt;INT&gt;
+</span><span class="line"> switchport access vlan &lt;VLAN&gt;
+</span><span class="line">
+</span><span class="line">interface &lt;INT&gt;
+</span><span class="line"> switchport trunk encapsulation dot1q
+</span><span class="line"> switchport trunk allowed vlan &lt;VLANS&gt;
+</span><span class="line"> switchport mode trunk</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+]]></content>
+    
+  </entry>
   
   <entry>
     
@@ -170,6 +365,8 @@
 <p>Хранить startup конфиг в сжатом виде</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">service compress-config </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section">Безопасность</h3>
 
 <p>Хранение паролей в зашифрованном виде</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>

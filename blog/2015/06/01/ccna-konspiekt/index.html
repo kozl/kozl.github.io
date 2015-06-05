@@ -5,14 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Базовая настройка маршрутизатора - Networks, security and system administration</title>
+  <title>CCNA: конспект - Networks, security and system administration</title>
   <meta name="author" content="Kozlov Alexander">
 
   
-  <meta name="description" content="Удаление предыдущей конфигурации 1
-Router#erase startup-config Отключение DNS запросов при ошибках в консоли
-1
-no ip domain lookup Выключить таймаут &hellip;">
+  <meta name="description" content="CCNA Version 2 (200-120) 1.0 Operation of IP Data Networks 1.4 Describe the purpose and basic operation of the protocols in the OSI and TCP/IP models &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +18,7 @@ no ip domain lookup Выключить таймаут &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://kozl.github.io/blog/2015/05/18/bazovaia-nastroika-marshrutizatora">
+  <link rel="canonical" href="http://kozl.github.io/blog/2015/06/01/ccna-konspiekt">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -101,7 +98,7 @@ no ip domain lookup Выключить таймаут &hellip;">
   <header>
   
     
-      <h1 class="entry-title">Базовая настройка маршрутизатора</h1>
+      <h1 class="entry-title">CCNA: конспект</h1>
     
   
     
@@ -118,73 +115,196 @@ no ip domain lookup Выключить таймаут &hellip;">
   
 
 
-<time datetime="2015-05-18T17:11:57+03:00" pubdate data-updated="true"></time>
+<time datetime="2015-06-01T11:37:56+03:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Удаление предыдущей конфигурации</p>
+<div class="entry-content"><h2 id="ccna-version-2-200-120">CCNA Version 2 (200-120)</h2>
+
+<h3 id="operation-of-ip-data-networks">1.0 Operation of IP Data Networks</h3>
+
+<h4 id="describe-the-purpose-and-basic-operation-of-the-protocols-in-the-osi-and-tcpip-models">1.4 Describe the purpose and basic operation of the protocols in the OSI and TCP/IP models</h4>
+
+<p><strong>OSI</strong></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Layer</th>
+      <th>Name</th>
+      <th>Protocols</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>7</td>
+      <td>Application</td>
+      <td>DNS, NTP, FTP, HTTP, DHCP, SMTP, Telnet, NFS</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Presentation</td>
+      <td>MIME, SSL/TLS</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Session</td>
+      <td>NETBIOS, RPC, SOCKS</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Transport</td>
+      <td>TCP, UDP, SCTP</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Network</td>
+      <td>IP, ICMP, IGMP, IPsec, OSPF, RIP, EIGRP, IS-IS</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Data link</td>
+      <td>L2TP, PPP, Ethernet, CDP, HDLC, ARP, Frame Relay</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Physical</td>
+      <td>DSL, USB</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>.</p>
+
+<p><strong>DoD</strong></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Protocols</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Application</td>
+      <td>DNS, NTP, FTP, HTTP, DHCP, SMTP, Telnet, NFS</td>
+    </tr>
+    <tr>
+      <td>Transport layer</td>
+      <td>TCP, UDP, SCTP</td>
+    </tr>
+    <tr>
+      <td>Internet layer</td>
+      <td>IP, ICMP, IGMP, IPsec, OSPF, RIP, EIGRP, IS-IS</td>
+    </tr>
+    <tr>
+      <td>Link layer</td>
+      <td>L2TP, PPP, Ethernet, CDP, HDLC, ARP, Frame Relay</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>.</p>
+
+<h4 id="identify-the-appropriate-media-cables-ports-and-connectors-to-connect-cisco-network-devices-to-other-network-devices-and-hosts-in-a-lan">1.6 Identify the appropriate media, cables, ports and connectors to connect Cisco network devices to other network devices and hosts in a LAN</h4>
+
+<p>Схемы распайки: TIA <strong>T568A</strong>, и EIA <strong>T568B</strong></p>
+
+<p><img src="http://www.bitsbyjohn.com/wp-content/uploads/2013/06/UTP-Pairing.png" /></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>TX: 1,2 RX: 3,6</th>
+      <th>RX: 1,2 TX: 3,6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Сетевые адаптеры ПК</td>
+      <td>Коммутаторы</td>
+    </tr>
+    <tr>
+      <td>Маршрутизаторы</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Точки доступа</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Сетевые принтеры</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Однотипные устройства подключаются перекрещенным кабелем (crossover)</p>
+
+<p>Cisco Console Rollover cable</p>
+
+<p><img src="http://wiki.artisansasylum.com/images/b/b6/Wiring-rollover.png" /></p>
+
+<h3 id="lan-switching-technologies">2.0 LAN Switching Technologies</h3>
+
+<h4 id="configure-and-verify-initial-switch-configuration-including-remote-access-management">2.3 Configure and verify initial switch configuration including remote access management</h4>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">Router#erase startup-config</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class=""><span class="line">hostname &lt;HOSTNAME&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>Отключение DNS запросов при ошибках в консоли</p>
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">no ip domain lookup</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>Выключить таймаут неактивной сессии в консоли, привилегированный режим в консоли, включить синхронный вывод на консоль:</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">line con 0
-</span><span class="line"> exec-timeout 0 0
-</span><span class="line"> privilege level 15
-</span><span class="line"> logging synchronous</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface Vlan &lt;NUM&gt;
+</span><span class="line"> no sh
+</span><span class="line"> ip address &lt;IP&gt; &lt;MASK&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>Хранить startup конфиг в сжатом виде</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">service compress-config </span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class=""><span class="line">ip default-gateway &lt;GW&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h3 id="section">Безопасность</h3>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">username &lt;USER&gt; password &lt;PASSWORD&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>Хранение паролей в зашифрованном виде</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">line vty 0 15
+</span><span class="line"> login local
+</span><span class="line"> transport input &lt;PROTOCOL&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">enable secret &lt;PASSWORD&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">service password-encryption</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>Блокировать после нескольких неудачных попыток залогиниться</p>
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">login block-for &lt;timeout&gt; attemts &lt;num&gt; within &lt;timeot&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+<h4 id="configure-and-verify-vlans">2.6 Configure and verify VLANs</h4>
 
-<p>Логирование доступа</p>
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">login on-success log
-</span><span class="line">login on-failure log every 2</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>Настройка ключей SSH</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
 <span class="line-number">5</span>
 <span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">hostname &lt;hostname&gt;
-</span><span class="line">ip domain name &lt;domain name&gt;
-</span><span class="line">crypto key generate rsa general-keys modulus 1024
-</span><span class="line">ip ssh time-out 90
-</span><span class="line">ip ssh maxstartups 2 
-</span><span class="line">ip ssh authentication-retries 2 </span></code></pre></td></tr></table></div></figure></notextile></div>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">vlan &lt;NUM&gt;
+</span><span class="line"> name &lt;NAME&gt;
+</span><span class="line">
+</span><span class="line">interface &lt;INT&gt;
+</span><span class="line"> switchport access vlan &lt;VLAN&gt;
+</span><span class="line">
+</span><span class="line">interface &lt;INT&gt;
+</span><span class="line"> switchport trunk encapsulation dot1q
+</span><span class="line"> switchport trunk allowed vlan &lt;VLANS&gt;
+</span><span class="line"> switchport mode trunk</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>Настроить SSH на нестандартный порт</p>
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">ip ssh port &lt;port&gt; rotary &lt;group&gt;
-</span><span class="line">line vty 0 4
-</span><span class="line"> rotary &lt;group&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
 </div>
 
 
@@ -207,7 +327,7 @@ no ip domain lookup Выключить таймаут &hellip;">
   
 
 
-<time datetime="2015-05-18T17:11:57+03:00" pubdate data-updated="true"></time>
+<time datetime="2015-06-01T11:37:56+03:00" pubdate data-updated="true"></time>
       
 
 <span class="categories">
@@ -221,7 +341,7 @@ no ip domain lookup Выключить таймаут &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kozl.github.io/blog/2015/05/18/bazovaia-nastroika-marshrutizatora/" data-via="" data-counturl="http://kozl.github.io/blog/2015/05/18/bazovaia-nastroika-marshrutizatora/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kozl.github.io/blog/2015/06/01/ccna-konspiekt/" data-via="" data-counturl="http://kozl.github.io/blog/2015/06/01/ccna-konspiekt/" >Tweet</a>
   
   
   
@@ -230,10 +350,8 @@ no ip domain lookup Выключить таймаут &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/05/18/zarieziervirovannyie-ip-adriesa-rfc-6890/" title="Previous Post: Зарезервированные IP адреса: RFC 6890">&laquo; Зарезервированные IP адреса: RFC 6890</a>
+        <a class="basic-alignment left" href="/blog/2015/05/22/dvukhtochiechnyie-protokoly/" title="Previous Post: Двухточечные протоколы">&laquo; Двухточечные протоколы</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/05/19/eigrp-kratkii-konspiekt/" title="Next Post: EIGRP: краткий конспект">EIGRP: краткий конспект &raquo;</a>
       
     </p>
   </footer>
