@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Двухточечные протоколы - Networks, security and system administration</title>
+  <title>VPN - Networks, security and system administration</title>
   <meta name="author" content="Kozlov Alexander">
 
   
-  <meta name="description" content="Point-to-Point Protocol (PPP) Двухточечный протокол канального уровня. Обеспечивает: аутентификацию (PAP и CHAP) автоматическую настройку интерфейсов &hellip;">
+  <meta name="description" content="IPsec RFC2401 IPsec - это стандарт, включающий в себя набор протоколов, позволяющих организовать шифрование и туннелирование данных между сетевыми &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://kozl.github.io/blog/2015/05/22/dvukhtochiechnyie-protokoly">
+  <link rel="canonical" href="http://kozl.github.io/blog/2015/06/05/vpn">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -98,7 +98,7 @@
   <header>
   
     
-      <h1 class="entry-title">Двухточечные протоколы</h1>
+      <h1 class="entry-title">VPN</h1>
     
   
     
@@ -115,47 +115,63 @@
   
 
 
-<time datetime="2015-05-22T16:00:42+03:00" pubdate data-updated="true"></time>
+<time datetime="2015-06-05T10:27:39+03:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2 id="point-to-point-protocol-ppp">Point-to-Point Protocol (PPP)</h2>
+<div class="entry-content"><h3 id="ipsec">IPsec</h3>
 
-<p>Двухточечный протокол канального уровня. Обеспечивает:</p>
+<p><a href="ftp://ftp.isi.edu/in-notes/rfc2401.txt">RFC2401</a></p>
 
-<ul>
-  <li>аутентификацию (PAP и CHAP)</li>
-  <li>автоматическую настройку интерфейсов на каждом конце по протоколу LCP</li>
-  <li>обнаружение закольцованных связей (на физическом уровне)</li>
-  <li>возможность работы нескольких протоколов 3 уровня на одном канале связи</li>
-  <li>обнаружение ошибок</li>
-  <li>многоканальную передачу, для передачи трафика через несколько физических каналов имея одно логическое соединение</li>
-</ul>
+<p><strong>IPsec</strong> - это стандарт, включающий в себя набор протоколов, позволяющих организовать шифрование и туннелирование данных между сетевыми устройствами. Включает в себя следующие протоколы:</p>
 
-<p><strong>LCP</strong> - Link Control Protocol, для установление соединения и согласования параметров соединения
-<strong>NCP</strong> - Network Control Protocol, инициирует соединение и настройку различных протоколов сетевого уровня. Для IP - IPCP</p>
+<dl>
+  <dt><strong>AH (Authentication header)</strong></dt>
+  <dd>
+    <p>протокол, позволяющий обеспечить целостность пакетов и аутентификацию источника</p>
+  </dd>
+  <dt><strong>ESP (Encapsulation Security Payload)</strong></dt>
+  <dd>
+    <p>занимается непосредственно шифрование данных, может обеспечивать аутентификацию источника и целостность данных. Может работать в двух режимах - транспортном и туннельном.</p>
+  </dd>
+  <dt><strong>IKE (Internet Key Exchange protocol)</strong></dt>
+  <dd>
+    <p>используется для аутентификации узлов-участников VPN и защищенного согласование SA (Security Association)</p>
+  </dd>
+</dl>
 
-<h4 id="section">Аутентификация</h4>
+<p>IPsec оперирует следующими понятиями:</p>
 
-<p><strong>PAP</strong> - пароль передаётся в открытом тексте
-<strong>CHAP</strong> - challenge-response аутентификация, основанная на MD5</p>
+<dl>
+  <dt><strong>SA (Security Association)</strong></dt>
+  <dd>
+    <p>набор параметров защищенного соединения (например протокол, ключ шифрования), у каждого соединения есть свой SA. SA определяется для соединения в одном направлении. Каждый SA идентифицируется SPI (Security Parameter Index), указанным в каждом пакете в заголовке IPsec.</p>
+  </dd>
+  <dt><strong>SPD (Security Policy Database)</strong></dt>
+  <dd>
+    <p>набор политик, определяющих какие данные будут шифроваться и какие SA при этом должны быть выбраны.</p>
+  </dd>
+</dl>
 
-<p>Конфигурация на маршрутизаторах Cisco:</p>
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">hostname R1
-</span><span class="line">username R2 password mypass
-</span><span class="line">!
-</span><span class="line">interface serial 0/1
-</span><span class="line"> encapsulation ppp
-</span><span class="line"> ppp authentication chap</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>IPsec может функционировать в двух режимах: транспортном и туннельном</p>
+
+<dl>
+  <dt><strong>Транспортный режим</strong></dt>
+  <dd>
+    <p>оставляет IP заголовок неизменным, шифрует содержимое пакета. Используется, как правило, для защиты данных между хостами. Может использоваться между шлюзами для защиты данных в тоннеле, организованным другими средствами, например GRE или L2TP.</p>
+  </dd>
+  <dt><strong>Туннельный режим</strong></dt>
+  <dd>
+    <p>в этом режиме исходный пакет шифруется полностью и инкапсулируется в новый пакет. Используется для организации Site-to-site VPN.</p>
+  </dd>
+</dl>
+
+<h3 id="section">Дополнительные материалы</h3>
+
+<p><a href="http://lartc.org/howto/lartc.ipsec.html">IPsec в Linux</a></p>
 
 </div>
 
@@ -179,12 +195,12 @@
   
 
 
-<time datetime="2015-05-22T16:00:42+03:00" pubdate data-updated="true"></time>
+<time datetime="2015-06-05T10:27:39+03:00" pubdate data-updated="true"></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/ccna/'>ccna,</a>, <a class='category' href='/blog/categories/network/'>network</a>
+    <a class='category' href='/blog/categories/network/'>network,</a>, <a class='category' href='/blog/categories/security/'>security</a>
   
 </span>
 
@@ -193,7 +209,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kozl.github.io/blog/2015/05/22/dvukhtochiechnyie-protokoly/" data-via="" data-counturl="http://kozl.github.io/blog/2015/05/22/dvukhtochiechnyie-protokoly/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kozl.github.io/blog/2015/06/05/vpn/" data-via="" data-counturl="http://kozl.github.io/blog/2015/06/05/vpn/" >Tweet</a>
   
   
   
@@ -202,10 +218,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/05/19/eigrp-kratkii-konspiekt/" title="Previous Post: EIGRP: краткий конспект">&laquo; EIGRP: краткий конспект</a>
+        <a class="basic-alignment left" href="/blog/2015/06/01/ccna-konspiekt/" title="Previous Post: CCNA: конспект">&laquo; CCNA: конспект</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/06/01/ccna-konspiekt/" title="Next Post: CCNA: конспект">CCNA: конспект &raquo;</a>
       
     </p>
   </footer>
