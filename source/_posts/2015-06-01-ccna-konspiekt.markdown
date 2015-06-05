@@ -61,5 +61,111 @@ Cisco Console Rollover cable
 
 ### 2.0 LAN Switching Technologies
 
-#### 
+#### 2.3 Configure and verify initial switch configuration including remote access management
 
+```
+hostname <HOSTNAME>
+```
+
+```
+interface Vlan <NUM>
+ no sh
+ ip address <IP> <MASK>
+```
+
+```
+ip default-gateway <GW>
+```
+
+```
+username <USER> password <PASSWORD>
+```
+
+```
+line vty 0 15
+ login local
+ transport input <PROTOCOL>
+```
+
+```
+enable secret <PASSWORD>
+```
+
+```
+service password-encryption
+```
+
+#### 2.6 Configure and verify VLANs
+
+```
+vlan <NUM>
+ name <NAME>
+
+interface <INT>
+ switchport access vlan <VLAN>
+
+interface <INT>
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan <VLANS>
+ switchport trunk native vlan <VLAN>
+ switchport mode trunk
+```
+
+#### 2.7 Configure and verify trunking on Cisco switches
+
+{: .table}
+| switchport modes      |  trunk active                          |
+|-----------------------|----------------------------------------|
+| access                |       -                                |
+| trunk                 | trunk, dynamic auto, dynamic desirable |
+| dynamic auto          | trunk, dynamic desirable               |
+| dynamic desirable     | trunk, dynamic auto, dynamic desirable |
+| nonegotiate           |       -                                |
+
+#### 2.8 Identify enhanced switching technologies
+
+**STP** - 802.1d
+
+1. Выбирается корневой мост. Корневым становится коммутатор с меньшим Bridge ID = Priority + MAC. Приоритет может быть изменен администратором с целью влияния на процесс выбора
+2. Определение корневых и выделенных портов (root и designated ports). Корневой выбирается по наилучшему пути до корневого моста. Наименьший по Root Path Cost.
+3. Перевод остальных портов в состояние Blocking
+
+Роли портов
+
+1. Root port
+2. Designated port
+3. Non-designated port
+4. Disabled port
+
+Состояния портов
+
+1. Blocking
+2. Listening
+3. Learning
+4. Forwarding
+
+
+**RSTP** - 802.1w, ускоренная сходимость за счёт наличия альтернативных путей до корневого моста и меньшего количества состояний порта
+
+Роли портов:
+
+1. Root port
+2. Designated port
+3. Alternative port
+4. Backup port
+
+Состояния портов:
+
+1. Discarding
+2. Learning
+3. Forwarding
+
+**PVST**, **PVST+** - проприетарные протоколы Cisco, для каждого VLAN строят отдельное дерево, могут использовать транки на ISL. Основаны на STP.
+
+**Rapid PVST**, **Rapid PVST+** - основаны на RSTP
+**Portfast**
+: настраивается на access портах, сразу переводит порт в состояние Forwarding
+**BPDU Guard**
+: выключает порт при получении BPDU
+
+**MSTP** - 802.1s
