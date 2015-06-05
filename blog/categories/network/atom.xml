@@ -4,7 +4,7 @@
   <title><![CDATA[Category: network | Networks, security and system administration]]></title>
   <link href="http://kozl.github.io/blog/categories/network/atom.xml" rel="self"/>
   <link href="http://kozl.github.io/"/>
-  <updated>2015-06-05T13:02:24+03:00</updated>
+  <updated>2015-06-05T15:48:14+03:00</updated>
   <id>http://kozl.github.io/</id>
   <author>
     <name><![CDATA[Kozlov Alexander]]></name>
@@ -31,8 +31,9 @@
   <li>многоканальную передачу, для передачи трафика через несколько физических каналов имея одно логическое соединение</li>
 </ul>
 
-<p><strong>LCP</strong> - Link Control Protocol, для установление соединения и согласования параметров соединения
-<strong>NCP</strong> - Network Control Protocol, инициирует соединение и настройку различных протоколов сетевого уровня. Для IP - IPCP</p>
+<p><strong>LCP</strong> - Link Control Protocol, для установление соединения и согласования параметров соединения</p>
+
+<p><strong>NCP</strong> - Network Control Protocol, инициирует соединение и настройку различных протоколов сетевого уровня. Для IP - IPCP</p>
 
 <h4 id="section">Аутентификация</h4>
 

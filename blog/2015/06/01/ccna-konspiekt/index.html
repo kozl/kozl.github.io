@@ -350,7 +350,7 @@
   <li>Перевод остальных портов в состояние Blocking</li>
 </ol>
 
-<p>Роли портов</p>
+<p>Роли портов:</p>
 
 <ol>
   <li>Root port</li>
@@ -359,7 +359,7 @@
   <li>Disabled port</li>
 </ol>
 
-<p>Состояния портов</p>
+<p>Состояния портов:</p>
 
 <ol>
   <li>Blocking</li>
@@ -398,6 +398,54 @@
 </dl>
 
 <p><strong>MSTP</strong> - 802.1s</p>
+
+<p><strong>Etherchannel</strong></p>
+
+<p>Существует три варианта конфигурирования аггрегированного канала:</p>
+
+<ol>
+  <li>Статическая настройка</li>
+  <li>Настройка при помощи протокола LACP - стандартный протокол</li>
+  <li>Настройка при помощи протокола PagP - проприетарный протокол</li>
+</ol>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface range fa0/10 - 13
+</span><span class="line"> channel-group 3 mode on</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Режимы (modes):</p>
+
+<ol>
+  <li><em>on</em> - статическая настройка</li>
+  <li><em>active</em> - включить LACP</li>
+  <li><em>passive</em> - включить LACP при получении сообщения LACP</li>
+  <li><em>desirable</em> - включить PagP</li>
+  <li><em>auto</em> - включить PagP при получении сообщения PagP</li>
+</ol>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show etherchannel summary</span></code></pre></td></tr></table></div></figure></notextile></div>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show etherchannel port-channel</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Основная проблема - балансировка нагрузки. Вовсе не факт, что все каналы в аггрегированном канале будут загружены равномерно. Это определяется политикой балансировки по каналам. Она может быть:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sw1(config)# port-channel load-balance ?
+</span><span class="line">  dst-ip       Dst IP Addr
+</span><span class="line">  dst-mac      Dst Mac Addr
+</span><span class="line">  src-dst-ip   Src XOR Dst IP Addr
+</span><span class="line">  src-dst-mac  Src XOR Dst Mac Addr
+</span><span class="line">  src-ip       Src IP Addr
+</span><span class="line">  src-mac      Src Mac Addr</span></code></pre></td></tr></table></div></figure></notextile></div>
+
 </div>
 
 
