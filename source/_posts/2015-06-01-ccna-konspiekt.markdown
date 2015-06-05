@@ -130,14 +130,14 @@ interface <INT>
 2. Определение корневых и выделенных портов (root и designated ports). Корневой выбирается по наилучшему пути до корневого моста. Наименьший по Root Path Cost.
 3. Перевод остальных портов в состояние Blocking
 
-Роли портов
+Роли портов:
 
 1. Root port
 2. Designated port
 3. Non-designated port
 4. Disabled port
 
-Состояния портов
+Состояния портов:
 
 1. Blocking
 2. Listening
@@ -169,3 +169,44 @@ interface <INT>
 : выключает порт при получении BPDU
 
 **MSTP** - 802.1s
+
+**Etherchannel**
+
+Существует три варианта конфигурирования аггрегированного канала:
+
+1. Статическая настройка
+2. Настройка при помощи протокола LACP - стандартный протокол
+3. Настройка при помощи протокола PagP - проприетарный протокол
+
+```
+interface range fa0/10 - 13
+ channel-group 3 mode on
+```
+
+Режимы (modes):
+
+1. *on* - статическая настройка
+2. *active* - включить LACP
+3. *passive* - включить LACP при получении сообщения LACP
+4. *desirable* - включить PagP
+5. *auto* - включить PagP при получении сообщения PagP
+
+```
+show etherchannel summary
+```
+```
+show etherchannel port-channel
+```
+
+Основная проблема - балансировка нагрузки. Вовсе не факт, что все каналы в аггрегированном канале будут загружены равномерно. Это определяется политикой балансировки по каналам. Она может быть:
+
+```
+sw1(config)# port-channel load-balance ?
+  dst-ip       Dst IP Addr
+  dst-mac      Dst Mac Addr
+  src-dst-ip   Src XOR Dst IP Addr
+  src-dst-mac  Src XOR Dst Mac Addr
+  src-ip       Src IP Addr
+  src-mac      Src Mac Addr
+```
+
