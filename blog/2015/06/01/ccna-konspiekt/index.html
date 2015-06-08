@@ -446,6 +446,102 @@
 </span><span class="line">  src-ip       Src IP Addr
 </span><span class="line">  src-mac      Src Mac Addr</span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<p><strong>PVST configuration</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">spanning-tree mode rapid-pvst
+</span><span class="line">spanning-tree vlan &lt;VLANS&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Настройка Portfast</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sw(config)#interface fa0/1
+</span><span class="line">sw(config-if)# spanning-tree portfast</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>Настройка Bridge priority</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">spanning-tree vlan vlan-id root primary
+</span><span class="line">spanning-tree vlan vlan-id root secondary
+</span><span class="line">spanning-tree vlan &lt;VLAN&gt; priority &lt;PRI&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Настройка стоимости портов</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sw(config-if)# spanning-tree cost &lt;COST&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show spanning tree
+</span><span class="line">show spanning tree detail</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="ip-addressing-ipv4ipv6">3.0 IP Addressing (IPv4/IPv6)</h3>
+
+<h4 id="describe-ipv6-addresses">3.5 Describe IPv6 addresses</h4>
+
+<p>IPv6</p>
+
+<ul>
+  <li>большее адресное пространство</li>
+  <li>большая эффективность маршрутизации</li>
+  <li>автоконфигурация</li>
+  <li>IPsec</li>
+  <li>нет броадкастов</li>
+  <li>нет контрольных сумм заголовков</li>
+  <li>в заголовок добавлен Flow Label</li>
+</ul>
+
+<p>Формат представления: x:x:x:x:x:x:x:x, где x - шестнадцатеричное число</p>
+
+<ul>
+  <li>нули слева записывать необязательно</li>
+  <li>последовательность 0 может быть заменена :: (но только один раз)</li>
+  <li>48-bit global prefix, 16-bit subnet ID and 64-bit interface ID</li>
+</ul>
+
+<p>Виды адресов:</p>
+
+<ul>
+  <li>Unicast (one-to-one)</li>
+  <li>global: 2000::/3</li>
+  <li>link-local: FE80::/10</li>
+  <li>loopback: ::1</li>
+  <li>reserved</li>
+  <li>Multicast (one-to-many)</li>
+  <li>Anycast (one-to-nearest)</li>
+</ul>
+
+<p>Global Unicast адреса:</p>
+
+<ul>
+  <li>на каждый интерфейс может быть назначено несколько адресов любого типа</li>
+  <li>каждый интерфейс имеет по меньшей мере один loopback и один link-local адрес</li>
+</ul>
+
+<p>Назначение IPv6 адреса:</p>
+
+<ul>
+  <li>статическое, указываем полный адрес</li>
+  <li>статическое, указываем сеть, младшие 64 бита генерирует EUI-64 как функцию от MAC интерфейса</li>
+  <li>автоконфигурация</li>
+  <li>DHCPv6</li>
+</ul>
+
+<p><strong>EUI-64</strong></p>
+
+<p>Метод генерации младших 64 бит адреса, используется MAC адрес, между старшими и младшими 3 байтами которого вставляется последовательность FF FE</p>
+
+<p><strong>Переход от IPv4 к IPv6</strong></p>
+
+<ul>
+  <li>Dual stack</li>
+  <li>6to4 tunneling</li>
+  <li>ISATAP</li>
+  <li>Teredo</li>
+</ul>
 </div>
 
 
