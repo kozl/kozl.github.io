@@ -5,8 +5,20 @@ date: 2015-06-01 11:37:56 +0300
 comments: true
 categories: network, ccna
 ---
-
+	
 ## CCNA Version 2 (200-120)
+
+
+- [1.0 Operation of IP Data Networks](#operation-of-ip-data-networks)
+	- [1.4 Describe the purpose and basic operation of the protocols in the OSI and TCP/IP models](#describe-the-purpose-and-basic-operation-of-the-protocols-in-the-osi-and-tcpip-models)
+	- [1.6 Identify the appropriate media, cables, ports and connectors to connect Cisco network devices to other network devices and hosts in a LAN](#identify-the-appropriate-media-cables-ports-and-connectors-to-connect-cisco-network-devices-to-other-network-devices-and-hosts-in-a-lan)
+- [2.0 LAN Switching Technologies](#lan-switching-technologies)
+	- [2.3 Configure and verify initial switch configuration including remote access management](#configure-and-verify-initial-switch-configuration-including-remote-access-management)
+	- [2.6 Configure and verify VLANs](#configure-and-verify-vlans)
+	- [2.7 Configure and verify trunking on Cisco switches](#configure-and-verify-trunking-on-cisco-switches)
+	- [2.8 Identify enhanced switching technologies](#identify-enhanced-switching-technologies)
+- [3.0 IP Addressing (IPv4/IPv6)](#ip-addressing-ipv4ipv6)
+	- [3.5 Describe IPv6 addresses](#describe-ipv6-addresses)
 
 ### 1.0 Operation of IP Data Networks
 
@@ -112,6 +124,7 @@ interface <INT>
 ```
 
 #### 2.7 Configure and verify trunking on Cisco switches
+
 
 {: .table}
 | switchport modes      |  trunk active                          |
