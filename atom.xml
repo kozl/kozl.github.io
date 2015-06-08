@@ -4,7 +4,7 @@
   <title><![CDATA[Networks, security and system administration]]></title>
   <link href="http://kozl.github.io/atom.xml" rel="self"/>
   <link href="http://kozl.github.io/"/>
-  <updated>2015-06-08T17:29:06+03:00</updated>
+  <updated>2015-06-08T17:54:41+03:00</updated>
   <id>http://kozl.github.io/</id>
   <author>
     <name><![CDATA[Kozlov Alexander]]></name>
@@ -85,6 +85,28 @@
     <id>http://kozl.github.io/blog/2015/06/01/ccna-konspiekt</id>
     
     <content type="html"><![CDATA[<h2 id="ccna-version-2-200-120">CCNA Version 2 (200-120)</h2>
+
+<ul>
+  <li><a href="#operation-of-ip-data-networks">1.0 Operation of IP Data Networks</a>
+    <ul>
+      <li><a href="#describe-the-purpose-and-basic-operation-of-the-protocols-in-the-osi-and-tcpip-models">1.4 Describe the purpose and basic operation of the protocols in the OSI and TCP/IP models</a></li>
+      <li><a href="#identify-the-appropriate-media-cables-ports-and-connectors-to-connect-cisco-network-devices-to-other-network-devices-and-hosts-in-a-lan">1.6 Identify the appropriate media, cables, ports and connectors to connect Cisco network devices to other network devices and hosts in a LAN</a></li>
+    </ul>
+  </li>
+  <li><a href="#lan-switching-technologies">2.0 LAN Switching Technologies</a>
+    <ul>
+      <li><a href="#configure-and-verify-initial-switch-configuration-including-remote-access-management">2.3 Configure and verify initial switch configuration including remote access management</a></li>
+      <li><a href="#configure-and-verify-vlans">2.6 Configure and verify VLANs</a></li>
+      <li><a href="#configure-and-verify-trunking-on-cisco-switches">2.7 Configure and verify trunking on Cisco switches</a></li>
+      <li><a href="#identify-enhanced-switching-technologies">2.8 Identify enhanced switching technologies</a></li>
+    </ul>
+  </li>
+  <li><a href="#ip-addressing-ipv4ipv6">3.0 IP Addressing (IPv4/IPv6)</a>
+    <ul>
+      <li><a href="#describe-ipv6-addresses">3.5 Describe IPv6 addresses</a></li>
+    </ul>
+  </li>
+</ul>
 
 <h3 id="operation-of-ip-data-networks">1.0 Operation of IP Data Networks</h3>
 
