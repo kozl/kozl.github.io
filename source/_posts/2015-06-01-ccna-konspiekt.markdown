@@ -210,3 +210,89 @@ sw1(config)# port-channel load-balance ?
   src-mac      Src Mac Addr
 ```
 
+**PVST configuration**
+
+```
+spanning-tree mode rapid-pvst
+spanning-tree vlan <VLANS>
+```
+
+Настройка Portfast
+
+```
+sw(config)#interface fa0/1
+sw(config-if)# spanning-tree portfast
+```
+Настройка Bridge priority
+
+```
+spanning-tree vlan vlan-id root primary
+spanning-tree vlan vlan-id root secondary
+spanning-tree vlan <VLAN> priority <PRI>
+```
+
+
+Настройка стоимости портов
+
+```
+sw(config-if)# spanning-tree cost <COST>
+```
+
+```
+show spanning tree
+show spanning tree detail
+```
+
+### 3.0 IP Addressing (IPv4/IPv6)
+
+#### 3.5 Describe IPv6 addresses
+
+IPv6
+
+- большее адресное пространство
+- большая эффективность маршрутизации
+- автоконфигурация
+- IPsec
+- нет броадкастов
+- нет контрольных сумм заголовков
+- в заголовок добавлен Flow Label
+
+Формат представления: x:x:x:x:x:x:x:x, где x - шестнадцатеричное число
+
+- нули слева записывать необязательно
+- последовательность 0 может быть заменена :: (но только один раз)
+- 48-bit global prefix, 16-bit subnet ID and 64-bit interface ID
+
+Виды адресов:
+
+* Unicast (one-to-one)
+ - global: 2000::/3
+ - link-local: FE80::/10
+ - loopback: ::1
+ - reserved
+* Multicast (one-to-many)
+* Anycast (one-to-nearest)
+
+Global Unicast адреса:
+
+- на каждый интерфейс может быть назначено несколько адресов любого типа
+- каждый интерфейс имеет по меньшей мере один loopback и один link-local адрес
+
+Назначение IPv6 адреса:
+
+- статическое, указываем полный адрес
+- статическое, указываем сеть, младшие 64 бита генерирует EUI-64 как функцию от MAC интерфейса
+- автоконфигурация
+- DHCPv6
+
+**EUI-64**
+
+Метод генерации младших 64 бит адреса, используется MAC адрес, между старшими и младшими 3 байтами которого вставляется последовательность FF FE
+
+
+**Переход от IPv4 к IPv6**
+
+- Dual stack
+- 6to4 tunneling
+- ISATAP
+- Teredo
