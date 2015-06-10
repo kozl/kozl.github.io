@@ -124,6 +124,28 @@
 
 <div class="entry-content"><h2 id="ccna-version-2-200-120">CCNA Version 2 (200-120)</h2>
 
+<ul>
+  <li><a href="#operation-of-ip-data-networks">1.0 Operation of IP Data Networks</a>
+    <ul>
+      <li><a href="#describe-the-purpose-and-basic-operation-of-the-protocols-in-the-osi-and-tcpip-models">1.4 Describe the purpose and basic operation of the protocols in the OSI and TCP/IP models</a></li>
+      <li><a href="#identify-the-appropriate-media-cables-ports-and-connectors-to-connect-cisco-network-devices-to-other-network-devices-and-hosts-in-a-lan">1.6 Identify the appropriate media, cables, ports and connectors to connect Cisco network devices to other network devices and hosts in a LAN</a></li>
+    </ul>
+  </li>
+  <li><a href="#lan-switching-technologies">2.0 LAN Switching Technologies</a>
+    <ul>
+      <li><a href="#configure-and-verify-initial-switch-configuration-including-remote-access-management">2.3 Configure and verify initial switch configuration including remote access management</a></li>
+      <li><a href="#configure-and-verify-vlans">2.6 Configure and verify VLANs</a></li>
+      <li><a href="#configure-and-verify-trunking-on-cisco-switches">2.7 Configure and verify trunking on Cisco switches</a></li>
+      <li><a href="#identify-enhanced-switching-technologies">2.8 Identify enhanced switching technologies</a></li>
+    </ul>
+  </li>
+  <li><a href="#ip-addressing-ipv4ipv6">3.0 IP Addressing (IPv4/IPv6)</a>
+    <ul>
+      <li><a href="#describe-ipv6-addresses">3.5 Describe IPv6 addresses</a></li>
+    </ul>
+  </li>
+</ul>
+
 <h3 id="operation-of-ip-data-networks">1.0 Operation of IP Data Networks</h3>
 
 <h4 id="describe-the-purpose-and-basic-operation-of-the-protocols-in-the-osi-and-tcpip-models">1.4 Describe the purpose and basic operation of the protocols in the OSI and TCP/IP models</h4>
@@ -350,7 +372,7 @@
   <li>Перевод остальных портов в состояние Blocking</li>
 </ol>
 
-<p>Роли портов</p>
+<p>Роли портов:</p>
 
 <ol>
   <li>Root port</li>
@@ -359,7 +381,7 @@
   <li>Disabled port</li>
 </ol>
 
-<p>Состояния портов</p>
+<p>Состояния портов:</p>
 
 <ol>
   <li>Blocking</li>
@@ -398,6 +420,150 @@
 </dl>
 
 <p><strong>MSTP</strong> - 802.1s</p>
+
+<p><strong>Etherchannel</strong></p>
+
+<p>Существует три варианта конфигурирования аггрегированного канала:</p>
+
+<ol>
+  <li>Статическая настройка</li>
+  <li>Настройка при помощи протокола LACP - стандартный протокол</li>
+  <li>Настройка при помощи протокола PagP - проприетарный протокол</li>
+</ol>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface range fa0/10 - 13
+</span><span class="line"> channel-group 3 mode on</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Режимы (modes):</p>
+
+<ol>
+  <li><em>on</em> - статическая настройка</li>
+  <li><em>active</em> - включить LACP</li>
+  <li><em>passive</em> - включить LACP при получении сообщения LACP</li>
+  <li><em>desirable</em> - включить PagP</li>
+  <li><em>auto</em> - включить PagP при получении сообщения PagP</li>
+</ol>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show etherchannel summary</span></code></pre></td></tr></table></div></figure></notextile></div>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show etherchannel port-channel</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Основная проблема - балансировка нагрузки. Вовсе не факт, что все каналы в аггрегированном канале будут загружены равномерно. Это определяется политикой балансировки по каналам. Она может быть:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sw1(config)# port-channel load-balance ?
+</span><span class="line">  dst-ip       Dst IP Addr
+</span><span class="line">  dst-mac      Dst Mac Addr
+</span><span class="line">  src-dst-ip   Src XOR Dst IP Addr
+</span><span class="line">  src-dst-mac  Src XOR Dst Mac Addr
+</span><span class="line">  src-ip       Src IP Addr
+</span><span class="line">  src-mac      Src Mac Addr</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>PVST configuration</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">spanning-tree mode rapid-pvst
+</span><span class="line">spanning-tree vlan &lt;VLANS&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Настройка Portfast</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sw(config)#interface fa0/1
+</span><span class="line">sw(config-if)# spanning-tree portfast</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>Настройка Bridge priority</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">spanning-tree vlan vlan-id root primary
+</span><span class="line">spanning-tree vlan vlan-id root secondary
+</span><span class="line">spanning-tree vlan &lt;VLAN&gt; priority &lt;PRI&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Настройка стоимости портов</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sw(config-if)# spanning-tree cost &lt;COST&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show spanning tree
+</span><span class="line">show spanning tree detail</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="ip-addressing-ipv4ipv6">3.0 IP Addressing (IPv4/IPv6)</h3>
+
+<h4 id="describe-ipv6-addresses">3.5 Describe IPv6 addresses</h4>
+
+<p>IPv6</p>
+
+<ul>
+  <li>большее адресное пространство</li>
+  <li>большая эффективность маршрутизации</li>
+  <li>автоконфигурация</li>
+  <li>IPsec</li>
+  <li>нет броадкастов</li>
+  <li>нет контрольных сумм заголовков</li>
+  <li>в заголовок добавлен Flow Label</li>
+</ul>
+
+<p>Формат представления: x:x:x:x:x:x:x:x, где x - шестнадцатеричное число</p>
+
+<ul>
+  <li>нули слева записывать необязательно</li>
+  <li>последовательность 0 может быть заменена :: (но только один раз)</li>
+  <li>48-bit global prefix, 16-bit subnet ID and 64-bit interface ID</li>
+</ul>
+
+<p>Виды адресов:</p>
+
+<ul>
+  <li>Unicast (one-to-one)</li>
+  <li>global: 2000::/3</li>
+  <li>link-local: FE80::/10</li>
+  <li>loopback: ::1</li>
+  <li>reserved</li>
+  <li>Multicast (one-to-many)</li>
+  <li>Anycast (one-to-nearest)</li>
+</ul>
+
+<p>Global Unicast адреса:</p>
+
+<ul>
+  <li>на каждый интерфейс может быть назначено несколько адресов любого типа</li>
+  <li>каждый интерфейс имеет по меньшей мере один loopback и один link-local адрес</li>
+</ul>
+
+<p>Назначение IPv6 адреса:</p>
+
+<ul>
+  <li>статическое, указываем полный адрес</li>
+  <li>статическое, указываем сеть, младшие 64 бита генерирует EUI-64 как функцию от MAC интерфейса</li>
+  <li>автоконфигурация</li>
+  <li>DHCPv6</li>
+</ul>
+
+<p><strong>EUI-64</strong></p>
+
+<p>Метод генерации младших 64 бит адреса, используется MAC адрес, между старшими и младшими 3 байтами которого вставляется последовательность FF FE</p>
+
+<p><strong>Переход от IPv4 к IPv6</strong></p>
+
+<ul>
+  <li>Dual stack</li>
+  <li>6to4 tunneling</li>
+  <li>ISATAP</li>
+  <li>Teredo</li>
+</ul>
 </div>
 
 
