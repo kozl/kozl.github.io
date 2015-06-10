@@ -144,6 +144,12 @@
       <li><a href="#describe-ipv6-addresses">3.5 Describe IPv6 addresses</a></li>
     </ul>
   </li>
+  <li><a href="#ip-routing-technologies">4.0 IP Routing Technologies</a>
+    <ul>
+      <li><a href="#describe-basic-routing-concepts">4.1 Describe basic routing concepts</a></li>
+      <li><a href="#configure-and-verify-ospf">4.7 Configure and verify OSPF</a></li>
+    </ul>
+  </li>
 </ul>
 
 <h3 id="operation-of-ip-data-networks">1.0 Operation of IP Data Networks</h3>
@@ -564,6 +570,111 @@
   <li>ISATAP</li>
   <li>Teredo</li>
 </ul>
+
+<h3 id="ip-routing-technologies">4.0 IP Routing Technologies</h3>
+
+<h4 id="describe-basic-routing-concepts">4.1 Describe basic routing concepts</h4>
+
+<p><strong>Process Switching</strong> - решение о маршрутизации и проверка RIB осуществляется ЦП для каждого пакета в отдельности
+<strong>Fast Switching</strong> - ЦП задействуется для принятия решения о первом пакете в потоке, далее эта информация кешируется и остальные пакеты маршрутизируются на основе данных в кеше.
+<strong>CEF</strong> - строится FIB и Adjacency table, в которых хранятся заранее рассчитанные данные, необходимые для машрутизации (интерфейс, MAC адрес следующего узла, IP адрес и т.п.). Эти таблицы хранятся в быстрой памяти, поиск по которой занимает намного меньше времени и может быть реализован аппаратно.</p>
+
+<h4 id="configure-and-verify-ospf">4.7 Configure and verify OSPF</h4>
+
+<p>Перимущества OSPF с одной зоной: роутеры одной зоны имеют полную информацию о топологии этой зоны, используются наиболее оптимальные маршруты.</p>
+
+<p>Недостатки: при кол-ве роутеров более 50 (в некоторых источниках более 25-30) требования к памяти и вычислительным ресурсам каждого маршрутизатора возрастают и рекомендуется использовать несколько зон. Кроме этого это позволит осуществлять автосуммирование на ABR.</p>
+
+<p><strong>Конфигурирование OSPFv2</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">router ospf &lt;PID&gt;
+</span><span class="line">router-id &lt;ROUTER ID&gt;
+</span><span class="line">network &lt;A.B.C.D&gt; &lt;REVERSE MASK&gt; area &lt;AREA&gt;
+</span><span class="line">(-if) ip ospf &lt;PID&gt; area &lt;AREA&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show ip protocol
+</span><span class="line">show ip ospf
+</span><span class="line">show ip ospf neighbor
+</span><span class="line">show ip ospf interface
+</span><span class="line">show ip ospf database</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Конфигурирование OSPFv3</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">router ospfv3 &lt;PID&gt;
+</span><span class="line">router-id &lt;ROUTER ID&gt;
+</span><span class="line">(-if) ipv6 router ospfv3 &lt;PID&gt; area &lt;AREA&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Passive interface</strong> - не рассылает OSPF пакеты, но этот интерфейс анонсируется в LSA</p>
+
+<p><strong>типы LSA</strong></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Номер LSA</th>
+      <th>Название LSA</th>
+      <th>Кто отправляет</th>
+      <th>Область распространения</th>
+      <th>Назначение</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>LSA 1</td>
+      <td>Router LSA</td>
+      <td>Каждый маршрутизатор</td>
+      <td>Внутри зоны</td>
+      <td>Описывает маршрутизатор, все имеющиеся у него интерфейсы, их стоимость и соседей на каждом интерфейсе</td>
+    </tr>
+    <tr>
+      <td>LSA 2</td>
+      <td>Network LSA</td>
+      <td>DR (в сетях со множественным доступом)</td>
+      <td>Внутри зоны</td>
+      <td>Описывает широковещательную сеть, указаны все маршрутизаторы, подключённые к ней, DR, маска сети</td>
+    </tr>
+    <tr>
+      <td>LSA 3</td>
+      <td>Network Summary LSA</td>
+      <td>ABR</td>
+      <td>AS</td>
+      <td>Содержит информацию о сетях вне зоны и их стоимость. Не содержит информации о топологии сети. Сети могут быть просуммированы.</td>
+    </tr>
+    <tr>
+      <td>LSA 4</td>
+      <td>ASBR Summary LSA</td>
+      <td>ABR</td>
+      <td>AS</td>
+      <td>Необходим для того чтобы сообщить всем маршрутизатором о том, где находится ASBR, содержит суммарную информацию о состоянии каналов ASBR.</td>
+    </tr>
+    <tr>
+      <td>LSA 5</td>
+      <td>AS External LSA</td>
+      <td>ASBR</td>
+      <td>AS</td>
+      <td>Объявление о состоянии внешних по отношению к AS каналов</td>
+    </tr>
+    <tr>
+      <td>LSA 7</td>
+      <td>AS External LSA for NSSA</td>
+      <td>ASBR</td>
+      <td>NSSA area</td>
+      <td>Аналогично LSA 5, но может распространяться только в NSSA зоне.</td>
+    </tr>
+  </tbody>
+</table>
+
 </div>
 
 
