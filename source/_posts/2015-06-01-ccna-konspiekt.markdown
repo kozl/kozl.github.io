@@ -19,6 +19,9 @@ categories: network, ccna
 	- [2.8 Identify enhanced switching technologies](#identify-enhanced-switching-technologies)
 - [3.0 IP Addressing (IPv4/IPv6)](#ip-addressing-ipv4ipv6)
 	- [3.5 Describe IPv6 addresses](#describe-ipv6-addresses)
+- [4.0 IP Routing Technologies](#ip-routing-technologies)
+	- [4.1 Describe basic routing concepts](#describe-basic-routing-concepts)
+	- [4.7 Configure and verify OSPF](#configure-and-verify-ospf)
 
 ### 1.0 Operation of IP Data Networks
 
@@ -309,3 +312,57 @@ Global Unicast адреса:
 - 6to4 tunneling
 - ISATAP
 - Teredo
+
+### 4.0 IP Routing Technologies
+
+#### 4.1 Describe basic routing concepts
+
+**Process Switching** - решение о маршрутизации и проверка RIB осуществляется ЦП для каждого пакета в отдельности
+**Fast Switching** - ЦП задействуется для принятия решения о первом пакете в потоке, далее эта информация кешируется и остальные пакеты маршрутизируются на основе данных в кеше.
+**CEF** - строится FIB и Adjacency table, в которых хранятся заранее рассчитанные данные, необходимые для машрутизации (интерфейс, MAC адрес следующего узла, IP адрес и т.п.). Эти таблицы хранятся в быстрой памяти, поиск по которой занимает намного меньше времени и может быть реализован аппаратно.
+
+#### 4.7 Configure and verify OSPF
+
+Перимущества OSPF с одной зоной: роутеры одной зоны имеют полную информацию о топологии этой зоны, используются наиболее оптимальные маршруты.
+
+Недостатки: при кол-ве роутеров более 50 (в некоторых источниках более 25-30) требования к памяти и вычислительным ресурсам каждого маршрутизатора возрастают и рекомендуется использовать несколько зон. Кроме этого это позволит осуществлять автосуммирование на ABR.
+
+**Конфигурирование OSPFv2**
+
+```
+router ospf <PID>
+router-id <ROUTER ID>
+network <A.B.C.D> <REVERSE MASK> area <AREA>
+(-if) ip ospf <PID> area <AREA>
+```
+```
+show ip protocol
+show ip ospf
+show ip ospf neighbor
+show ip ospf interface
+show ip ospf database
+```
+
+**Конфигурирование OSPFv3**
+
+```
+router ospfv3 <PID>
+router-id <ROUTER ID>
+(-if) ipv6 router ospfv3 <PID> area <AREA>
+```
+
+**Passive interface** - не рассылает OSPF пакеты, но этот интерфейс анонсируется в LSA
+
+**типы LSA**
+
+{: .table}
+| Номер LSA | Название LSA             | Кто отправляет                         | Область распространения | Назначение                                                                                                                                |
+|-----------|--------------------------|----------------------------------------|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| LSA 1     | Router LSA               | Каждый маршрутизатор                   | Внутри зоны             | Описывает маршрутизатор, все имеющиеся у него интерфейсы, их стоимость и соседей на каждом интерфейсе                                     |
+| LSA 2     | Network LSA              | DR (в сетях со множественным доступом) | Внутри зоны             | Описывает широковещательную сеть, указаны все маршрутизаторы, подключённые к ней, DR, маска сети                                          |
+| LSA 3     | Network Summary LSA      | ABR                                    | AS                      | Содержит информацию о сетях вне зоны и их стоимость. Не содержит информации о топологии сети. Сети могут быть просуммированы.             |
+| LSA 4     | ASBR Summary LSA         | ABR                                    | AS                      | Необходим для того чтобы сообщить всем маршрутизатором о том, где находится ASBR, содержит суммарную информацию о состоянии каналов ASBR. |
+| LSA 5     | AS External LSA          | ASBR                                   | AS                      | Объявление о состоянии внешних по отношению к AS каналов                                                                                  |
+| LSA 7     | AS External LSA for NSSA | ASBR                                   | NSSA area               | Аналогично LSA 5, но может распространяться только в NSSA зоне.                                                                           |
+
+
