@@ -4,7 +4,7 @@
   <title><![CDATA[Networks, security and system administration]]></title>
   <link href="http://kozl.github.io/atom.xml" rel="self"/>
   <link href="http://kozl.github.io/"/>
-  <updated>2015-06-10T10:17:03+03:00</updated>
+  <updated>2015-06-11T16:36:07+03:00</updated>
   <id>http://kozl.github.io/</id>
   <author>
     <name><![CDATA[Kozlov Alexander]]></name>
@@ -110,6 +110,9 @@
     <ul>
       <li><a href="#describe-basic-routing-concepts">4.1 Describe basic routing concepts</a></li>
       <li><a href="#configure-and-verify-ospf">4.7 Configure and verify OSPF</a></li>
+      <li><a href="#configure-and-verify-intervlan-routing-router-on-a-stick">4.8 Configure and verify interVLAN routing (Router on a stick)</a></li>
+      <li><a href="#configure-svi-interfaces">4.9 Configure SVI interfaces</a></li>
+      <li><a href="#manage-cisco-ios-files">4.10 Manage Cisco IOS Files</a>s</li>
     </ul>
   </li>
 </ul>
@@ -636,6 +639,58 @@
     </tr>
   </tbody>
 </table>
+
+<h4 id="configure-and-verify-intervlan-routing-router-on-a-stick">4.8 Configure and verify interVLAN routing (Router on a stick)</h4>
+
+<p>Настройка сабинтерфейса на 101 влане, на маршрутизаторе:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface fa1/0.101
+</span><span class="line"> encapsulation dot1Q 101
+</span><span class="line"> ip address 192.168.101.1 255.255.255.0</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="configure-svi-interfaces">4.9 Configure SVI interfaces</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface vlan 101
+</span><span class="line"> no shutdown
+</span><span class="line"> ip address 192.168.101.254 255.255.255.0</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="manage-cisco-ios-files">4.10 Manage Cisco IOS Files</h4>
+
+<p><strong>Типы памяти</strong></p>
+
+<ul>
+  <li><strong>ROM</strong> - ПЗУ, хранит код bootstrap программы - ROMmon и POST</li>
+  <li><strong>Flash</strong> - перезаписываемая, в ней хранится образ IOS</li>
+  <li><strong>NVRAM</strong> - перезаписываемая, в ней хранятся конфиги</li>
+  <li><strong>ROM</strong> - оперативная память</li>
+</ul>
+
+<p><strong>Последовательность загрузки</strong></p>
+
+<ul>
+  <li>включается питание</li>
+  <li>запускается bootstrap программа из ROM, которая запускает POST</li>
+  <li>проверяется регистр confreg и определяется место, откуда будет загружаться образ IOS. По умолчанию (значение 2102), проверяется startup-config на наличие указаний откуда нужно грузить образ, если они отсутствуют, образ грузится из Flash памяти. Если образ отсутствует во Flash памяти, bootstrap пытается загрузить образ с TFTP сервера.</li>
+  <li>образ загружается в RAM</li>
+  <li>если startup-config отсутствует, запускается мастер конфигурации setup</li>
+</ul>
+
+<p><strong>Установка/удаление лицензий</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show license all
+</span><span class="line">license install &lt;URI&gt;
+</span><span class="line">license clear &lt;URI&gt;
+</span><span class="line">license save &lt;URI&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 ]]></content>
     
