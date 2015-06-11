@@ -22,6 +22,9 @@ categories: network, ccna
 - [4.0 IP Routing Technologies](#ip-routing-technologies)
 	- [4.1 Describe basic routing concepts](#describe-basic-routing-concepts)
 	- [4.7 Configure and verify OSPF](#configure-and-verify-ospf)
+	- [4.8 Configure and verify interVLAN routing (Router on a stick)](#configure-and-verify-intervlan-routing-router-on-a-stick)
+	- [4.9 Configure SVI interfaces](#configure-svi-interfaces)
+	- [4.10 Manage Cisco IOS Files](#manage-cisco-ios-files)s
 
 ### 1.0 Operation of IP Data Networks
 
@@ -365,4 +368,47 @@ router-id <ROUTER ID>
 | LSA 5     | AS External LSA          | ASBR                                   | AS                      | Объявление о состоянии внешних по отношению к AS каналов                                                                                  |
 | LSA 7     | AS External LSA for NSSA | ASBR                                   | NSSA area               | Аналогично LSA 5, но может распространяться только в NSSA зоне.                                                                           |
 
+#### 4.8 Configure and verify interVLAN routing (Router on a stick)
+
+Настройка сабинтерфейса на 101 влане, на маршрутизаторе:
+
+```
+interface fa1/0.101
+ encapsulation dot1Q 101
+ ip address 192.168.101.1 255.255.255.0
+```
+
+#### 4.9 Configure SVI interfaces
+
+```
+interface vlan 101
+ no shutdown
+ ip address 192.168.101.254 255.255.255.0
+```
+
+#### 4.10 Manage Cisco IOS Files
+
+**Типы памяти**
+
+- **ROM** - ПЗУ, хранит код bootstrap программы - ROMmon и POST
+- **Flash** - перезаписываемая, в ней хранится образ IOS
+- **NVRAM** - перезаписываемая, в ней хранятся конфиги
+- **ROM** - оперативная память
+
+**Последовательность загрузки**
+
+- включается питание
+- запускается bootstrap программа из ROM, которая запускает POST
+- проверяется регистр confreg и определяется место, откуда будет загружаться образ IOS. По умолчанию (значение 2102), проверяется startup-config на наличие указаний откуда нужно грузить образ, если они отсутствуют, образ грузится из Flash памяти. Если образ отсутствует во Flash памяти, bootstrap пытается загрузить образ с TFTP сервера.
+- образ загружается в RAM
+- если startup-config отсутствует, запускается мастер конфигурации setup
+
+**Установка/удаление лицензий**
+
+```
+show license all
+license install <URI>
+license clear <URI>
+license save <URI>
+```
 
