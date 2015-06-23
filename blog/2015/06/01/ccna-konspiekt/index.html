@@ -150,7 +150,8 @@
       <li><a href="#configure-and-verify-ospf">4.7 Configure and verify OSPF</a></li>
       <li><a href="#configure-and-verify-intervlan-routing-router-on-a-stick">4.8 Configure and verify interVLAN routing (Router on a stick)</a></li>
       <li><a href="#configure-svi-interfaces">4.9 Configure SVI interfaces</a></li>
-      <li><a href="#manage-cisco-ios-files">4.10 Manage Cisco IOS Files</a>s</li>
+      <li><a href="#manage-cisco-ios-files">4.10 Manage Cisco IOS Files</a></li>
+      <li><a href="#configure-and-verify-eigrp-single-as">4.11 Configure and verify EIGRP (single AS)</a></li>
     </ul>
   </li>
 </ul>
@@ -729,6 +730,103 @@
 </span><span class="line">license install &lt;URI&gt;
 </span><span class="line">license clear &lt;URI&gt;
 </span><span class="line">license save &lt;URI&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="configure-and-verify-eigrp-single-as">4.11 Configure and verify EIGRP (single AS)</h4>
+
+<p><strong>Feasible Distance</strong> - Administrative distance + стоимость пути до маршрутизатора, анонсировавшего этот маршрут</p>
+
+<p><strong>Feasible Successors</strong> - резервные маршруты до сети назначения</p>
+
+<p><strong>Feasibility condition</strong> - условие, при котором маршрут становится FS, его AD должна быть меньше FD текцщего Successor’a</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show eigrp topology
+</span><span class="line">show eigrp topology all-links</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Administrative distance</strong> - приоритет маршрутов, полученных от данного протокола маршрутизации, чем он меньше, тем лучшим считается маршрут.У EIGRP AD=90</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">router eigrp 65001
+</span><span class="line"> distance eigrp 60 120</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Metric composition</strong> - принцип расчёта метрики, по которым выбирается наилучший маршрут. Для расчёта метрики IEGRP использует 5 параметров, которые позволяют выбрать вес для следующих характеристик каналов: пропускная способность, задержка, надежность, загрузка канала. По умолчанию метрика пропорциональна сумме пропускной способности и задержки. Bandwith маршрута равна наименьшей bandwith составляющих его каналов.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">router eigrp 65001
+</span><span class="line"> metric weights 0 1 0 1 0 0</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Router ID</strong> - уникальный в пределах AS идентификатор маршрутазатора</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">router eigrp 65001
+</span><span class="line"> eigrp router-id 1.1.1.1</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Auto summary</strong> - автосуммирование анонсированных маршрутов до классовых сетей</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">router eigrp 65001
+</span><span class="line"> no auto-summary</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Path selection</strong> - наилучшим считается маршрут с наименьшей композитной метрикой.</p>
+
+<p><strong>Load balancing</strong> - нагрузка балансируется для маршрутов с одинаковой метрикой. Возможна балансировка по маршрутам с разной метрикой между Successor и Fesible successor, если настроить variance, множителя, на который умножается FD лучшего маршрута для определения feasible маршрутов, по которым будет балансироваться нагрузка.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">router eigrp 65001
+</span><span class="line"> maximum-paths 6
+</span><span class="line"> variance 2</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="ip-services">5.0 IP Services</h3>
+
+<h4 id="configure-and-verify-dhcp-ios-router">5.1 Configure and verify DHCP (IOS Router)</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">service dhcp
+</span><span class="line">ip dhcp excluded-address
+</span><span class="line">ip dhcp pool &lt;POOL NAME&gt;
+</span><span class="line"> network &lt;NETWORK&gt; &lt;MASK&gt;
+</span><span class="line"> domain-name &lt;DOMAIN&gt;
+</span><span class="line"> dns-server &lt;DNS&gt;
+</span><span class="line"> default-router &lt;GW&gt;
+</span><span class="line"> lease &lt;LEASE&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="configure-and-verify-acls-in-a-network-enviroment">5.3 Configure and verify ACLs in a network enviroment</h4>
+
+<p><strong>Именованый</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">R1(conf)# ip access-list standard &lt;NAME&gt;
+</span><span class="line">R1(conf-std-nacl)# deny 10.0.0.0 0.0.0.255</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Нумерованный</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">R1(conf)# access-list &lt;1-99&gt; deny 10.0.0.0 0.0.0.255</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Применение ACL на интерфейсе</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">R1(conf-if)# ip access-group &lt;1-99&gt; &lt;in | out&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Применение ACL на vty</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">R1(config-line)# access-class &lt;1-99&gt; &lt;in | out&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 </div>
 
