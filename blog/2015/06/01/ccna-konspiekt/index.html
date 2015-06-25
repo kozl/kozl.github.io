@@ -154,6 +154,14 @@
       <li><a href="#configure-and-verify-eigrp-single-as">4.11 Configure and verify EIGRP (single AS)</a></li>
     </ul>
   </li>
+  <li><a href="#ip-services">5.0 IP Services</a>
+    <ul>
+      <li><a href="#configure-and-verify-dhcp-ios-router">5.1 Configure and verify DHCP (IOS Router)</a></li>
+      <li><a href="#configure-and-verify-acls-in-a-network-enviroment">5.3 Configure and verify ACLs in a network enviroment</a></li>
+      <li><a href="#identify-the-basic-operation-of-nat">5.4 Identify the basic operation of NAT</a></li>
+      <li><a href="#configure-and-verify-ntp-as-a-client">5.6 Configure and verify NTP as a client</a></li>
+    </ul>
+  </li>
 </ul>
 
 <h3 id="operation-of-ip-data-networks">1.0 Operation of IP Data Networks</h3>
@@ -828,6 +836,49 @@
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">R1(config-line)# access-class &lt;1-99&gt; &lt;in | out&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<h4 id="identify-the-basic-operation-of-nat">5.4 Identify the basic operation of NAT</h4>
+
+<p><strong>Static NAT</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">R1(config-if)# ip nat inside
+</span><span class="line">...
+</span><span class="line">R1(config-if)# ip nat outside
+</span><span class="line">R1(config)# ip nat inside static 172.16.50.8 172.16.10.8</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Dynamic NAT</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">...
+</span><span class="line">access list 100 permit 10.0.0.0 0.0.0.255 any
+</span><span class="line">ip nat pool MYPOOL 11.1.1.0 11.1.1.20 netmask 255.255.255.0
+</span><span class="line">ip nat inside source  list 100 pool MYPOOL </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>PAT (NAT overload)</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">...
+</span><span class="line">ip nat inside source  list 100 pool MYPOOL overload</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show ip nat translations</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="configure-and-verify-ntp-as-a-client">5.6 Configure and verify NTP as a client</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">ntp server 7.7.7.7</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show clock detail
+</span><span class="line">show ntp associations</span></code></pre></td></tr></table></div></figure></notextile></div>
 </div>
 
 
