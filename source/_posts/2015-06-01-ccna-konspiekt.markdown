@@ -26,6 +26,12 @@ categories: network, ccna
 	- [4.9 Configure SVI interfaces](#configure-svi-interfaces)
 	- [4.10 Manage Cisco IOS Files](#manage-cisco-ios-files)
 	- [4.11 Configure and verify EIGRP (single AS)](#configure-and-verify-eigrp-single-as)
+- [5.0 IP Services](#ip-services)
+	- [5.1 Configure and verify DHCP (IOS Router)](#configure-and-verify-dhcp-ios-router)
+	- [5.3 Configure and verify ACLs in a network enviroment](#configure-and-verify-acls-in-a-network-enviroment)
+	- [5.4 Identify the basic operation of NAT](#identify-the-basic-operation-of-nat)
+	- [5.6 Configure and verify NTP as a client](#configure-and-verify-ntp-as-a-client)
+
 
 ### 1.0 Operation of IP Data Networks
 
@@ -506,3 +512,44 @@ R1(conf-if)# ip access-group <1-99> <in | out>
 R1(config-line)# access-class <1-99> <in | out>
 ```
 
+#### 5.4 Identify the basic operation of NAT
+
+**Static NAT**
+
+```
+R1(config-if)# ip nat inside
+...
+R1(config-if)# ip nat outside
+R1(config)# ip nat inside static 172.16.50.8 172.16.10.8
+```
+
+**Dynamic NAT**
+
+```
+...
+access list 100 permit 10.0.0.0 0.0.0.255 any
+ip nat pool MYPOOL 11.1.1.0 11.1.1.20 netmask 255.255.255.0
+ip nat inside source  list 100 pool MYPOOL 
+```
+
+**PAT (NAT overload)**
+
+```
+...
+ip nat inside source  list 100 pool MYPOOL overload
+```
+
+```
+show ip nat translations
+```
+
+#### 5.6 Configure and verify NTP as a client
+
+```
+ntp server 7.7.7.7
+```
+
+```
+show clock detail
+show ntp associations
+```
