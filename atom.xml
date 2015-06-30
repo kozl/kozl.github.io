@@ -4,7 +4,7 @@
   <title><![CDATA[Networks, security and system administration]]></title>
   <link href="http://kozl.github.io/atom.xml" rel="self"/>
   <link href="http://kozl.github.io/"/>
-  <updated>2015-06-25T15:51:05+03:00</updated>
+  <updated>2015-06-30T12:01:23+03:00</updated>
   <id>http://kozl.github.io/</id>
   <author>
     <name><![CDATA[Kozlov Alexander]]></name>
@@ -122,6 +122,11 @@
       <li><a href="#configure-and-verify-acls-in-a-network-enviroment">5.3 Configure and verify ACLs in a network enviroment</a></li>
       <li><a href="#identify-the-basic-operation-of-nat">5.4 Identify the basic operation of NAT</a></li>
       <li><a href="#configure-and-verify-ntp-as-a-client">5.6 Configure and verify NTP as a client</a></li>
+    </ul>
+  </li>
+  <li><a href="#network-device-security">6.0 Network device security</a>
+    <ul>
+      <li><a href="#configure-and-verify-switch-port-security">6.2 Configure and verify Switch Port Security</a></li>
     </ul>
   </li>
 </ul>
@@ -841,6 +846,28 @@
 <span class="line-number">2</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">show clock detail
 </span><span class="line">show ntp associations</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="network-device-security">6.0 Network device security</h3>
+
+<h4 id="configure-and-verify-switch-port-security">6.2 Configure and verify Switch Port Security</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">switch(config-if)# switchport port-security mac-address sticky</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">switch(config-if)# switchport port-security maximum 10</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">switch(config-if)# switchport port-security violation &lt;protect | restrict | shutdown&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>protect</strong> - отбрасывать небезопасные кадры, не увеличивая при этом счетчик security violation
+<strong>restrict</strong> - то же самое с увеличением счётчика
+<strong>shutdown</strong> - отключать порт, переходит в состояние err-disable</p>
+
+<p>Автоматическое восстановление из состояния err-disable:</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">errdisable recovery interval &lt;SECONDS&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
 ]]></content>
     
   </entry>
