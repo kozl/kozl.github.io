@@ -167,6 +167,15 @@
       <li><a href="#configure-and-verify-switch-port-security">6.2 Configure and verify Switch Port Security</a></li>
     </ul>
   </li>
+  <li><a href="#troubleshooting">7.0 Troubleshooting</a>
+    <ul>
+      <li><a href="#troubleshoot-and-resolve-vlan-problems">7.2 Troubleshoot and resolve VLAN problems</a></li>
+      <li><a href="#troubleshoot-and-resolve-trunking-problems-on-cisco-switches">7.3 Troubleshoot and resolve trunking problems on Cisco switches</a></li>
+      <li><a href="#troubleshoot-and-resolve-acl-issues">7.4 Troubleshoot and resolve ACL issues</a></li>
+      <li><a href="#troubleshoot-and-resolve-layer-1-problems">7.5 Troubleshoot and resolve Layer 1 problems</a></li>
+      <li><a href="#troubleshoot-and-resolve-spanning-tree-operation-issues">7.7 Troubleshoot and resolve spanning tree operation issues</a></li>
+    </ul>
+  </li>
 </ul>
 
 <h3 id="operation-of-ip-data-networks">1.0 Operation of IP Data Networks</h3>
@@ -905,6 +914,53 @@
 <p>Автоматическое восстановление из состояния err-disable:</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">errdisable recovery interval &lt;SECONDS&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="troubleshooting">7.0 Troubleshooting</h3>
+
+<h4 id="troubleshoot-and-resolve-vlan-problems">7.2 Troubleshoot and resolve VLAN problems</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show vlan
+</span><span class="line">show mac-address-table
+</span><span class="line">show interfaces switchport
+</span><span class="line">show interface status
+</span><span class="line">show interface description
+</span><span class="line">show ip interface brief</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="troubleshoot-and-resolve-trunking-problems-on-cisco-switches">7.3 Troubleshoot and resolve trunking problems on Cisco switches</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show vlan
+</span><span class="line">show interface trunk</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="troubleshoot-and-resolve-acl-issues">7.4 Troubleshoot and resolve ACL issues</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show ip interfaces
+</span><span class="line">show access-lists
+</span><span class="line">show ip access-lists</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="troubleshoot-and-resolve-layer-1-problems">7.5 Troubleshoot and resolve Layer 1 problems</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show interface</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="troubleshoot-and-resolve-spanning-tree-operation-issues">7.7 Troubleshoot and resolve spanning tree operation issues</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show spanning-tree detail
+</span><span class="line">show spanning-tree vlan &lt;VLAN&gt; detail
+</span><span class="line">show spanning-tree interface &lt;INT&gt; detail</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 </div>
 
