@@ -31,6 +31,8 @@ categories: network, ccna
 	- [5.3 Configure and verify ACLs in a network enviroment](#configure-and-verify-acls-in-a-network-enviroment)
 	- [5.4 Identify the basic operation of NAT](#identify-the-basic-operation-of-nat)
 	- [5.6 Configure and verify NTP as a client](#configure-and-verify-ntp-as-a-client)
+- [6.0 Network device security](#network-device-security)
+	- [6.2 Configure and verify Switch Port Security](#configure-and-verify-switch-port-security)
 
 
 ### 1.0 Operation of IP Data Networks
@@ -553,3 +555,29 @@ ntp server 7.7.7.7
 show clock detail
 show ntp associations
 ```
+
+### 6.0 Network device security
+
+#### 6.2 Configure and verify Switch Port Security
+
+```
+switch(config-if)# switchport port-security mac-address sticky
+```
+
+```
+switch(config-if)# switchport port-security maximum 10
+```
+
+```
+switch(config-if)# switchport port-security violation <protect | restrict | shutdown>
+```
+
+**protect** - отбрасывать небезопасные кадры, не увеличивая при этом счетчик security violation
+**restrict** - то же самое с увеличением счётчика
+**shutdown** - отключать порт, переходит в состояние err-disable
+
+Автоматическое восстановление из состояния err-disable:
+```
+errdisable recovery interval <SECONDS>
+```
+
