@@ -174,6 +174,12 @@
       <li><a href="#troubleshoot-and-resolve-acl-issues">7.4 Troubleshoot and resolve ACL issues</a></li>
       <li><a href="#troubleshoot-and-resolve-layer-1-problems">7.5 Troubleshoot and resolve Layer 1 problems</a></li>
       <li><a href="#troubleshoot-and-resolve-spanning-tree-operation-issues">7.7 Troubleshoot and resolve spanning tree operation issues</a></li>
+      <li><a href="#troubleshoot-and-resolve-routing-issues">7.8 Troubleshoot and resolve routing issues</a></li>
+      <li><a href="#troubleshoot-and-resolve-ospf-problems">7.9 Troubleshoot and resolve OSPF problems</a></li>
+      <li><a href="#troubleshoot-and-resolve-eigrp-problems">7.10 Troubleshoot and resolve EIGRP problems</a></li>
+      <li><a href="#troubleshoot-and-resolve-intervlan-routing-problems">7.11 Troubleshoot and resolve interVLAN routing problems</a></li>
+      <li><a href="#monitor-netflow-statistics">7.13 Monitor NetFlow statistics</a></li>
+      <li><a href="#ts-etherchannel-problems">7.14 TS EtherChannel problems</a></li>
     </ul>
   </li>
 </ul>
@@ -961,6 +967,79 @@
 </pre></td><td class="code"><pre><code class=""><span class="line">show spanning-tree detail
 </span><span class="line">show spanning-tree vlan &lt;VLAN&gt; detail
 </span><span class="line">show spanning-tree interface &lt;INT&gt; detail</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="troubleshoot-and-resolve-routing-issues">7.8 Troubleshoot and resolve routing issues</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show ip route</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="troubleshoot-and-resolve-ospf-problems">7.9 Troubleshoot and resolve OSPF problems</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show ip ospf neighbor
+</span><span class="line">show ip ospf interface
+</span><span class="line">show ip ospf statistics
+</span><span class="line">show ip ospf database</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="troubleshoot-and-resolve-eigrp-problems">7.10 Troubleshoot and resolve EIGRP problems</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show ip protocols
+</span><span class="line">show ip eigrp neighbors
+</span><span class="line">show ip eigrp topology</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="troubleshoot-and-resolve-intervlan-routing-problems">7.11 Troubleshoot and resolve interVLAN routing problems</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show vlan brief
+</span><span class="line">show interface trunk
+</span><span class="line">show ip interface brief</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="monitor-netflow-statistics">7.13 Monitor NetFlow statistics</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show ip cache flow
+</span><span class="line">show ip flow export
+</span><span class="line">show ip flow interface</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Настройка</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">SW(config-if)# ip flow ingress
+</span><span class="line">SW(config-if)# ip flow egress
+</span><span class="line">SW(config)# ip flow-export destination &lt;IP&gt; &lt;PORT&gt;
+</span><span class="line">SW(config)# ip flow-export version &lt;VERSION&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="ts-etherchannel-problems">7.14 TS EtherChannel problems</h4>
+
+<p>Если не используется ни один из протоколов согласования параметров аггрегированного канала, нужно иметь ввиду, что на обоих концах канала следующие параметры портов должны совпадать:</p>
+
+<ul>
+  <li>Speed settings</li>
+  <li>Duplex settings</li>
+  <li>STP settings</li>
+  <li>VLAN membership (for access ports)</li>
+  <li>Native VLAN (for trunk ports)</li>
+  <li>Allowed VLANs (for trunk ports)</li>
+  <li>Trunking Encapsulation (ISL or 802.1Q, for trunk ports)</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show etherchannel &lt;NUM&gt; port-channel
+</span><span class="line">show etherchannel summary</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 </div>
 
