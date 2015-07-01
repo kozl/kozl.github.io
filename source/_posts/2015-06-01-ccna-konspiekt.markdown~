@@ -37,8 +37,15 @@ categories: network, ccna
 	- [7.2 Troubleshoot and resolve VLAN problems](#troubleshoot-and-resolve-vlan-problems)
 	- [7.3 Troubleshoot and resolve trunking problems on Cisco switches](#troubleshoot-and-resolve-trunking-problems-on-cisco-switches)
 	- [7.4 Troubleshoot and resolve ACL issues](#troubleshoot-and-resolve-acl-issues)
-	- [7.5 Troubleshoot and resolve Layer 1 problems](#troubleshoot-and-resolve-layer-problems)
+	- [7.5 Troubleshoot and resolve Layer 1 problems](#troubleshoot-and-resolve-layer-1-problems)
 	- [7.7 Troubleshoot and resolve spanning tree operation issues](#troubleshoot-and-resolve-spanning-tree-operation-issues)
+	- [7.8 Troubleshoot and resolve routing issues](#troubleshoot-and-resolve-routing-issues)
+	- [7.9 Troubleshoot and resolve OSPF problems](#troubleshoot-and-resolve-ospf-problems)
+	- [7.10 Troubleshoot and resolve EIGRP problems](#troubleshoot-and-resolve-eigrp-problems)
+	- [7.11 Troubleshoot and resolve interVLAN routing problems](#troubleshoot-and-resolve-intervlan-routing-problems)
+	- [7.13 Monitor NetFlow statistics](#monitor-netflow-statistics)
+	- [7.14 TS EtherChannel problems](#ts-etherchannel-problems)
+	
 
 
 ### 1.0 Operation of IP Data Networks
@@ -629,3 +636,67 @@ show spanning-tree vlan <VLAN> detail
 show spanning-tree interface <INT> detail
 ```
 
+#### 7.8 Troubleshoot and resolve routing issues
+
+```
+show ip route
+```
+
+#### 7.9 Troubleshoot and resolve OSPF problems
+
+```
+show ip ospf neighbor
+show ip ospf interface
+show ip ospf statistics
+show ip ospf database
+```
+
+#### 7.10 Troubleshoot and resolve EIGRP problems
+
+```
+show ip protocols
+show ip eigrp neighbors
+show ip eigrp topology
+```
+
+#### 7.11 Troubleshoot and resolve interVLAN routing problems
+
+```
+show vlan brief
+show interface trunk
+show ip interface brief
+```
+
+#### 7.13 Monitor NetFlow statistics
+
+```
+show ip cache flow
+show ip flow export
+show ip flow interface
+```
+
+**Настройка**
+
+```
+SW(config-if)# ip flow ingress
+SW(config-if)# ip flow egress
+SW(config)# ip flow-export destination <IP> <PORT>
+SW(config)# ip flow-export version <VERSION>
+```
+
+#### 7.14 TS EtherChannel problems
+
+Если не используется ни один из протоколов согласования параметров аггрегированного канала, нужно иметь ввиду, что на обоих концах канала следующие параметры портов должны совпадать:
+
++ Speed settings
++ Duplex settings
++ STP settings
++ VLAN membership (for access ports)
++ Native VLAN (for trunk ports)
++ Allowed VLANs (for trunk ports)
++ Trunking Encapsulation (ISL or 802.1Q, for trunk ports)
+
+```
+show etherchannel <NUM> port-channel
+show etherchannel summary
+```
