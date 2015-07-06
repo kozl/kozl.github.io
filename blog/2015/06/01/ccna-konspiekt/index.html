@@ -160,6 +160,7 @@
       <li><a href="#configure-and-verify-acls-in-a-network-enviroment">5.3 Configure and verify ACLs in a network enviroment</a></li>
       <li><a href="#identify-the-basic-operation-of-nat">5.4 Identify the basic operation of NAT</a></li>
       <li><a href="#configure-and-verify-ntp-as-a-client">5.6 Configure and verify NTP as a client</a></li>
+      <li><a href="#recognize-high-availibility">5.7 Recognize High availibility</a></li>
     </ul>
   </li>
   <li><a href="#network-device-security">6.0 Network device security</a>
@@ -899,6 +900,65 @@
 <span class="line-number">2</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">show clock detail
 </span><span class="line">show ntp associations</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="recognize-high-availibility">5.7 Recognize High availibility</h4>
+
+<p><strong>HSRP</strong> - проприетарный FHRP cisco, терминология:</p>
+
+<ul>
+  <li><strong>Active router</strong></li>
+  <li><strong>Standby router</strong></li>
+  <li><strong>Standby group</strong></li>
+  <li><strong>Virtual IP &amp; MAC</strong></li>
+</ul>
+
+<p><strong>Virtual MAC</strong> - xxxx.xx07.acGG, xx - vendor ID, GG - stanby group number</p>
+
+<p>Default values:</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Timer</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Hello timer</td>
+      <td>2 sec</td>
+    </tr>
+    <tr>
+      <td>Hold timer</td>
+      <td>10 sec</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>VRRP</strong> - IEEE standard (RFC2338)</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>HSRP</th>
+      <th>VRRP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Virtual router</td>
+      <td>VRRP group</td>
+    </tr>
+    <tr>
+      <td>Active router</td>
+      <td>Master virtual router</td>
+    </tr>
+    <tr>
+      <td>Standby router</td>
+      <td>Backup router</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="network-device-security">6.0 Network device security</h3>
 
