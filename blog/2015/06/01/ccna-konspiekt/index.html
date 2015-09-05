@@ -1,0 +1,1234 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>CCNA: конспект - Networks, security and system administration</title>
+  <meta name="author" content="Kozlov Alexander">
+
+  
+  <meta name="description" content="CCNA Version 2 (200-120) 1.0 Operation of IP Data Networks 1.4 Describe the purpose and basic operation of the protocols in the OSI and TCP/IP models &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://kozl.github.io/blog/2015/06/01/ccna-konspiekt">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="Networks, security and system administration" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner">
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:kozl.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Главная</a></li>
+<!--  <li><a href="/about">About</a></li> -->
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+  
+    
+      <h1 class="entry-title">CCNA: конспект</h1>
+    
+  
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-01T11:37:56+03:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2 id="ccna-version-2-200-120">CCNA Version 2 (200-120)</h2>
+
+<ul>
+  <li><a href="#operation-of-ip-data-networks">1.0 Operation of IP Data Networks</a>
+    <ul>
+      <li><a href="#describe-the-purpose-and-basic-operation-of-the-protocols-in-the-osi-and-tcpip-models">1.4 Describe the purpose and basic operation of the protocols in the OSI and TCP/IP models</a></li>
+      <li><a href="#identify-the-appropriate-media-cables-ports-and-connectors-to-connect-cisco-network-devices-to-other-network-devices-and-hosts-in-a-lan">1.6 Identify the appropriate media, cables, ports and connectors to connect Cisco network devices to other network devices and hosts in a LAN</a></li>
+    </ul>
+  </li>
+  <li><a href="#lan-switching-technologies">2.0 LAN Switching Technologies</a>
+    <ul>
+      <li><a href="#configure-and-verify-initial-switch-configuration-including-remote-access-management">2.3 Configure and verify initial switch configuration including remote access management</a></li>
+      <li><a href="#configure-and-verify-vlans">2.6 Configure and verify VLANs</a></li>
+      <li><a href="#configure-and-verify-trunking-on-cisco-switches">2.7 Configure and verify trunking on Cisco switches</a></li>
+      <li><a href="#identify-enhanced-switching-technologies">2.8 Identify enhanced switching technologies</a></li>
+    </ul>
+  </li>
+  <li><a href="#ip-addressing-ipv4ipv6">3.0 IP Addressing (IPv4/IPv6)</a>
+    <ul>
+      <li><a href="#describe-ipv6-addresses">3.5 Describe IPv6 addresses</a></li>
+    </ul>
+  </li>
+  <li><a href="#ip-routing-technologies">4.0 IP Routing Technologies</a>
+    <ul>
+      <li><a href="#describe-basic-routing-concepts">4.1 Describe basic routing concepts</a></li>
+      <li><a href="#configure-and-verify-ospf">4.7 Configure and verify OSPF</a></li>
+      <li><a href="#configure-and-verify-intervlan-routing-router-on-a-stick">4.8 Configure and verify interVLAN routing (Router on a stick)</a></li>
+      <li><a href="#configure-svi-interfaces">4.9 Configure SVI interfaces</a></li>
+      <li><a href="#manage-cisco-ios-files">4.10 Manage Cisco IOS Files</a></li>
+      <li><a href="#configure-and-verify-eigrp-single-as">4.11 Configure and verify EIGRP (single AS)</a></li>
+    </ul>
+  </li>
+  <li><a href="#ip-services">5.0 IP Services</a>
+    <ul>
+      <li><a href="#configure-and-verify-dhcp-ios-router">5.1 Configure and verify DHCP (IOS Router)</a></li>
+      <li><a href="#configure-and-verify-acls-in-a-network-enviroment">5.3 Configure and verify ACLs in a network enviroment</a></li>
+      <li><a href="#identify-the-basic-operation-of-nat">5.4 Identify the basic operation of NAT</a></li>
+      <li><a href="#configure-and-verify-ntp-as-a-client">5.6 Configure and verify NTP as a client</a></li>
+      <li><a href="#recognize-high-availibility">5.7 Recognize High availibility</a></li>
+    </ul>
+  </li>
+  <li><a href="#network-device-security">6.0 Network device security</a>
+    <ul>
+      <li><a href="#configure-and-verify-switch-port-security">6.2 Configure and verify Switch Port Security</a></li>
+    </ul>
+  </li>
+  <li><a href="#troubleshooting">7.0 Troubleshooting</a>
+    <ul>
+      <li><a href="#troubleshoot-and-resolve-vlan-problems">7.2 Troubleshoot and resolve VLAN problems</a></li>
+      <li><a href="#troubleshoot-and-resolve-trunking-problems-on-cisco-switches">7.3 Troubleshoot and resolve trunking problems on Cisco switches</a></li>
+      <li><a href="#troubleshoot-and-resolve-acl-issues">7.4 Troubleshoot and resolve ACL issues</a></li>
+      <li><a href="#troubleshoot-and-resolve-layer-1-problems">7.5 Troubleshoot and resolve Layer 1 problems</a></li>
+      <li><a href="#troubleshoot-and-resolve-spanning-tree-operation-issues">7.7 Troubleshoot and resolve spanning tree operation issues</a></li>
+      <li><a href="#troubleshoot-and-resolve-routing-issues">7.8 Troubleshoot and resolve routing issues</a></li>
+      <li><a href="#troubleshoot-and-resolve-ospf-problems">7.9 Troubleshoot and resolve OSPF problems</a></li>
+      <li><a href="#troubleshoot-and-resolve-eigrp-problems">7.10 Troubleshoot and resolve EIGRP problems</a></li>
+      <li><a href="#troubleshoot-and-resolve-intervlan-routing-problems">7.11 Troubleshoot and resolve interVLAN routing problems</a></li>
+      <li><a href="#monitor-netflow-statistics">7.13 Monitor NetFlow statistics</a></li>
+      <li><a href="#ts-etherchannel-problems">7.14 TS EtherChannel problems</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="operation-of-ip-data-networks">1.0 Operation of IP Data Networks</h3>
+
+<h4 id="describe-the-purpose-and-basic-operation-of-the-protocols-in-the-osi-and-tcpip-models">1.4 Describe the purpose and basic operation of the protocols in the OSI and TCP/IP models</h4>
+
+<p><strong>OSI</strong></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Layer</th>
+      <th>Name</th>
+      <th>Protocols</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>7</td>
+      <td>Application</td>
+      <td>DNS, NTP, FTP, HTTP, DHCP, SMTP, Telnet, NFS</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Presentation</td>
+      <td>MIME, SSL/TLS</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Session</td>
+      <td>NETBIOS, RPC, SOCKS</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Transport</td>
+      <td>TCP, UDP, SCTP</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Network</td>
+      <td>IP, ICMP, IGMP, IPsec, OSPF, RIP, EIGRP, IS-IS</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Data link</td>
+      <td>L2TP, PPP, Ethernet, CDP, HDLC, ARP, Frame Relay</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Physical</td>
+      <td>DSL, USB</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>.</p>
+
+<p><strong>DoD</strong></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Protocols</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Application</td>
+      <td>DNS, NTP, FTP, HTTP, DHCP, SMTP, Telnet, NFS</td>
+    </tr>
+    <tr>
+      <td>Transport layer</td>
+      <td>TCP, UDP, SCTP</td>
+    </tr>
+    <tr>
+      <td>Internet layer</td>
+      <td>IP, ICMP, IGMP, IPsec, OSPF, RIP, EIGRP, IS-IS</td>
+    </tr>
+    <tr>
+      <td>Link layer</td>
+      <td>L2TP, PPP, Ethernet, CDP, HDLC, ARP, Frame Relay</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>.</p>
+
+<h4 id="identify-the-appropriate-media-cables-ports-and-connectors-to-connect-cisco-network-devices-to-other-network-devices-and-hosts-in-a-lan">1.6 Identify the appropriate media, cables, ports and connectors to connect Cisco network devices to other network devices and hosts in a LAN</h4>
+
+<p>Схемы распайки: TIA <strong>T568A</strong>, и EIA <strong>T568B</strong></p>
+
+<p><img src="http://www.bitsbyjohn.com/wp-content/uploads/2013/06/UTP-Pairing.png" /></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>TX: 1,2 RX: 3,6</th>
+      <th>RX: 1,2 TX: 3,6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Сетевые адаптеры ПК</td>
+      <td>Коммутаторы</td>
+    </tr>
+    <tr>
+      <td>Маршрутизаторы</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Точки доступа</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Сетевые принтеры</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Однотипные устройства подключаются перекрещенным кабелем (crossover)</p>
+
+<p>Cisco Console Rollover cable</p>
+
+<p><img src="http://wiki.artisansasylum.com/images/b/b6/Wiring-rollover.png" /></p>
+
+<h3 id="lan-switching-technologies">2.0 LAN Switching Technologies</h3>
+
+<h4 id="configure-and-verify-initial-switch-configuration-including-remote-access-management">2.3 Configure and verify initial switch configuration including remote access management</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">hostname &lt;HOSTNAME&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface Vlan &lt;NUM&gt;
+</span><span class="line"> no sh
+</span><span class="line"> ip address &lt;IP&gt; &lt;MASK&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">ip default-gateway &lt;GW&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">username &lt;USER&gt; password &lt;PASSWORD&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">line vty 0 15
+</span><span class="line"> login local
+</span><span class="line"> transport input &lt;PROTOCOL&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">enable secret &lt;PASSWORD&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">service password-encryption</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="configure-and-verify-vlans">2.6 Configure and verify VLANs</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">vlan &lt;NUM&gt;
+</span><span class="line"> name &lt;NAME&gt;
+</span><span class="line">
+</span><span class="line">interface &lt;INT&gt;
+</span><span class="line"> switchport access vlan &lt;VLAN&gt;
+</span><span class="line">
+</span><span class="line">interface &lt;INT&gt;
+</span><span class="line"> switchport trunk encapsulation dot1q
+</span><span class="line"> switchport trunk allowed vlan &lt;VLANS&gt;
+</span><span class="line"> switchport trunk native vlan &lt;VLAN&gt;
+</span><span class="line"> switchport mode trunk</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="configure-and-verify-trunking-on-cisco-switches">2.7 Configure and verify trunking on Cisco switches</h4>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>switchport modes</th>
+      <th>trunk active</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>access</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>trunk</td>
+      <td>trunk, dynamic auto, dynamic desirable</td>
+    </tr>
+    <tr>
+      <td>dynamic auto</td>
+      <td>trunk, dynamic desirable</td>
+    </tr>
+    <tr>
+      <td>dynamic desirable</td>
+      <td>trunk, dynamic auto, dynamic desirable</td>
+    </tr>
+    <tr>
+      <td>nonegotiate</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="identify-enhanced-switching-technologies">2.8 Identify enhanced switching technologies</h4>
+
+<p><strong>STP</strong> - 802.1d</p>
+
+<ol>
+  <li>Выбирается корневой мост. Корневым становится коммутатор с меньшим Bridge ID = Priority + MAC. Приоритет может быть изменен администратором с целью влияния на процесс выбора</li>
+  <li>Определение корневых и выделенных портов (root и designated ports). Корневой выбирается по наилучшему пути до корневого моста. Наименьший по Root Path Cost.</li>
+  <li>Перевод остальных портов в состояние Blocking</li>
+</ol>
+
+<p>Роли портов:</p>
+
+<ol>
+  <li>Root port</li>
+  <li>Designated port</li>
+  <li>Non-designated port</li>
+  <li>Disabled port</li>
+</ol>
+
+<p>Состояния портов:</p>
+
+<ol>
+  <li>Blocking</li>
+  <li>Listening</li>
+  <li>Learning</li>
+  <li>Forwarding</li>
+</ol>
+
+<p><strong>RSTP</strong> - 802.1w, ускоренная сходимость за счёт наличия альтернативных путей до корневого моста и меньшего количества состояний порта</p>
+
+<p>Роли портов:</p>
+
+<ol>
+  <li>Root port</li>
+  <li>Designated port</li>
+  <li>Alternative port</li>
+  <li>Backup port</li>
+</ol>
+
+<p>Состояния портов:</p>
+
+<ol>
+  <li>Discarding</li>
+  <li>Learning</li>
+  <li>Forwarding</li>
+</ol>
+
+<p><strong>PVST</strong>, <strong>PVST+</strong> - проприетарные протоколы Cisco, для каждого VLAN строят отдельное дерево, могут использовать транки на ISL. Основаны на STP.</p>
+
+<dl>
+  <dt><strong>Rapid PVST</strong>, <strong>Rapid PVST+</strong> - основаны на RSTP</dt>
+  <dt><strong>Portfast</strong></dt>
+  <dd>настраивается на access портах, сразу переводит порт в состояние Forwarding
+<strong>BPDU Guard</strong></dd>
+  <dd>выключает порт при получении BPDU</dd>
+</dl>
+
+<p><strong>MSTP</strong> - 802.1s</p>
+
+<p><strong>Etherchannel</strong></p>
+
+<p>Существует три варианта конфигурирования аггрегированного канала:</p>
+
+<ol>
+  <li>Статическая настройка</li>
+  <li>Настройка при помощи протокола LACP - стандартный протокол</li>
+  <li>Настройка при помощи протокола PagP - проприетарный протокол</li>
+</ol>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface range fa0/10 - 13
+</span><span class="line"> channel-group 3 mode on</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Режимы (modes):</p>
+
+<ol>
+  <li><em>on</em> - статическая настройка</li>
+  <li><em>active</em> - включить LACP</li>
+  <li><em>passive</em> - включить LACP при получении сообщения LACP</li>
+  <li><em>desirable</em> - включить PagP</li>
+  <li><em>auto</em> - включить PagP при получении сообщения PagP</li>
+</ol>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show etherchannel summary</span></code></pre></td></tr></table></div></figure></notextile></div>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show etherchannel port-channel</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Основная проблема - балансировка нагрузки. Вовсе не факт, что все каналы в аггрегированном канале будут загружены равномерно. Это определяется политикой балансировки по каналам. Она может быть:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sw1(config)# port-channel load-balance ?
+</span><span class="line">  dst-ip       Dst IP Addr
+</span><span class="line">  dst-mac      Dst Mac Addr
+</span><span class="line">  src-dst-ip   Src XOR Dst IP Addr
+</span><span class="line">  src-dst-mac  Src XOR Dst Mac Addr
+</span><span class="line">  src-ip       Src IP Addr
+</span><span class="line">  src-mac      Src Mac Addr</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>PVST configuration</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">spanning-tree mode rapid-pvst
+</span><span class="line">spanning-tree vlan &lt;VLANS&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Настройка Portfast</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sw(config)#interface fa0/1
+</span><span class="line">sw(config-if)# spanning-tree portfast</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>Настройка Bridge priority</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">spanning-tree vlan vlan-id root primary
+</span><span class="line">spanning-tree vlan vlan-id root secondary
+</span><span class="line">spanning-tree vlan &lt;VLAN&gt; priority &lt;PRI&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Настройка стоимости портов</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sw(config-if)# spanning-tree cost &lt;COST&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show spanning tree
+</span><span class="line">show spanning tree detail</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="ip-addressing-ipv4ipv6">3.0 IP Addressing (IPv4/IPv6)</h3>
+
+<h4 id="describe-ipv6-addresses">3.5 Describe IPv6 addresses</h4>
+
+<p>IPv6</p>
+
+<ul>
+  <li>большее адресное пространство</li>
+  <li>большая эффективность маршрутизации</li>
+  <li>автоконфигурация</li>
+  <li>IPsec</li>
+  <li>нет броадкастов</li>
+  <li>нет контрольных сумм заголовков</li>
+  <li>в заголовок добавлен Flow Label</li>
+</ul>
+
+<p>Формат представления: x:x:x:x:x:x:x:x, где x - шестнадцатеричное число</p>
+
+<ul>
+  <li>нули слева записывать необязательно</li>
+  <li>последовательность 0 может быть заменена :: (но только один раз)</li>
+  <li>48-bit global prefix, 16-bit subnet ID and 64-bit interface ID</li>
+</ul>
+
+<p>Виды адресов:</p>
+
+<ul>
+  <li>Unicast (one-to-one)</li>
+  <li>global: 2000::/3</li>
+  <li>link-local: FE80::/10</li>
+  <li>unique local: FC00::/7</li>
+  <li>loopback: ::1</li>
+  <li>reserved</li>
+  <li>Multicast (one-to-many): FF00::/8</li>
+  <li>Anycast (one-to-nearest)</li>
+</ul>
+
+<p>Global Unicast адреса:</p>
+
+<ul>
+  <li>на каждый интерфейс может быть назначено несколько адресов любого типа</li>
+  <li>каждый интерфейс имеет по меньшей мере один loopback и один link-local адрес</li>
+</ul>
+
+<p>Назначение IPv6 адреса:</p>
+
+<ul>
+  <li>статическое, указываем полный адрес</li>
+  <li>статическое, указываем сеть, младшие 64 бита генерирует EUI-64 как функцию от MAC интерфейса</li>
+  <li>автоконфигурация</li>
+  <li>DHCPv6</li>
+</ul>
+
+<p><strong>EUI-64</strong></p>
+
+<p>Метод генерации младших 64 бит адреса, используется MAC адрес, между старшими и младшими 3 байтами которого вставляется последовательность FF FE. При этом нужно инвертировать 7 бит MAC адреса.</p>
+
+<p><strong>Переход от IPv4 к IPv6</strong></p>
+
+<ul>
+  <li>Dual stack</li>
+  <li>6to4 tunneling</li>
+  <li>ISATAP</li>
+  <li>Teredo</li>
+</ul>
+
+<h3 id="ip-routing-technologies">4.0 IP Routing Technologies</h3>
+
+<h4 id="describe-basic-routing-concepts">4.1 Describe basic routing concepts</h4>
+
+<p><strong>Process Switching</strong> - решение о маршрутизации и проверка RIB осуществляется ЦП для каждого пакета в отдельности
+<strong>Fast Switching</strong> - ЦП задействуется для принятия решения о первом пакете в потоке, далее эта информация кешируется и остальные пакеты маршрутизируются на основе данных в кеше.
+<strong>CEF</strong> - строится FIB и Adjacency table, в которых хранятся заранее рассчитанные данные, необходимые для машрутизации (интерфейс, MAC адрес следующего узла, IP адрес и т.п.). Эти таблицы хранятся в быстрой памяти, поиск по которой занимает намного меньше времени и может быть реализован аппаратно.</p>
+
+<h4 id="configure-and-verify-ospf">4.7 Configure and verify OSPF</h4>
+
+<p>Перимущества OSPF с одной зоной: роутеры одной зоны имеют полную информацию о топологии этой зоны, используются наиболее оптимальные маршруты.</p>
+
+<p>Недостатки: при кол-ве роутеров более 50 (в некоторых источниках более 25-30) требования к памяти и вычислительным ресурсам каждого маршрутизатора возрастают и рекомендуется использовать несколько зон. Кроме этого это позволит осуществлять автосуммирование на ABR.</p>
+
+<p><strong>Конфигурирование OSPFv2</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">router ospf &lt;PID&gt;
+</span><span class="line">router-id &lt;ROUTER ID&gt;
+</span><span class="line">network &lt;A.B.C.D&gt; &lt;REVERSE MASK&gt; area &lt;AREA&gt;
+</span><span class="line">(-if) ip ospf &lt;PID&gt; area &lt;AREA&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show ip protocol
+</span><span class="line">show ip ospf
+</span><span class="line">show ip ospf neighbor
+</span><span class="line">show ip ospf interface
+</span><span class="line">show ip ospf database</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Конфигурирование OSPFv3</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">router ospfv3 &lt;PID&gt;
+</span><span class="line">router-id &lt;ROUTER ID&gt;
+</span><span class="line">(-if) ipv6 router ospfv3 &lt;PID&gt; area &lt;AREA&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Passive interface</strong> - не рассылает OSPF пакеты, но этот интерфейс анонсируется в LSA</p>
+
+<p><strong>типы LSA</strong></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Номер LSA</th>
+      <th>Название LSA</th>
+      <th>Кто отправляет</th>
+      <th>Область распространения</th>
+      <th>Назначение</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>LSA 1</td>
+      <td>Router LSA</td>
+      <td>Каждый маршрутизатор</td>
+      <td>Внутри зоны</td>
+      <td>Описывает маршрутизатор, все имеющиеся у него интерфейсы, их стоимость и соседей на каждом интерфейсе</td>
+    </tr>
+    <tr>
+      <td>LSA 2</td>
+      <td>Network LSA</td>
+      <td>DR (в сетях со множественным доступом)</td>
+      <td>Внутри зоны</td>
+      <td>Описывает широковещательную сеть, указаны все маршрутизаторы, подключённые к ней, DR, маска сети</td>
+    </tr>
+    <tr>
+      <td>LSA 3</td>
+      <td>Network Summary LSA</td>
+      <td>ABR</td>
+      <td>AS</td>
+      <td>Содержит информацию о сетях вне зоны и их стоимость. Не содержит информации о топологии сети. Сети могут быть просуммированы.</td>
+    </tr>
+    <tr>
+      <td>LSA 4</td>
+      <td>ASBR Summary LSA</td>
+      <td>ABR</td>
+      <td>AS</td>
+      <td>Необходим для того чтобы сообщить всем маршрутизатором о том, где находится ASBR, содержит суммарную информацию о состоянии каналов ASBR.</td>
+    </tr>
+    <tr>
+      <td>LSA 5</td>
+      <td>AS External LSA</td>
+      <td>ASBR</td>
+      <td>AS</td>
+      <td>Объявление о состоянии внешних по отношению к AS каналов</td>
+    </tr>
+    <tr>
+      <td>LSA 7</td>
+      <td>AS External LSA for NSSA</td>
+      <td>ASBR</td>
+      <td>NSSA area</td>
+      <td>Аналогично LSA 5, но может распространяться только в NSSA зоне.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="configure-and-verify-intervlan-routing-router-on-a-stick">4.8 Configure and verify interVLAN routing (Router on a stick)</h4>
+
+<p>Настройка сабинтерфейса на 101 влане, на маршрутизаторе:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface fa1/0.101
+</span><span class="line"> encapsulation dot1Q 101
+</span><span class="line"> ip address 192.168.101.1 255.255.255.0</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="configure-svi-interfaces">4.9 Configure SVI interfaces</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface vlan 101
+</span><span class="line"> no shutdown
+</span><span class="line"> ip address 192.168.101.254 255.255.255.0</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="manage-cisco-ios-files">4.10 Manage Cisco IOS Files</h4>
+
+<p><strong>Типы памяти</strong></p>
+
+<ul>
+  <li><strong>ROM</strong> - ПЗУ, хранит код bootstrap программы - ROMmon и POST</li>
+  <li><strong>Flash</strong> - перезаписываемая, в ней хранится образ IOS</li>
+  <li><strong>NVRAM</strong> - перезаписываемая, в ней хранятся конфиги</li>
+  <li><strong>ROM</strong> - оперативная память</li>
+</ul>
+
+<p><strong>Последовательность загрузки</strong></p>
+
+<ul>
+  <li>включается питание</li>
+  <li>запускается bootstrap программа из ROM, которая запускает POST</li>
+  <li>проверяется регистр confreg и определяется место, откуда будет загружаться образ IOS. По умолчанию (значение 2102), проверяется startup-config на наличие указаний откуда нужно грузить образ, если они отсутствуют, образ грузится из Flash памяти. Если образ отсутствует во Flash памяти, bootstrap пытается загрузить образ с TFTP сервера.</li>
+  <li>образ загружается в RAM</li>
+  <li>если startup-config отсутствует, запускается мастер конфигурации setup</li>
+</ul>
+
+<p>Значения регистра:</p>
+
+<p>0x2102 - поиск начальной конфигурации в NVRAM
+0x2142 - игнорировать начальную конфигурацию в NVRAM</p>
+
+<p><strong>Установка/удаление лицензий</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show license all
+</span><span class="line">license install &lt;URI&gt;
+</span><span class="line">license clear &lt;URI&gt;
+</span><span class="line">license save &lt;URI&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="configure-and-verify-eigrp-single-as">4.11 Configure and verify EIGRP (single AS)</h4>
+
+<p><strong>Feasible Distance</strong> - Administrative distance + стоимость пути до маршрутизатора, анонсировавшего этот маршрут</p>
+
+<p><strong>Feasible Successors</strong> - резервные маршруты до сети назначения</p>
+
+<p><strong>Feasibility condition</strong> - условие, при котором маршрут становится FS, его AD должна быть меньше FD текцщего Successor’a</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show eigrp topology
+</span><span class="line">show eigrp topology all-links</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Administrative distance</strong> - приоритет маршрутов, полученных от данного протокола маршрутизации, чем он меньше, тем лучшим считается маршрут.У EIGRP AD=90</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">router eigrp 65001
+</span><span class="line"> distance eigrp 60 120</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Metric composition</strong> - принцип расчёта метрики, по которым выбирается наилучший маршрут. Для расчёта метрики IEGRP использует 5 параметров, которые позволяют выбрать вес для следующих характеристик каналов: пропускная способность, задержка, надежность, загрузка канала. По умолчанию метрика пропорциональна сумме пропускной способности и задержки. Bandwith маршрута равна наименьшей bandwith составляющих его каналов.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">router eigrp 65001
+</span><span class="line"> metric weights 0 1 0 1 0 0</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Router ID</strong> - уникальный в пределах AS идентификатор маршрутазатора</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">router eigrp 65001
+</span><span class="line"> eigrp router-id 1.1.1.1</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Auto summary</strong> - автосуммирование анонсированных маршрутов до классовых сетей</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">router eigrp 65001
+</span><span class="line"> no auto-summary</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Path selection</strong> - наилучшим считается маршрут с наименьшей композитной метрикой.</p>
+
+<p><strong>Load balancing</strong> - нагрузка балансируется для маршрутов с одинаковой метрикой. Возможна балансировка по маршрутам с разной метрикой между Successor и Fesible successor, если настроить variance, множителя, на который умножается FD лучшего маршрута для определения feasible маршрутов, по которым будет балансироваться нагрузка.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">router eigrp 65001
+</span><span class="line"> maximum-paths 6
+</span><span class="line"> variance 2</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="ip-services">5.0 IP Services</h3>
+
+<h4 id="configure-and-verify-dhcp-ios-router">5.1 Configure and verify DHCP (IOS Router)</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">service dhcp
+</span><span class="line">ip dhcp excluded-address
+</span><span class="line">ip dhcp pool &lt;POOL NAME&gt;
+</span><span class="line"> network &lt;NETWORK&gt; &lt;MASK&gt;
+</span><span class="line"> domain-name &lt;DOMAIN&gt;
+</span><span class="line"> dns-server &lt;DNS&gt;
+</span><span class="line"> default-router &lt;GW&gt;
+</span><span class="line"> lease &lt;LEASE&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="configure-and-verify-acls-in-a-network-enviroment">5.3 Configure and verify ACLs in a network enviroment</h4>
+
+<p><strong>Именованый</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">R1(conf)# ip access-list standard &lt;NAME&gt;
+</span><span class="line">R1(conf-std-nacl)# deny 10.0.0.0 0.0.0.255</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Нумерованный</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">R1(conf)# access-list &lt;1-99&gt; deny 10.0.0.0 0.0.0.255</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Применение ACL на интерфейсе</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">R1(conf-if)# ip access-group &lt;1-99&gt; &lt;in | out&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Применение ACL на vty</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">R1(config-line)# access-class &lt;1-99&gt; &lt;in | out&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="identify-the-basic-operation-of-nat">5.4 Identify the basic operation of NAT</h4>
+
+<p><strong>Static NAT</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">R1(config-if)# ip nat inside
+</span><span class="line">...
+</span><span class="line">R1(config-if)# ip nat outside
+</span><span class="line">R1(config)# ip nat inside static 172.16.50.8 172.16.10.8</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Dynamic NAT</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">...
+</span><span class="line">access list 100 permit 10.0.0.0 0.0.0.255 any
+</span><span class="line">ip nat pool MYPOOL 11.1.1.0 11.1.1.20 netmask 255.255.255.0
+</span><span class="line">ip nat inside source  list 100 pool MYPOOL </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>PAT (NAT overload)</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">...
+</span><span class="line">ip nat inside source  list 100 pool MYPOOL overload</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show ip nat translations</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="configure-and-verify-ntp-as-a-client">5.6 Configure and verify NTP as a client</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">ntp server 7.7.7.7</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show clock detail
+</span><span class="line">show ntp associations</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="recognize-high-availibility">5.7 Recognize High availibility</h4>
+
+<p><strong>HSRP</strong> - проприетарный FHRP cisco, терминология:</p>
+
+<ul>
+  <li><strong>Active router</strong></li>
+  <li><strong>Standby router</strong></li>
+  <li><strong>Standby group</strong></li>
+  <li><strong>Virtual IP &amp; MAC</strong></li>
+</ul>
+
+<p><strong>Virtual MAC</strong> - xxxx.xx07.acGG, xx - vendor ID, GG - stanby group number</p>
+
+<p>Default values:</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Timer</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Hello timer</td>
+      <td>2 sec</td>
+    </tr>
+    <tr>
+      <td>Hold timer</td>
+      <td>10 sec</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>VRRP</strong> - IEEE standard (RFC2338)</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>HSRP</th>
+      <th>VRRP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Virtual router</td>
+      <td>VRRP group</td>
+    </tr>
+    <tr>
+      <td>Active router</td>
+      <td>Master virtual router</td>
+    </tr>
+    <tr>
+      <td>Standby router</td>
+      <td>Backup router</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="network-device-security">6.0 Network device security</h3>
+
+<h4 id="configure-and-verify-switch-port-security">6.2 Configure and verify Switch Port Security</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">switch(config-if)# switchport port-security mac-address sticky</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">switch(config-if)# switchport port-security maximum 10</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">switch(config-if)# switchport port-security violation &lt;protect | restrict | shutdown&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>protect</strong> - отбрасывать небезопасные кадры, не увеличивая при этом счетчик security violation
+<strong>restrict</strong> - то же самое с увеличением счётчика
+<strong>shutdown</strong> - отключать порт, переходит в состояние err-disable</p>
+
+<p>Автоматическое восстановление из состояния err-disable:</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">errdisable recovery interval &lt;SECONDS&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="troubleshooting">7.0 Troubleshooting</h3>
+
+<h4 id="troubleshoot-and-resolve-vlan-problems">7.2 Troubleshoot and resolve VLAN problems</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show vlan
+</span><span class="line">show mac-address-table
+</span><span class="line">show interfaces switchport
+</span><span class="line">show interface status
+</span><span class="line">show interface description
+</span><span class="line">show ip interface brief</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="troubleshoot-and-resolve-trunking-problems-on-cisco-switches">7.3 Troubleshoot and resolve trunking problems on Cisco switches</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show vlan
+</span><span class="line">show interface trunk</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="troubleshoot-and-resolve-acl-issues">7.4 Troubleshoot and resolve ACL issues</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show ip interfaces
+</span><span class="line">show access-lists
+</span><span class="line">show ip access-lists</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="troubleshoot-and-resolve-layer-1-problems">7.5 Troubleshoot and resolve Layer 1 problems</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show interface</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="troubleshoot-and-resolve-spanning-tree-operation-issues">7.7 Troubleshoot and resolve spanning tree operation issues</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show spanning-tree detail
+</span><span class="line">show spanning-tree vlan &lt;VLAN&gt; detail
+</span><span class="line">show spanning-tree interface &lt;INT&gt; detail</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="troubleshoot-and-resolve-routing-issues">7.8 Troubleshoot and resolve routing issues</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show ip route</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="troubleshoot-and-resolve-ospf-problems">7.9 Troubleshoot and resolve OSPF problems</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show ip ospf neighbor
+</span><span class="line">show ip ospf interface
+</span><span class="line">show ip ospf statistics
+</span><span class="line">show ip ospf database</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="troubleshoot-and-resolve-eigrp-problems">7.10 Troubleshoot and resolve EIGRP problems</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show ip protocols
+</span><span class="line">show ip eigrp neighbors
+</span><span class="line">show ip eigrp topology</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="troubleshoot-and-resolve-intervlan-routing-problems">7.11 Troubleshoot and resolve interVLAN routing problems</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show vlan brief
+</span><span class="line">show interface trunk
+</span><span class="line">show ip interface brief</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="monitor-netflow-statistics">7.13 Monitor NetFlow statistics</h4>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show ip cache flow
+</span><span class="line">show ip flow export
+</span><span class="line">show ip flow interface</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Настройка</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">SW(config-if)# ip flow ingress
+</span><span class="line">SW(config-if)# ip flow egress
+</span><span class="line">SW(config)# ip flow-export destination &lt;IP&gt; &lt;PORT&gt;
+</span><span class="line">SW(config)# ip flow-export version &lt;VERSION&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h4 id="ts-etherchannel-problems">7.14 TS EtherChannel problems</h4>
+
+<p>Если не используется ни один из протоколов согласования параметров аггрегированного канала, нужно иметь ввиду, что на обоих концах канала следующие параметры портов должны совпадать:</p>
+
+<ul>
+  <li>Speed settings</li>
+  <li>Duplex settings</li>
+  <li>STP settings</li>
+  <li>VLAN membership (for access ports)</li>
+  <li>Native VLAN (for trunk ports)</li>
+  <li>Allowed VLANs (for trunk ports)</li>
+  <li>Trunking Encapsulation (ISL or 802.1Q, for trunk ports)</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">show etherchannel &lt;NUM&gt; port-channel
+</span><span class="line">show etherchannel summary</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Kozlov Alexander</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-01T11:37:56+03:00" pubdate data-updated="true"></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ccna/'>ccna</a>, <a class='category' href='/blog/categories/network/'>network,</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kozl.github.io/blog/2015/06/01/ccna-konspiekt/" data-via="" data-counturl="http://kozl.github.io/blog/2015/06/01/ccna-konspiekt/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/05/22/dvukhtochiechnyie-protokoly/" title="Previous Post: Двухточечные протоколы">&laquo; Двухточечные протоколы</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/06/05/vpn/" title="Next Post: VPN">VPN &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/06/05/vpn/">VPN</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/01/ccna-konspiekt/">CCNA: конспект</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/22/dvukhtochiechnyie-protokoly/">Двухточечные протоколы</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/19/eigrp-kratkii-konspiekt/">EIGRP: краткий конспект</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/18/bazovaia-nastroika-marshrutizatora/">Базовая настройка маршрутизатора</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Kozlov Alexander <br/>
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>, customized with <a href="https://github.com/mjhea0/whiterspace">whiterspace</a>.</span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

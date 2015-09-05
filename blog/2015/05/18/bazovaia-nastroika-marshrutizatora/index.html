@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Базовая настройка маршрутизатора - Networks, security and system administration</title>
+  <meta name="author" content="Kozlov Alexander">
+
+  
+  <meta name="description" content="Удаление предыдущей конфигурации 1
+Router#erase startup-config Отключение DNS запросов при ошибках в консоли
+1
+no ip domain lookup Выключить таймаут &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://kozl.github.io/blog/2015/05/18/bazovaia-nastroika-marshrutizatora">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="Networks, security and system administration" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner">
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:kozl.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Главная</a></li>
+<!--  <li><a href="/about">About</a></li> -->
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+  
+    
+      <h1 class="entry-title">Базовая настройка маршрутизатора</h1>
+    
+  
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-18T17:11:57+03:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Удаление предыдущей конфигурации</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">Router#erase startup-config</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Отключение DNS запросов при ошибках в консоли</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">no ip domain lookup</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Выключить таймаут неактивной сессии в консоли, привилегированный режим в консоли, включить синхронный вывод на консоль:</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">line con 0
+</span><span class="line"> exec-timeout 0 0
+</span><span class="line"> privilege level 15
+</span><span class="line"> logging synchronous</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Хранить startup конфиг в сжатом виде</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">service compress-config </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section">Безопасность</h3>
+
+<p>Хранение паролей в зашифрованном виде</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">service password-encryption</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Блокировать после нескольких неудачных попыток залогиниться</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">login block-for &lt;timeout&gt; attemts &lt;num&gt; within &lt;timeot&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Логирование доступа</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">login on-success log
+</span><span class="line">login on-failure log every 2</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Настройка ключей SSH</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">hostname &lt;hostname&gt;
+</span><span class="line">ip domain name &lt;domain name&gt;
+</span><span class="line">crypto key generate rsa general-keys modulus 1024
+</span><span class="line">ip ssh time-out 90
+</span><span class="line">ip ssh maxstartups 2 
+</span><span class="line">ip ssh authentication-retries 2 </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Настроить SSH на нестандартный порт</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">ip ssh port &lt;port&gt; rotary &lt;group&gt;
+</span><span class="line">line vty 0 4
+</span><span class="line"> rotary &lt;group&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Kozlov Alexander</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-18T17:11:57+03:00" pubdate data-updated="true"></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ccna/'>ccna</a>, <a class='category' href='/blog/categories/network/'>network,</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kozl.github.io/blog/2015/05/18/bazovaia-nastroika-marshrutizatora/" data-via="" data-counturl="http://kozl.github.io/blog/2015/05/18/bazovaia-nastroika-marshrutizatora/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/05/18/zarieziervirovannyie-ip-adriesa-rfc-6890/" title="Previous Post: Зарезервированные IP адреса: RFC 6890">&laquo; Зарезервированные IP адреса: RFC 6890</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/05/19/eigrp-kratkii-konspiekt/" title="Next Post: EIGRP: краткий конспект">EIGRP: краткий конспект &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/06/05/vpn/">VPN</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/01/ccna-konspiekt/">CCNA: конспект</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/22/dvukhtochiechnyie-protokoly/">Двухточечные протоколы</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/19/eigrp-kratkii-konspiekt/">EIGRP: краткий конспект</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/18/bazovaia-nastroika-marshrutizatora/">Базовая настройка маршрутизатора</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Kozlov Alexander <br/>
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>, customized with <a href="https://github.com/mjhea0/whiterspace">whiterspace</a>.</span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

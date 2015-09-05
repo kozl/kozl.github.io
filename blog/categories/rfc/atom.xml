@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: rfc | Networks, security and system administration]]></title>
+  <link href="http://kozl.github.io/blog/categories/rfc/atom.xml" rel="self"/>
+  <link href="http://kozl.github.io/"/>
+  <updated>2015-09-05T13:50:46+03:00</updated>
+  <id>http://kozl.github.io/</id>
+  <author>
+    <name><![CDATA[Kozlov Alexander]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Зарезервированные IP адреса: RFC 6890]]></title>
+    <link href="http://kozl.github.io/blog/2015/05/18/zarieziervirovannyie-ip-adriesa-rfc-6890/"/>
+    <updated>2015-05-18T15:57:17+03:00</updated>
+    <id>http://kozl.github.io/blog/2015/05/18/zarieziervirovannyie-ip-adriesa-rfc-6890</id>
+    <content type="html"><![CDATA[<table class="table">
+  <thead>
+    <tr>
+      <th style="text-align: center">Подсеть</th>
+      <th>Назначение</th>
+      <th>Маршрутизация</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">0.0.0.0/8</td>
+      <td>Адреса источников “своей” сети</td>
+      <td>запрещена</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0.0.0.0/32</td>
+      <td>Любая сеть отправителя или получателя</td>
+      <td>запрещена</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">10.0.0.0/8</td>
+      <td>Для использования в частных сетях</td>
+      <td>только в частных сетях</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">100.64.0.0/10</td>
+      <td>Shared Address Space. RFC 6598. Для использования в сетях сервис-провайдера.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">127.0.0.0/8</td>
+      <td>Loopback IP</td>
+      <td>запрещена</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">169.254.0.0/16</td>
+      <td>Автоматическое назначение IP адреса</td>
+      <td>только в частных сетях</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">172.16.0.0/12</td>
+      <td>Для использования в частных сетях</td>
+      <td>только в частных сетях</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">192.0.2.0/24</td>
+      <td>Для примеров в документации.</td>
+      <td>запрещена</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">192.88.99.0/24</td>
+      <td>Используются для рассылки ближайшему узлу. RFC 3068</td>
+      <td>глобально запрещена</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">192.88.99.1/32</td>
+      <td>Применяется в качестве ретранслятора при инкапсуляции IPv6 в IPv4</td>
+      <td>глобально запрещена</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">192.168.0.0/16</td>
+      <td>Для использования в частных сетях.</td>
+      <td>только в частных сетях</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">198.51.100.0/24</td>
+      <td>Для примеров в документации.</td>
+      <td>запрещена</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">198.18.0.0/15</td>
+      <td>Для стендов тестирования производительности.</td>
+      <td>только для тестов</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">203.0.113.0/24</td>
+      <td>Для примеров в документации.</td>
+      <td>запрещена</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">224.0.0.0/4</td>
+      <td>Multicast IP</td>
+      <td>Глобально разрешена только для подсетей 233.0.0.0/8 и 234.0.0.0/8.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">239.0.0.0/8</td>
+      <td>Для частных мультикаст-доменов/организаций</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">240.0.0.0/4</td>
+      <td>Зарезервировано для использования в будущем.</td>
+      <td>запрещена</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">255.255.255.255/32</td>
+      <td>Широковещательный адрес</td>
+      <td>запрещена</td>
+    </tr>
+  </tbody>
+</table>
+]]></content>
+  </entry>
+  
+</feed>

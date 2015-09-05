@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>OSPF: краткий конспект - Networks, security and system administration</title>
+  <meta name="author" content="Kozlov Alexander">
+
+  
+  <meta name="description" content="OSPF - динамический протокол маршрутизации состояния канала. Предназначен для обмена маршрутной информацией в пределах автономной системы. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://kozl.github.io/blog/2015/05/18/ospf-kratkii-konspiekt">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="Networks, security and system administration" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner">
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:kozl.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Главная</a></li>
+<!--  <li><a href="/about">About</a></li> -->
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+  
+    
+      <h1 class="entry-title">OSPF: краткий конспект</h1>
+    
+  
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-18T09:38:15+03:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>OSPF - динамический протокол маршрутизации состояния канала. Предназначен для обмена маршрутной информацией в пределах автономной системы. Исползьзуется поверх протокола IP. Маршрутизаторы обмениваются друг с другом информацией о своих интерфейсах, формируют граф сети, идентичный для каждого маршрутизатора и, используя алгоритм поиска кратчайшего пути, получают маршруты для каждой подсети.</p>
+
+<h2 id="ospf">Терминология OSPF</h2>
+
+<ul>
+  <li><strong>Router id</strong> - уникальный в пределах домена OSPF идентификатор маршрутизатора</li>
+  <li><strong>Area</strong> - совокупность маршрутизаторов, имеющих единую базу состояния каналов (LSDB). Существуют различные типы зон, вот некоторые из них:
+    <ul>
+      <li><strong>Backbone area</strong> - зона с идентификатором 0.0.0.0, не может быть тупиковой.</li>
+      <li><strong>Stub area</strong> - зона, в которой запрещено распространение External LSA, вместо этого распространяется Summary LSA с маршрутом по умолчанию.</li>
+      <li><strong>Totally stub area</strong> - Stub зона, в которой кроме того запрещено распространение Summary LSA, вместо этого распространяется единственный Summary LSA с маршрутом по умолчанию.</li>
+      <li><strong>NSSArea</strong> - Stub зона, в которой разрешено распространение Type 7 External LSA, которые предназначены для анонса внешних по отношению к автономной системе маршрутов.</li>
+    </ul>
+  </li>
+  <li><strong>LSDB</strong> - база данных, содержащая информацию о состоянии всех каналов, формируется путём обмена сообщениями LSA.</li>
+  <li><strong>LSA</strong> - сообщение, описывающее состояние канала или сети. Существуют LSA разных типов, вот некоторые из них:
+    <ul>
+      <li><strong>Router LSA (Type 1)</strong> - объявление о состоянии каналов маршрутизатора, распространяется внутри зоны, отправляется всеми роутерами.</li>
+      <li><strong>Network LSA (Type 2)</strong> - объявление о состоянии каналов сети, распространяется внутри зоны, отправляется DR.</li>
+      <li><strong>Network Summary LSA (Type 3)</strong> - суммарное объявление о состоянии каналов в сети, не содержит информации о топологии сети, содержит маршруты и метрики к сетям вне зоны, распространяется ABR.</li>
+      <li><strong>ASBR Summary LSA (Type 4)</strong> - суммарное объявление о состоянии каналов пограничного маршрутизатора автономной системы, распространяется ABR, то же что LSA 3, только распространяется информация о состоянии каналов ASBR.</li>
+      <li><strong>AS External LSA (Type 5)</strong> - объявление о состоянии внешних каналов автономной системы, рапространяется в пределах всей автономной системы, отправялется ASBR.</li>
+      <li><strong>AS External LSA for NSSA (Type 7)</strong> - объявление о состоянии внешних каналов автономной системы в NSSA зоне, аналогично LSA Type 5, рапространяется только в пределах NSSA зоны, отправялется ASBR.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="ospf-1">Типы маршрутизаторов OSPF</h4>
+
+<ul>
+  <li><strong>Backbone router</strong> - один из интерфейсов относится к магистральной зоне</li>
+  <li><strong>Internal router</strong> - все интерфейсы маршрутизатора находятся в одной зоне</li>
+  <li><strong>Area Border Router</strong> - соединяет одно или больше зон с магистральной зоной, для каждой зоны имеет отдельную базу состояний каналов</li>
+  <li><strong>AS Boundary Router</strong> - пограничный маршрутизатор автономной системы, один из интерфейсов связан с другой автономной системой или доменом маршрутизации другого протокола</li>
+</ul>
+
+<h4 id="ospf-2">Типы пакетов OSPF</h4>
+
+<ul>
+  <li><strong>Database Description</strong> - описание всех LSA, хранящихся в LSDB маршрутизатора</li>
+  <li><strong>Link State Request</strong> - запрос с описанием тех LSA, которых не хватает в LSDB</li>
+  <li><strong>Link State Update</strong> - сообщение, в котором передаются полные LSA</li>
+  <li><strong>Link State Acknowledgment</strong> - подтверждение о получении конкретных LSA с их описанием</li>
+</ul>
+
+<h2 id="section">Стадии обмена маршрутной информацией</h2>
+
+<ol>
+  <li>Установление отношений смежности</li>
+  <li>Обмен информацией о состоянии каналов</li>
+  <li>Вычисление кратчайших путей по алгоритму SPF до всех подсетей</li>
+</ol>
+
+<h4 id="section-1">Установление отношений смежности</h4>
+<p>Есть отношения соседства и отношения смежности. LSA передаются только между маршрутизаторами установившими отношения смежности. Отношения смежности устанавливаются путём передачи Hello пакетов, которые также выполняют роль keepalive пакетов. Для установления смежности необходимо, чтобы на обоих маршрутизаторах совпадали следующие параметры:</p>
+
+<ul>
+  <li>Hello interval</li>
+  <li>Router Dead Interval = 4 * Hello interval</li>
+  <li>Area ID</li>
+  <li>Authentication</li>
+  <li>Stub area flag</li>
+  <li>сеть и маска сети на интерфейсах</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>[Настройка таймеров OSPF на интерфейсе] </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface type number
+</span><span class="line">ip ospf hello-interval seconds
+</span><span class="line">ip ospf dead-interval seconds
+</span><span class="line">ip ospf authentication-key key # plaintext
+</span><span class="line">ip ospf message-digest-key key-id md5 key # md5</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>В point-to-point соединениях сразу устанавливаются отношения смежности. В сетях с широковещанием происходят выборы DR и BDR, остальные маршрутизаторы устанавливают с ними отношения смежности, а друг с другом - отношения соседства.</p>
+
+<p>Отношения соседства происходят следующим образом:</p>
+
+<ol>
+  <li>Маршрутизатор R1 отправляет Hello сообщение на мультикастовый адрес 224.0.0.5.Маршрутизатор R2 принимает его, и если соответствующие параметры совпадают вносит его в список соседей.</li>
+  <li>R2 юникастом отправляет также Hello сообщение, в котором в списке соседей уже указан R1, т.е. он его уже считает своим соседом.
+R1 принимает сообщение, находит себя в списке соседей, также вносит R2 в список соседей, между ними устанавливаются отношения смежности. R1 и R2 переходят в состояние <strong>TWO WAY</strong></li>
+  <li>Далее происходит обмен информацией о состоянии каналов.</li>
+</ol>
+
+<h4 id="section-2">Обмен информацией о состоянии каналов</h4>
+
+<ol>
+  <li>Маршрутизаторы обмениваются DBD сообщениями с описанием LSDB. Первым DBD отправляет маршрутизатор с большим Router ID.</li>
+  <li>Подтвердив получение DBD сообщениями LSAck, R1 и R2 посылают друг другу LSR с указанием тех LSA, которые им незвестны, переходя в состояние <strong>LOADING</strong></li>
+  <li>Получив LSR, маршрутизатор отправляет LSU, которые содержат в себе LSA с детальной информацией о подсетях.</li>
+</ol>
+
+<h4 id="ospf-3">Состояния узлов OSPF</h4>
+
+<ul>
+  <li><strong>Down</strong> - процесс OSPF запущен, но ни одно Hello сообщение не отправлялось. Например в случае когда мы запустили OSPF, но все интерфейсы в состоянии passive</li>
+  <li><strong>Init</strong> - процесс OSPF отправил Hello сообщение и ждет ответа.</li>
+  <li><strong>Two way</strong> - отношение соседства установлено, т.е. совпали все параметры Hello сообщений и маршрутизатор увидел себя в списке соседей пришедшего Hello сообщения. Такое состояние принимают DROTHER маршрутизаторы между собой в широковещательной сети.</li>
+  <li><strong>Exstart</strong> - определяется Master и Slave в паре, на основании Router ID, у кого больше, тот становится Master</li>
+  <li><strong>Exchange</strong> - обмен DBD сообщениями</li>
+  <li><strong>Loading</strong> - во время обмена LSA, в случае если в DBD соседа есть сети, которых нет у маршрутизатора.</li>
+  <li><strong>Full</strong> - когда LSDB на двух маршрутизаторах синхронизирована.</li>
+</ul>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Kozlov Alexander</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-18T09:38:15+03:00" pubdate data-updated="true"></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ccna/'>ccna</a>, <a class='category' href='/blog/categories/network/'>network,</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kozl.github.io/blog/2015/05/18/ospf-kratkii-konspiekt/" data-via="" data-counturl="http://kozl.github.io/blog/2015/05/18/ospf-kratkii-konspiekt/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/05/18/zarieziervirovannyie-ip-adriesa-rfc-6890/" title="Next Post: Зарезервированные IP адреса: RFC 6890">Зарезервированные IP адреса: RFC 6890 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/06/05/vpn/">VPN</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/01/ccna-konspiekt/">CCNA: конспект</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/22/dvukhtochiechnyie-protokoly/">Двухточечные протоколы</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/19/eigrp-kratkii-konspiekt/">EIGRP: краткий конспект</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/18/bazovaia-nastroika-marshrutizatora/">Базовая настройка маршрутизатора</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Kozlov Alexander <br/>
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>, customized with <a href="https://github.com/mjhea0/whiterspace">whiterspace</a>.</span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
