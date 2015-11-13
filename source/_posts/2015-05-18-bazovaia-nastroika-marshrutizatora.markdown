@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Базовая настройка маршрутизатора"
+title: "Базовая настройка коммутатора"
 date: 2015-05-18 17:11:57 +0300
 comments: true
 categories: network, ccna
@@ -28,12 +28,23 @@ line con 0
 ```
 service compress-config 
 ```
+### Настройки времени
+
+```
+ntp peer <IP>
+clock timezone MSK +3
+```
 
 ### Безопасность
 
 Хранение паролей в зашифрованном виде
 ```
 service password-encryption
+```
+
+Пароль для привилегированного режима
+```
+enable secret <PASS>
 ```
 
 Блокировать после нескольких неудачных попыток залогиниться
@@ -47,7 +58,14 @@ login on-success log
 login on-failure log every 2
 ```
 
-Настройка ключей SSH
+Настройка SSH
+
+```
+line vty 0 15
+ transport input ssh
+ login local
+```
+
 ```
 hostname <hostname>
 ip domain name <domain name>
