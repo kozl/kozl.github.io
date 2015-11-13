@@ -1,0 +1,350 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Зарезервированные IP адреса: RFC 6890 - Networks, security and system administration</title>
+  <meta name="author" content="Kozlov Alexander">
+
+  
+  <meta name="description" content="Подсеть Назначение Маршрутизация 0.0.0.0/8 Адреса источников “своей” сети запрещена 0.0.0.0/32 Любая сеть отправителя или получателя запрещена 10.0. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://kozl.github.io/blog/2015/05/18/zarieziervirovannyie-ip-adriesa-rfc-6890">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="Networks, security and system administration" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner">
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:kozl.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Главная</a></li>
+<!--  <li><a href="/about">About</a></li> -->
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+  
+    
+      <h1 class="entry-title">Зарезервированные IP адреса: RFC 6890</h1>
+    
+  
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-18T15:57:17+03:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><table class="table">
+  <thead>
+    <tr>
+      <th style="text-align: center">Подсеть</th>
+      <th>Назначение</th>
+      <th>Маршрутизация</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">0.0.0.0/8</td>
+      <td>Адреса источников “своей” сети</td>
+      <td>запрещена</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0.0.0.0/32</td>
+      <td>Любая сеть отправителя или получателя</td>
+      <td>запрещена</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">10.0.0.0/8</td>
+      <td>Для использования в частных сетях</td>
+      <td>только в частных сетях</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">100.64.0.0/10</td>
+      <td>Shared Address Space. RFC 6598. Для использования в сетях сервис-провайдера.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">127.0.0.0/8</td>
+      <td>Loopback IP</td>
+      <td>запрещена</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">169.254.0.0/16</td>
+      <td>Автоматическое назначение IP адреса</td>
+      <td>только в частных сетях</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">172.16.0.0/12</td>
+      <td>Для использования в частных сетях</td>
+      <td>только в частных сетях</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">192.0.2.0/24</td>
+      <td>Для примеров в документации.</td>
+      <td>запрещена</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">192.88.99.0/24</td>
+      <td>Используются для рассылки ближайшему узлу. RFC 3068</td>
+      <td>глобально запрещена</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">192.88.99.1/32</td>
+      <td>Применяется в качестве ретранслятора при инкапсуляции IPv6 в IPv4</td>
+      <td>глобально запрещена</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">192.168.0.0/16</td>
+      <td>Для использования в частных сетях.</td>
+      <td>только в частных сетях</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">198.51.100.0/24</td>
+      <td>Для примеров в документации.</td>
+      <td>запрещена</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">198.18.0.0/15</td>
+      <td>Для стендов тестирования производительности.</td>
+      <td>только для тестов</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">203.0.113.0/24</td>
+      <td>Для примеров в документации.</td>
+      <td>запрещена</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">224.0.0.0/4</td>
+      <td>Multicast IP</td>
+      <td>Глобально разрешена только для подсетей 233.0.0.0/8 и 234.0.0.0/8.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">239.0.0.0/8</td>
+      <td>Для частных мультикаст-доменов/организаций</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">240.0.0.0/4</td>
+      <td>Зарезервировано для использования в будущем.</td>
+      <td>запрещена</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">255.255.255.255/32</td>
+      <td>Широковещательный адрес</td>
+      <td>запрещена</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Kozlov Alexander</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-18T15:57:17+03:00" pubdate data-updated="true"></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ccna/'>ccna,</a>, <a class='category' href='/blog/categories/network/'>network,</a>, <a class='category' href='/blog/categories/rfc/'>rfc</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kozl.github.io/blog/2015/05/18/zarieziervirovannyie-ip-adriesa-rfc-6890/" data-via="" data-counturl="http://kozl.github.io/blog/2015/05/18/zarieziervirovannyie-ip-adriesa-rfc-6890/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/05/18/ospf-kratkii-konspiekt/" title="Previous Post: OSPF: краткий конспект">&laquo; OSPF: краткий конспект</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/05/18/bazovaia-nastroika-marshrutizatora/" title="Next Post: Базовая настройка коммутатора">Базовая настройка коммутатора &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/06/05/vpn/">VPN</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/01/ccna-konspiekt/">CCNA: конспект</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/22/dvukhtochiechnyie-protokoly/">Двухточечные протоколы</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/19/eigrp-kratkii-konspiekt/">EIGRP: краткий конспект</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/18/bazovaia-nastroika-marshrutizatora/">Базовая настройка коммутатора</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Kozlov Alexander <br/>
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>, customized with <a href="https://github.com/mjhea0/whiterspace">whiterspace</a>.</span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
