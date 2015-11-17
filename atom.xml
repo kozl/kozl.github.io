@@ -4,7 +4,7 @@
   <title><![CDATA[Networks, security and system administration]]></title>
   <link href="http://kozl.github.io/atom.xml" rel="self"/>
   <link href="http://kozl.github.io/"/>
-  <updated>2015-11-13T13:12:16+03:00</updated>
+  <updated>2015-11-17T19:38:33+03:00</updated>
   <id>http://kozl.github.io/</id>
   <author>
     <name><![CDATA[Kozlov Alexander]]></name>
@@ -1205,50 +1205,164 @@
   
   <entry>
     
-    <title type="html"><![CDATA[Базовая настройка коммутатора]]></title>
-    <link href="http://kozl.github.io/blog/2015/05/18/bazovaia-nastroika-marshrutizatora/"/>
+    <title type="html"><![CDATA[Типовая настройка коммутатора]]></title>
+    <link href="http://kozl.github.io/blog/2015/05/18/tipovaya-nastroika-kommutatora/"/>
     
     <updated>2015-05-18T17:11:57+03:00</updated>
-    <id>http://kozl.github.io/blog/2015/05/18/bazovaia-nastroika-marshrutizatora</id>
+    <id>http://kozl.github.io/blog/2015/05/18/tipovaya-nastroika-kommutatora</id>
     
-    <content type="html"><![CDATA[<p>Удаление предыдущей конфигурации</p>
+    <content type="html"><![CDATA[<h3 id="section">1. Базовая настройка</h3>
+<ul>
+  <li>Удалить старый конфиг</li>
+  <li>Настроить hostname, dns lookup zone</li>
+  <li>Отключить DNS запросы при ошибках в консоли</li>
+  <li>Настроить консольный терминал</li>
+  <li>Настроить NTP и таймзону</li>
+  <li>Настроить удалённый доступ в MNGMT vlan</li>
+</ul>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">Router#erase startup-config</span></code></pre></td></tr></table></div></figure></notextile></div>
+</pre></td><td class="code"><pre><code class=""><span class="line">erase startup-config</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>Отключение DNS запросов при ошибках в консоли</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">hostname &lt;hostname&gt;
+</span><span class="line">ip domain name &lt;domain&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">no ip domain lookup</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>Выключить таймаут неактивной сессии в консоли, привилегированный режим в консоли, включить синхронный вывод на консоль:</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 <span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">line con 0
 </span><span class="line"> exec-timeout 0 0
 </span><span class="line"> privilege level 15
-</span><span class="line"> logging synchronous</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>Хранить startup конфиг в сжатом виде</p>
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">service compress-config </span></code></pre></td></tr></table></div></figure></notextile></div>
-<p>### Настройки времени</p>
+</span><span class="line"> logging synchronous
+</span><span class="line"> login
+</span><span class="line"> password &lt;PASS&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">ntp peer &lt;IP&gt;
 </span><span class="line">clock timezone MSK +3</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h3 id="section">Безопасность</h3>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface Vlan 2
+</span><span class="line"> no shutdown
+</span><span class="line"> ip address x.x.x.x x.x.x.x
+</span><span class="line">enable secret &lt;PASS&gt;
+</span><span class="line">line vty 0 15
+</span><span class="line"> transport input ssh/telnet
+</span><span class="line"> login local
+</span><span class="line"> exec-timeout 0 0
+</span><span class="line">ip default-gateway &lt;IP&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>Хранение паролей в зашифрованном виде</p>
+<h3 id="section-1">2. Безопасность</h3>
+
+<ul>
+  <li>Запретить хранить пароли в конфигах в plaintext</li>
+  <li>Интерфейсы к машинам перевести в режим access, к другим коммутаторам - в trunk</li>
+  <li>Неиспользуемые интерфейсы отключить</li>
+  <li>Для транковых интерфейсов настроить native vlan отличный от 1-го</li>
+  <li>(опционально) Настроить на access интерфейсах port-security</li>
+  <li>(опционально) Указать разрешенные vlan для транка</li>
+</ul>
+
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">service password-encryption</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>Пароль для привилегированного режима</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">enable secret &lt;PASS&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface range Gi0/1 - 6
+</span><span class="line"> switchport mode access
+</span><span class="line"> switchport access vlan &lt;VLAN&gt;
+</span><span class="line">interface Gi0/24
+</span><span class="line"> switchport mode trunk</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface range Gi0/7 - 23
+</span><span class="line"> shutdown</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface Gi0/24
+</span><span class="line"> switchport trunk native vlan 2</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface range Gi0/1 -6
+</span><span class="line"> switchport port-security
+</span><span class="line"> switchport port-security maximum &lt;NUM&gt;
+</span><span class="line"> switchport port-security mac-address sticky
+</span><span class="line"> switchport port-security violation protect</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface Gi0/24
+</span><span class="line"> switchport trunk allowed vlan &lt;VLANS&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="stp">3. STP</h3>
+
+<ul>
+  <li>включить RPVST+</li>
+  <li>выставить приоритет для всех вланов в соответствии с планом</li>
+  <li>Portfast на всех access интерфейсах</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">spanning-tree mode rapid-pvst</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">spanning tree vlan &lt;VLAN&gt; priority &lt;PRI&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface range Gi0/1 - 6
+</span><span class="line"> spanning-tree portfast</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="etherchannel">4. EtherChannel</h3>
+
+<ul>
+  <li>настроить интерфейсы так, чтобы их настройки совпадали с настройками аггрегированного интерфейса</li>
+  <li>выключить интерфейсы, настроить аггрегированны линк статически, при помощи LACP и PaGP, включить интерфейсы</li>
+  <li>выбрать подходящий режим балансировки</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface range Gi0/23 - 24
+</span><span class="line"> switchport mode trunk</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface range Gi0/23 - 24
+</span><span class="line"> shutdown
+</span><span class="line"> channel-group 1 mode on
+</span><span class="line"> no shutdown</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">port-channel load-balance &lt;MODE&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Блокировать после нескольких неудачных попыток залогиниться</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
@@ -1259,15 +1373,6 @@
 <span class="line-number">2</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">login on-success log
 </span><span class="line">login on-failure log every 2</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>Настройка SSH</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">line vty 0 15
-</span><span class="line"> transport input ssh
-</span><span class="line"> login local</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>

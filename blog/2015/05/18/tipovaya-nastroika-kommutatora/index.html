@@ -1,0 +1,432 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Типовая настройка коммутатора - Networks, security and system administration</title>
+  <meta name="author" content="Kozlov Alexander">
+
+  
+  <meta name="description" content="1. Базовая настройка Удалить старый конфиг Настроить hostname, dns lookup zone Отключить DNS запросы при ошибках в консоли Настроить консольный &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://kozl.github.io/blog/2015/05/18/tipovaya-nastroika-kommutatora">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="Networks, security and system administration" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner">
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:kozl.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Главная</a></li>
+<!--  <li><a href="/about">About</a></li> -->
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+  
+    
+      <h1 class="entry-title">Типовая настройка коммутатора</h1>
+    
+  
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-18T17:11:57+03:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3 id="section">1. Базовая настройка</h3>
+<ul>
+  <li>Удалить старый конфиг</li>
+  <li>Настроить hostname, dns lookup zone</li>
+  <li>Отключить DNS запросы при ошибках в консоли</li>
+  <li>Настроить консольный терминал</li>
+  <li>Настроить NTP и таймзону</li>
+  <li>Настроить удалённый доступ в MNGMT vlan</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">erase startup-config</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">hostname &lt;hostname&gt;
+</span><span class="line">ip domain name &lt;domain&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">no ip domain lookup</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">line con 0
+</span><span class="line"> exec-timeout 0 0
+</span><span class="line"> privilege level 15
+</span><span class="line"> logging synchronous
+</span><span class="line"> login
+</span><span class="line"> password &lt;PASS&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">ntp peer &lt;IP&gt;
+</span><span class="line">clock timezone MSK +3</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface Vlan 2
+</span><span class="line"> no shutdown
+</span><span class="line"> ip address x.x.x.x x.x.x.x
+</span><span class="line">enable secret &lt;PASS&gt;
+</span><span class="line">line vty 0 15
+</span><span class="line"> transport input ssh/telnet
+</span><span class="line"> login local
+</span><span class="line"> exec-timeout 0 0
+</span><span class="line">ip default-gateway &lt;IP&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-1">2. Безопасность</h3>
+
+<ul>
+  <li>Запретить хранить пароли в конфигах в plaintext</li>
+  <li>Интерфейсы к машинам перевести в режим access, к другим коммутаторам - в trunk</li>
+  <li>Неиспользуемые интерфейсы отключить</li>
+  <li>Для транковых интерфейсов настроить native vlan отличный от 1-го</li>
+  <li>(опционально) Настроить на access интерфейсах port-security</li>
+  <li>(опционально) Указать разрешенные vlan для транка</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">service password-encryption</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface range Gi0/1 - 6
+</span><span class="line"> switchport mode access
+</span><span class="line"> switchport access vlan &lt;VLAN&gt;
+</span><span class="line">interface Gi0/24
+</span><span class="line"> switchport mode trunk</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface range Gi0/7 - 23
+</span><span class="line"> shutdown</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface Gi0/24
+</span><span class="line"> switchport trunk native vlan 2</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface range Gi0/1 -6
+</span><span class="line"> switchport port-security
+</span><span class="line"> switchport port-security maximum &lt;NUM&gt;
+</span><span class="line"> switchport port-security mac-address sticky
+</span><span class="line"> switchport port-security violation protect</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface Gi0/24
+</span><span class="line"> switchport trunk allowed vlan &lt;VLANS&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="stp">3. STP</h3>
+
+<ul>
+  <li>включить RPVST+</li>
+  <li>выставить приоритет для всех вланов в соответствии с планом</li>
+  <li>Portfast на всех access интерфейсах</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">spanning-tree mode rapid-pvst</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">spanning tree vlan &lt;VLAN&gt; priority &lt;PRI&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface range Gi0/1 - 6
+</span><span class="line"> spanning-tree portfast</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="etherchannel">4. EtherChannel</h3>
+
+<ul>
+  <li>настроить интерфейсы так, чтобы их настройки совпадали с настройками аггрегированного интерфейса</li>
+  <li>выключить интерфейсы, настроить аггрегированны линк статически, при помощи LACP и PaGP, включить интерфейсы</li>
+  <li>выбрать подходящий режим балансировки</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface range Gi0/23 - 24
+</span><span class="line"> switchport mode trunk</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">interface range Gi0/23 - 24
+</span><span class="line"> shutdown
+</span><span class="line"> channel-group 1 mode on
+</span><span class="line"> no shutdown</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">port-channel load-balance &lt;MODE&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Блокировать после нескольких неудачных попыток залогиниться</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">login block-for &lt;timeout&gt; attemts &lt;num&gt; within &lt;timeot&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Логирование доступа</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">login on-success log
+</span><span class="line">login on-failure log every 2</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">hostname &lt;hostname&gt;
+</span><span class="line">ip domain name &lt;domain name&gt;
+</span><span class="line">crypto key generate rsa general-keys modulus 1024
+</span><span class="line">ip ssh time-out 90
+</span><span class="line">ip ssh maxstartups 2 
+</span><span class="line">ip ssh authentication-retries 2 </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Настроить SSH на нестандартный порт</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">ip ssh port &lt;port&gt; rotary &lt;group&gt;
+</span><span class="line">line vty 0 4
+</span><span class="line"> rotary &lt;group&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Kozlov Alexander</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-18T17:11:57+03:00" pubdate data-updated="true"></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ccna/'>ccna</a>, <a class='category' href='/blog/categories/network/'>network,</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://kozl.github.io/blog/2015/05/18/tipovaya-nastroika-kommutatora/" data-via="" data-counturl="http://kozl.github.io/blog/2015/05/18/tipovaya-nastroika-kommutatora/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/05/18/zarieziervirovannyie-ip-adriesa-rfc-6890/" title="Previous Post: Зарезервированные IP адреса: RFC 6890">&laquo; Зарезервированные IP адреса: RFC 6890</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/05/19/eigrp-kratkii-konspiekt/" title="Next Post: EIGRP: краткий конспект">EIGRP: краткий конспект &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/06/05/vpn/">VPN</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/01/ccna-konspiekt/">CCNA: конспект</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/22/dvukhtochiechnyie-protokoly/">Двухточечные протоколы</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/19/eigrp-kratkii-konspiekt/">EIGRP: краткий конспект</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/18/tipovaya-nastroika-kommutatora/">Типовая настройка коммутатора</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Kozlov Alexander <br/>
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>, customized with <a href="https://github.com/mjhea0/whiterspace">whiterspace</a>.</span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
