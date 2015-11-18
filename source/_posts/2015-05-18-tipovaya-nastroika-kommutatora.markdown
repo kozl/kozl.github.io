@@ -89,7 +89,6 @@ interface Gi0/24
 interface range Gi0/1 -6
  switchport port-security
  switchport port-security maximum <NUM>
- switchport port-security mac-address sticky
  switchport port-security violation protect
 ```
 
