@@ -4,7 +4,7 @@
   <title><![CDATA[Networks, security and system administration]]></title>
   <link href="http://kozl.github.io/atom.xml" rel="self"/>
   <link href="http://kozl.github.io/"/>
-  <updated>2015-11-18T15:10:51+03:00</updated>
+  <updated>2015-11-20T16:02:21+03:00</updated>
   <id>http://kozl.github.io/</id>
   <author>
     <name><![CDATA[Kozlov Alexander]]></name>
@@ -1211,7 +1211,15 @@
     <updated>2015-05-18T17:11:57+03:00</updated>
     <id>http://kozl.github.io/blog/2015/05/18/tipovaya-nastroika-kommutatora</id>
     
-    <content type="html"><![CDATA[<h3 id="section">1. Базовая настройка</h3>
+    <content type="html"><![CDATA[<ul>
+  <li><a href="#section">1. Базовая настройка</a></li>
+  <li><a href="#section-1">2. Безопасность</a></li>
+  <li><a href="#stp">3. STP</a></li>
+  <li><a href="#etherchannel">4. EtherChannel</a></li>
+  <li><a href="#section-2">5. Дополнительно</a></li>
+</ul>
+
+<h3 id="section">1. Базовая настройка</h3>
 <ul>
   <li>Удалить старый конфиг</li>
   <li>Настроить hostname, dns lookup zone</li>
@@ -1361,6 +1369,15 @@
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">port-channel load-balance &lt;MODE&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-2">5. Дополнительно</h3>
+
+<ul>
+  <li>перевести VTP в transparent mode</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">vtp mode transparent</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Блокировать после нескольких неудачных попыток залогиниться</p>
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
