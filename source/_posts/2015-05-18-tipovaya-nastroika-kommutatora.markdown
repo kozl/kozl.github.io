@@ -6,6 +6,13 @@ comments: true
 categories: network, ccna
 ---
 
+- [1. Базовая настройка](#section)
+- [2. Безопасность](#section-1)
+- [3. STP](#stp)
+- [4. EtherChannel](#etherchannel)
+- [5. Дополнительно](#section-2)
+
+
 ### 1. Базовая настройка
 - Удалить старый конфиг
 - Настроить hostname, dns lookup zone
@@ -138,6 +145,13 @@ interface range Gi0/23 - 24
 port-channel load-balance <MODE>
 ```
 
+### 5. Дополнительно
+
+ - перевести VTP в transparent mode
+
+```
+vtp mode transparent
+```
 
 Блокировать после нескольких неудачных попыток залогиниться
 ```
