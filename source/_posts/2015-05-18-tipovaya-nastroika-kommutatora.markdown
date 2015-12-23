@@ -20,6 +20,7 @@ categories: network, ccna
 - Настроить консольный терминал
 - Настроить NTP и таймзону
 - Настроить удалённый доступ в MNGMT vlan
+- Настроить логирование
 
 ```
 erase startup-config
@@ -58,6 +59,14 @@ line vty 0 15
  login local
  exec-timeout 0 0
 ip default-gateway <IP>
+```
+
+```
+logging <IP>
+service timestamps log datetime msec localtime
+
+logging buffered 32000 informational
+logging rate-limit all 10
 ```
 
 ### 2. Безопасность
@@ -108,7 +117,7 @@ interface Gi0/24
 
 - включить RPVST+
 - выставить приоритет для всех вланов в соответствии с планом
-- Portfast на всех access интерфейсах
+- BPDUGuard enable, Portfast на всех access интерфейсах, errdisable recovery
 
 ```
 spanning-tree mode rapid-pvst
@@ -119,8 +128,11 @@ spanning tree vlan <VLAN> priority <PRI>
 ```
 
 ```
+spanning-tree portfast bpduguard default
 interface range Gi0/1 - 6
  spanning-tree portfast
+
+errdisable recovery cause bpduguard
 ```
 
 ### 4. EtherChannel
